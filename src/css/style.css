@@ -1,0 +1,23 @@
+@media (min-width: 375px) {
+  .App { width: 375px; }
+}
+
+@media (max-width:500px) {
+  .App{ width: 100vw; }
+}
+
+#root {
+  box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
+}
+
+.App {
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
