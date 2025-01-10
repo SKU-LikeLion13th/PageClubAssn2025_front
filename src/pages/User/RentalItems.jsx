@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const RentalItems = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return (
+    <div>
+      <p></p>
+    </div>
+  );
 };
 
 export default RentalItems;
