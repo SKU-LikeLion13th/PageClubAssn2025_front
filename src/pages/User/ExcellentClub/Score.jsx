@@ -24,10 +24,9 @@ export default function Score() {
             <div
               key={item.id}
               className={`flex flex-col items-center justify-end ${
-                item.grade === 1 ? "order-2 mx-3" : item.grade === 2 ? "order-1" : "order-3"
+                item.grade === 1 ? "order-2 mx-2.5" : item.grade === 2 ? "order-1" : "order-3"
               }`}
             >
-              {/* Render win.png for grade 1 */}
               {item.grade === 1 && (
                 <img
                   className="w-[40px] mb-2"
@@ -50,7 +49,7 @@ export default function Score() {
               <div
                 className={`flex justify-center items-center w-[5rem] ${
                   item.grade === 1 ? "h-[100px]" : item.grade === 2 ? "h-[80px]" : "h-[60px]"
-                } bg-[#D2B48C] bg-opacity-20 rounded-t-[10px]`}
+                } bg-[#D2B48C] bg-opacity-80 rounded-t-[10px]`}
               >
                 {item.grade}
               </div>

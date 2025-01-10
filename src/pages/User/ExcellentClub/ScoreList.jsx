@@ -25,7 +25,7 @@ export default function ScoreList() {
   };
 
   return (
-    <div className="flex flex-col font-Moneygraphy mt-10 w-[85%] bg-[#ffffff] border-[1px] border-[#d2b48c] rounded-[10px]">
+    <div className="flex flex-col font-Moneygraphy mt-10 w-[84%] bg-[#ffffff] border-[1px] border-[#d2b48c] rounded-[10px]">
       {sortedScores.map((item, index) => (
         <div
           key={item.id}
