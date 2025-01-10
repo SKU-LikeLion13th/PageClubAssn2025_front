@@ -5,12 +5,12 @@ import ScoreList from "./ScoreList";
 
 export default function ExcellentClub() {
   return (
-    <div className="relative font-Ownglyph_PDH text-[#996516]">
+    <div>
       {/* 리본 배경 */}
       <RibbonBackground />
 
       {/* 콘텐츠 */}
-      <div className="flex flex-col items-center">
+      <div className=" relative flex flex-col items-center font-Ownglyph_PDH text-[#996516]">
         {/* TOP3 점수 */}
         <Score />
 

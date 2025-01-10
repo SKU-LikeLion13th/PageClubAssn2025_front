@@ -12,25 +12,43 @@ export default function Score() {
     .map((item, index) => ({ ...item, grade: index + 1 }));
 
   return (
-    <div className="relative">
-      <div className="flex justify-center text-[25.5px] border-[0.5px] border-[#996515] bg-[#fdfdfd] rounded-[62px] mt-10 px-8 py-1 translate-y-[70%]">
+    <div>
+      <div className="flex justify-center text-[25.5px] border-[0.5px] border-[#996515] bg-[#fdfdfd] rounded-[62px] mt-14 px-8 py-1">
         1분기 활동 점수 TOP3
       </div>
 
-      <div className="flex flex-col mt-12 absolute z-[20] left-[50%] transform -translate-x-[50%] translate-y-[15%] ">
+      <div className="flex flex-col mt-14">
         {/* Score List */}
-        <div className="flex justify-center h-max-fit">
+        <div className="flex justify-center">
           {sortedTop3.map((item) => (
             <div
               key={item.id}
               className={`flex flex-col items-center justify-end ${
-                item.grade === 1 ? "order-2 mx-8" : item.grade === 2 ? "order-1" : "order-3"
+                item.grade === 1 ? "order-2 mx-3" : item.grade === 2 ? "order-1" : "order-3"
               }`}
             >
-              <img className="w-[60px] h-[60px]" src={`assets/images/${item.image}`} alt={item.name} />
+              {/* Render win.png for grade 1 */}
+              {item.grade === 1 && (
+                <img
+                  className="w-[40px] mb-2"
+                  src="assets/images/win.png"
+                  alt="1등 트로피"
+                />
+              )}
+              <img
+                className={`${
+                  item.grade === 1
+                    ? "w-[80%]"
+                    : item.grade === 2
+                    ? "w-[60%]"
+                    : "w-[40%]"
+                }`}
+                src={`assets/images/${item.image}`}
+                alt={item.name}
+              />
               <div className="flex my-1 mx-auto font-Moneygraphy text-[8px] text-[#3f3f3f]">{item.name}</div>
               <div
-                className={`flex justify-center items-center w-[90px] ${
+                className={`flex justify-center items-center w-[5rem] ${
                   item.grade === 1 ? "h-[100px]" : item.grade === 2 ? "h-[80px]" : "h-[60px]"
                 } bg-[#D2B48C] bg-opacity-20 rounded-t-[10px]`}
               >

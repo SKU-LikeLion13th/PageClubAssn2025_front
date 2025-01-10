@@ -5,7 +5,7 @@ export default function RibbonBackground() {
     <>
       {/* 리본 배경 */}
       <div
-        className="flex absolute z-[0] top-[10%] left-[50%] w-[70vw] h-[70vh] bg-center bg-contain bg-no-repeat transform -translate-x-1/2 rotate-[-40deg]"
+        className="absolute z-0 w-[35rem] h-[38rem] top-[16%] left-[20%] bg-center bg-contain bg-no-repeat rotate-[-52deg] opacity-30"
         style={{ backgroundImage: 'url(/assets/images/ribbon.png)' }}
       ></div>
     </>
