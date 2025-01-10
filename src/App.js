@@ -5,13 +5,11 @@ import User from './routes/User';
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen App">
+    <div className="App">
       {/* Main Content */}
-      <div className="flex-grow">
         <Routes>
           <Route path = "/*" element={<User/>}/>
         </Routes>
-      </div>
       {/* Footer */}
       <Footer />
     </div>

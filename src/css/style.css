@@ -1,3 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Ownglyph_PDH";
+  src: url("../fonts/Ownglyph_PDH.ttf");
+}
+
+@font-face {
+  font-family: "Ownglyph_ryurue";
+  src: url("../fonts/Ownglyph_ryurue.ttf");
+}
+
+@font-face {
+  font-family: "Moneygraphy";
+  src: url("../fonts/Moneygraphy.ttf");
+}
+
+
 @media (min-width: 375px) {
   .App { width: 375px; }
 }
@@ -21,4 +41,5 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
+  font-family: "Ownglyph_PDH";
 }

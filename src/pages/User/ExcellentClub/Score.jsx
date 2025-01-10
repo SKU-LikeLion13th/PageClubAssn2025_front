@@ -12,14 +12,12 @@ export default function Score() {
     .map((item, index) => ({ ...item, grade: index + 1 }));
 
   return (
-    <div className="relative">
-      <div className="flex justify-center text-[25.5px] border-[0.5px] border-[#996515] bg-[#fdfdfd] rounded-[62px] mt-10 px-8 py-1 translate-y-[70%]">
+    <div className="relative z-0">
+      <div className="flex justify-center text-[25.5px] border-[0.5px] border-[#996515] bg-[#fdfdfd] rounded-[62px] mt-20 px-8 py-1">
         1분기 활동 점수 TOP3
       </div>
-
-      <div className="flex flex-col mt-12 absolute z-[20] left-[50%] transform -translate-x-[50%] translate-y-[15%] ">
         {/* Score List */}
-        <div className="flex justify-center h-max-fit">
+        <div className="flex relative justify-center pt-10 z-10">
           {sortedTop3.map((item) => (
             <div
               key={item.id}
@@ -32,7 +30,7 @@ export default function Score() {
               <div
                 className={`flex justify-center items-center w-[90px] ${
                   item.grade === 1 ? "h-[100px]" : item.grade === 2 ? "h-[80px]" : "h-[60px]"
-                } bg-[#D2B48C] bg-opacity-20 rounded-t-[10px]`}
+                } bg-[#F6E9D9] rounded-t-[10px]`}
               >
                 {item.grade}
               </div>
@@ -40,6 +38,5 @@ export default function Score() {
           ))}
         </div>
       </div>
-    </div>
   );
 }
