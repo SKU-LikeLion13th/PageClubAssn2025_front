@@ -1,4 +1,5 @@
 import React from "react";
+import { images } from "../../../utils/images";
 
 export default function Score() {
   const top3 = [
@@ -12,12 +13,12 @@ export default function Score() {
     .map((item, index) => ({ ...item, grade: index + 1 }));
 
   return (
-    <div className="relative z-0">
-      <div className="flex justify-center text-[25.5px] border-[0.5px] border-[#996515] bg-[#fdfdfd] rounded-[62px] mt-20 px-8 py-1">
+    <div className="relative z-0 text-[#996515]">
+      <div className="flex justify-center text-[25.5px] border-[0.5px] border-[#996515] bg-[#ffffff] rounded-[62px] mt-20 px-8 py-1">
         1분기 활동 점수 TOP3
       </div>
         {/* Score List */}
-        <div className="flex relative justify-center pt-10 z-10">
+        <div className="relative z-10 flex justify-center pt-10">
           {sortedTop3.map((item) => (
             <div
               key={item.id}
@@ -28,7 +29,7 @@ export default function Score() {
               {item.grade === 1 && (
                 <img
                   className="w-[40px] mb-2"
-                  src="assets/images/win.png"
+                  src={images.win}
                   alt="1등 트로피"
                 />
               )}
