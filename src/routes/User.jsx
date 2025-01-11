@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Routes, useLocation} from "react-router-dom";
 import Main from '../pages/User/Maintest'
 import ExcellentClub from '../pages/User/ExcellentClub/ExcellentClub';
-import RentalItems from '../pages/User/RentalItems';
+import RentalItems from '../pages/User/Rental/RentalItems';
 
 const User = () => {
   return (
