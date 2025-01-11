@@ -6,6 +6,8 @@ import RentalItems from '../pages/User/RentalItems';
 import ClassSchedule from '../pages/User/ClassSchedule/ClassSchedule';
 import NoReservation from '../pages/User/ReservationClick/NoReservation';
 import YesReservation from '../pages/User/ReservationClick/YesReservation';
+import NoRental from '../pages/User/RentalClick/NoRental';
+import YesRental from '../pages/User/RentalClick/YesRental';
 
 const User = () => {
   return (
@@ -16,6 +18,8 @@ const User = () => {
         <Route path = "/classSchedule" element={<ClassSchedule/>}/>
         <Route path = "/noReservation" element={<NoReservation/>}/>
         <Route path = "/yesReservation" element={<YesReservation/>}/>
+        <Route path = "/noRental" element={<NoRental/>}/>
+        <Route path = "/yesRental" element={<YesRental/>}/>
         <Route path = "/rentalitems" element={<RentalItems/>}/>
       </Routes>
     </div>
