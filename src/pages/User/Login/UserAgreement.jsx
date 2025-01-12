@@ -69,19 +69,18 @@ export default function UserAgreement() {
               checked={allChecked}
               onChange={handleAllCheck}
             />
-            <span className="text-[15px] text-[#3F3F3F] font-bold">
-              전체 동의
-            </span>
+            <span className="text-[17.15px] text-[#3F3F3F]">전체 동의</span>
           </label>
-          <p className="text-[#999999] text-[12px]">
-            *위의 개인정보 수집·이용에 대한 동의를 거부할 권리가 있습니다.
-            <br /> 이에 대한 동의를 거부할 경우, Page 웹사이트 사용이 제한될 수
+          <p className="text-[#999999] text-[8px] text-left">
+            *위의 개인정보 수집•이용에 대한 동의를 거부할 권리가 있습니다.
+            <br />
+            이에 대한 항목에 동의를 거부할 경우, Page 웹사이트 사용이 제한 될 수
             있습니다.
           </p>
 
           {/* 개별 항목 */}
           {/* 수집 이용 항목 */}
-          <div>
+          <div className="text-[#996515]">
             <div className="flex justify-between items-center pb-2 cursor-pointer">
               <label className="flex items-center space-x-2">
                 <input
@@ -91,24 +90,24 @@ export default function UserAgreement() {
                   onChange={() => handleIndividualCheck("items")}
                 />
                 <span
-                  className="text-[14px] text-[#3F3F3F] cursor-pointer"
+                  className="text-[14px] cursor-pointer"
                   onClick={() => toggleSection("items")}>
                   수집 이용 항목
                 </span>
               </label>
               <span
-                className="text-[14px] text-[#3F3F3F]"
+                className="text-[14px]"
                 onClick={() => toggleSection("items")}>
                 {expandedSection === "items" ? "▲" : "▼"}
               </span>
             </div>
             {expandedSection === "items" && (
-              <p className="mt-2 text-[13px] text-[#3F3F3F]">이름, 학번</p>
+              <p className="mt-2 text-[13px]">이름, 학번</p>
             )}
           </div>
 
           {/* 수집 이용 목적 */}
-          <div>
+          <div className="text-[#996515]">
             <div className="flex justify-between items-center pb-2 cursor-pointer">
               <label className="flex items-center space-x-2">
                 <input
@@ -118,24 +117,24 @@ export default function UserAgreement() {
                   onChange={() => handleIndividualCheck("purpose")}
                 />
                 <span
-                  className="text-[14px] text-[#3F3F3F] cursor-pointer"
+                  className="text-[14px] cursor-pointer"
                   onClick={() => toggleSection("purpose")}>
                   수집 이용 목적
                 </span>
               </label>
               <span
-                className="text-[14px] text-[#3F3F3F]"
+                className="text-[14px]"
                 onClick={() => toggleSection("purpose")}>
                 {expandedSection === "purpose" ? "▲" : "▼"}
               </span>
             </div>
             {expandedSection === "purpose" && (
-              <p className="mt-2 text-[13px] text-[#3F3F3F]">동아리원증 발급</p>
+              <p className="mt-2 text-[13px]">동아리원증 발급</p>
             )}
           </div>
 
           {/* 보유 기간 */}
-          <div>
+          <div className="text-[#996515]">
             <div className="flex justify-between items-center pb-2 cursor-pointer">
               <label className="flex items-center space-x-2">
                 <input
@@ -145,19 +144,19 @@ export default function UserAgreement() {
                   onChange={() => handleIndividualCheck("duration")}
                 />
                 <span
-                  className="text-[14px] text-[#3F3F3F] cursor-pointer"
+                  className="text-[14px] cursor-pointer"
                   onClick={() => toggleSection("duration")}>
                   보유 기간
                 </span>
               </label>
               <span
-                className="text-[14px] text-[#3F3F3F]"
+                className="text-[14px]"
                 onClick={() => toggleSection("duration")}>
                 {expandedSection === "duration" ? "▲" : "▼"}
               </span>
             </div>
             {expandedSection === "duration" && (
-              <p className="mt-2 text-[13px] text-[#3F3F3F]">
+              <p className="mt-2 text-[13px]">
                 수집 이용 목적 달성 시
                 <br />
                 기본적으로 개인정보는 즉시 파기 처리
