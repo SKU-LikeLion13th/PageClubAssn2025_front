@@ -6,6 +6,7 @@ import RentalItems from "../pages/User/RentalItems";
 import Login from "../pages/User/Login/Login";
 import LoginFailureModal from "./../pages/User/Login/LoginFailureModal";
 import UserAgreement from "../pages/User/Login/UserAgreement";
+import ClubMemberCard from "../pages/User/ClubMemberCard";
 
 const User = () => {
   return (
@@ -17,6 +18,7 @@ const User = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/login-failure" element={<LoginFailureModal />} />
         <Route path="/user-agreement" element={<UserAgreement />} />
+        <Route path="/member-card" element={<ClubMemberCard />} />
       </Routes>
     </div>
   );
