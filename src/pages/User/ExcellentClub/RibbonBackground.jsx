@@ -5,8 +5,8 @@ export default function RibbonBackground() {
   return (
     <>
       {/* 리본 배경 */}
-      <div className="flex absolute items-center justify-center h-full ">
-          <img src={images.ribbon} className="transform rotate-[-40deg]" />
+      <div className="flex absolute items-center justify-center h-full w-full">
+          <img src={images.ribbon} className="mt-[35%] w-full" />
       </div>
     </>
   );
