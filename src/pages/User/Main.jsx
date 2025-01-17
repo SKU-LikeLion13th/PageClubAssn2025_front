@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Main() {
   return (
@@ -11,12 +11,12 @@ export default function Main() {
           alt="Page 로고"
         />
         <nav className="flex gap-4">
-          <button className="w-8 h-8">
+          <NavLink to="/mypage" className="w-8 h-8">
             <img src="/assets/images/UserIcon.png" alt="사용자 아이콘" />
-          </button>
-          <button className="w-8 h-8">
+          </NavLink>
+          <NavLink to="/menu" className="w-8 h-8">
             <img src="assets/images/MenuIcon.png" alt="메뉴 아이콘" />
-          </button>
+          </NavLink>
         </nav>
       </header>
 
