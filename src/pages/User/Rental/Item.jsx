@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { images } from "../../../utils/images";
+import RentalNote from "./RentalNote";
 
 const Item = () => {
   // 임시 데이터
@@ -45,9 +47,11 @@ const Item = () => {
             <div className="itemcontent pl-4 w-full">
               <div className="itemname flex justify-between items-center mb-1">
                 <p className="text-xl">{item.name}</p>
-                <button className="rounded-xl px-4 h-5 bg-[#D2B48C] text-[#583D2C]">
-                  예약하기
-                </button>
+                <Link to="/rentalnote">
+                  <button className="rounded-xl px-4 h-5 bg-[#D2B48C] text-[#583D2C]">
+                    예약하기
+                  </button>
+                </Link>
               </div>
               <img src={images.line} className="pb-2 pt-1" />
               <div className="grid grid-cols-2 text-center gap-5 mt-2">
