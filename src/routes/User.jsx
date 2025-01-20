@@ -1,11 +1,11 @@
 import React from 'react';
 import {Route, Routes, useLocation} from "react-router-dom";
-import Main from '../pages/User/Maintest'
+import Main from '../pages/User/Main'
 import ExcellentClub from '../pages/User/ExcellentClub/ExcellentClub';
-import RentalItems from '../pages/User/RentalItems';
+import RentalItems from '../pages/User/Rental/RentalItems';
 import ClassSchedule from '../pages/User/ClassSchedule/ClassSchedule';
-import Reservation from '../pages/User/ReservationClick/Reservation';
-import Rental from '../pages/User/RentalClick/Rental';
+import Reservation from '../pages/User/Reservation';
+import Rental from '../pages/User/Rental';
 import Menu from "../pages/User/Menu/Menu";
 import Introduction from "../pages/User/Menu/Introduction";
 import SNS from "../pages/User/Menu/SNS";

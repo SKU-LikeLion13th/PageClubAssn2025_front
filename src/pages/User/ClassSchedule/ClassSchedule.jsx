@@ -1,11 +1,11 @@
 import React from "react";
-import PageBackgrouond from "../PageBackgrouond";
+import PageBack from "../PageBack";
 import ClassList from "./ClassList";
 
 export default function ClassSchedule() {
   return (
     <div className="relative">
-      <PageBackgrouond />
+      <PageBack />
 
       <div className="relative z-20">
         <ClassList />

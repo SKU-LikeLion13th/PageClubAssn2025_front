@@ -1,15 +1,15 @@
 import React from "react";
-import RibbonBackground from "./RibbonBackground";
+import RibbonBackground from "../RibbonBackground";
 import Score from "./Score";
 import ScoreList from "./ScoreList";
 
 export default function ExcellentClub() {
   return (
-    <div className="relative min-h-screen w-full">
+    <div className="relative w-full min-h-screen">
       <RibbonBackground />
 
         {/* 콘텐츠 */}
-        <div className="flex flex-col items-center h-full z-10">
+        <div className="z-10 flex flex-col items-center h-full">
           {/* TOP3 점수 */}
           <Score />
 
