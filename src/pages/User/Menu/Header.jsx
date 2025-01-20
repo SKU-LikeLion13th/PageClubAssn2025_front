@@ -9,7 +9,7 @@ export default function Header() {
   };
 
   return (
-    <div className="flex justify-between items-center w-full">
+    <div className="flex justify-between items-center w-full px-4">
       {/* 헤더 */}
       <div className="flex justify-between items-center w-full max-w-4xl px-2">
         <NavLink to="/">

@@ -6,7 +6,7 @@ import Introduction from "../pages/User/Menu/Introduction";
 import SNS from "../pages/User/Menu/SNS";
 import AboutUs from "../pages/User/Menu/AboutUs";
 import ExcellentClub from "../pages/User/ExcellentClub/ExcellentClub";
-import RentalItems from "../pages/User/RentalItems";
+// import RentalItems from "../pages/User/RentalItems";
 
 const User = () => {
   return (
@@ -18,7 +18,7 @@ const User = () => {
         <Route path="/sns" element={<SNS />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/excellentclub" element={<ExcellentClub />} />
-        <Route path="/rentalitems" element={<RentalItems />} />
+        {/* <Route path="/rentalitems" element={<RentalItems />} /> */}
       </Routes>
     </div>
   );

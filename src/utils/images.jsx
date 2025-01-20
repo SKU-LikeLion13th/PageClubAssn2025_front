@@ -3,8 +3,12 @@ const PATH = process.env.PUBLIC_URL;
 export const images = {
   //excellentClub
   ribbon: PATH + "/assets/images/ribbon.png",
-  p: PATH + "/assets/images/p.png",
-  a: PATH + "/assets/images/a.png",
-  g: PATH + "/assets/images/g.png",
-  e: PATH + "/assets/images/e.png",
+
+  //rentalitems
+  cushion: PATH + "/assets/images/rental/cushion.png",
+  line: PATH + "/assets/images/rental/Line.png",
+  aBack: PATH + "/assets/images/rental/aBack.png",
+  eBack: PATH + "/assets/images/rental/eBack.png",
+  gBack: PATH + "/assets/images/rental/gBack.png",
+  pBack: PATH + "/assets/images/rental/pBack.png",
 };

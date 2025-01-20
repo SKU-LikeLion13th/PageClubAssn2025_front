@@ -1,35 +1,33 @@
 import React from "react";
 import { images } from "../../utils/images";
 
-export default function PageBackground() {
+const PageBack = () => {
   return (
-    <div className="flex justify-center">
-      <div className="fixed z-0 grid grid-cols-2 grid-rows-2 px-0 mx-0 w-[100%]">
-        <div className="ml-[-3rem]">
-          <img src={images.p} alt="p" className="w-full h-full rotate-[5deg]" />
-        </div>
-        <div className="mr-[-3rem]">
+    <div>
+      <div className="fixed min-h-screen w-full">
+        <div className="flex">
           <img
-            src={images.a}
-            alt="a"
-            className="w-full h-full mt-[6rem] rotate-[-5deg]"
+            src={images.pBack}
+            className=" pb-48 max-[500px]:absolute max-[500px]:p-0 max-[500px]:top-0"
+          />
+          <img
+            src={images.aBack}
+            className="pt-44 max-[500px]:absolute max-[500px]:p-0 max-[500px]:right-0 max-[500px]:top-[25%]"
           />
         </div>
-        <div className="ml-[-5rem]">
+        <div className="flex">
           <img
-            src={images.g}
-            alt="g"
-            className="w-full h-full mt-[2rem] rotate-[-5deg]"
+            src={images.gBack}
+            className="pb-48 max-[500px]:absolute max-[500px]:p-0 max-[500px]:top-[50%]"
           />
-        </div>
-        <div className="mr-[-3rem]">
           <img
-            src={images.e}
-            alt="e"
-            className="w-full h-full mt-[8rem] rotate-[5deg]"
+            src={images.eBack}
+            className="ml-[50px] pt-48 max-[500px]:absolute max-[500px]:p-0 max-[500px]:right-0 max-[500px]:top-[75%]"
           />
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default PageBack;
