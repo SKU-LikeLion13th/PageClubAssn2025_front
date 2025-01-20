@@ -6,10 +6,6 @@ export const images = {
   win : PATH + '/assets/images/win.png',
 
   //pageBackground
-  p : PATH + '/assets/images/pagebackground/p.png',
-  a : PATH + '/assets/images/pagebackground/a.png',
-  g : PATH + '/assets/images/pagebackground/g.png',
-  e : PATH + '/assets/images/pagebackground/e.png',
   pBack : PATH + '/assets/images/pagebackground/pBack.png',
   aBack : PATH + '/assets/images/pagebackground/aBack.png',
   gBack : PATH + '/assets/images/pagebackground/gBack.png',
@@ -25,4 +21,8 @@ export const images = {
   testball : PATH + '/assets/images/testball.png',
   left : PATH + '/assets/images/left.png',
   right : PATH + '/assets/images/right.png',
+
+  //rentalitems
+  cushion: PATH + "/assets/images/rental/cushion.png",
+  line: PATH + "/assets/images/rental/Line.png",
 };

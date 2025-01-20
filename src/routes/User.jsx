@@ -6,6 +6,10 @@ import RentalItems from '../pages/User/RentalItems';
 import ClassSchedule from '../pages/User/ClassSchedule/ClassSchedule';
 import Reservation from '../pages/User/ReservationClick/Reservation';
 import Rental from '../pages/User/RentalClick/Rental';
+import Menu from "../pages/User/Menu/Menu";
+import Introduction from "../pages/User/Menu/Introduction";
+import SNS from "../pages/User/Menu/SNS";
+import AboutUs from "../pages/User/Menu/AboutUs";
 
 const User = () => {
   return (
@@ -17,6 +21,10 @@ const User = () => {
         <Route path = "/reservation" element={<Reservation/>}/>
         <Route path = "/rental" element={<Rental/>}/>
         <Route path = "/rentalitems" element={<RentalItems/>}/>
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/introduction" element={<Introduction />} />
+        <Route path="/sns" element={<SNS />} />
+        <Route path="/aboutus" element={<AboutUs />} />
       </Routes>
     </div>
   );
