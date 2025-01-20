@@ -24,17 +24,14 @@ export default function NoReservation() {
       <div className="text-[50px] mt-7">MY PAGE</div>
 
       {/* 드롭다운 컨테이너 */}
-      <div className="flex flex-col items-center mt-5">
+      <div className="relative flex flex-col items-center mt-5">
         <div
-          className="flex items-center bg-[#ffffff] w-[320px] px-4 py-1 border-[#D2B48C] rounded-[10px] cursor-pointer"
+          className="flex items-center bg-[#ffffff] w-[320px] px-4 py-1 border-[#D2B48C] rounded-[10px] cursor-pointer relative z-10"
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         >
-          {/* 로고 */}
           <div className="w-[80px]">
             <img src={selectedClub.logo} alt="clublogo" className="w-[60px] object-cover rounded-full" />
           </div>
-
-          {/* 이름 및 사용자 */}
           <div className="flex flex-col items-center justify-center w-full">
             <div className="flex items-center">
               {selectedClub.name}
@@ -44,13 +41,12 @@ export default function NoReservation() {
           </div>
         </div>
 
-        {/* 드롭다운 메뉴 */}
         {isDropdownOpen && (
-          <div className="flex flex-col bg-[#ffffff] w-[320px] border-[#D2B48C] border rounded-[10px] shadow-lg mt-2">
+          <div className="flex flex-col bg-[#ffffff] w-[320px] border-[#D2B48C] border rounded-[10px] shadow-lg absolute mt-0 z-50">
             {testUser.clubs.map((club) => (
               <div
                 key={club.name}
-                className="flex items-center px-4 py-2 cursor-pointer hover:bg-[#f8f8f8]"
+                className="flex items-center px-4 py-2 cursor-pointer hover:bg-[#f8f8f8] first:rounded-t-[10px] last:rounded-b-[10px]"
                 onClick={() => handleClubSelect(club)}
               >
                 <img
