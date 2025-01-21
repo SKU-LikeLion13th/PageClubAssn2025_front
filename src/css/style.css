@@ -17,13 +17,26 @@
   src: url("../fonts/Moneygraphy.ttf");
 }
 
-
-@media (min-width: 375px) {
-  .App { width: 375px; }
+@font-face {
+  font-family: "PretendardVariable";
+  src: url("../fonts/PretendardVariable.ttf");
 }
 
-@media (max-width:500px) {
-  .App{ width: 100vw; }
+@font-face {
+  font-family: "Y_spotlight";
+  src: url("../fonts/Y_spotlight.ttf");
+}
+
+@media (min-width: 375px) {
+  .App {
+    width: 375px;
+  }
+}
+
+@media (max-width: 500px) {
+  .App {
+    width: 100vw;
+  }
 }
 
 #root {
@@ -32,7 +45,7 @@
 
 .App {
   min-height: 100vh;
-  background-color: #FFF6EC;
+  background-color: #fff6ec;
 }
 
 body {

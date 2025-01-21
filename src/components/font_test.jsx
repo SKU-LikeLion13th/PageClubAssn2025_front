@@ -7,6 +7,8 @@ export default function font_test() {
       <p className="font-Ownglyph_PDH">폰트 변경 예시</p>
       <p className="font-Ownglyph_ryurue">폰트 변경 예시</p>
       <p className="font-Moneygraphy">폰트 변경 예시</p>
+      <p className="font-Y_spotlight">폰트 변경 예시</p>
+      <p className="font-PretendardVariable">폰트 변경 예시</p>
     </div>
   );
 }
