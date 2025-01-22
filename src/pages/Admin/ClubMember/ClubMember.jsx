@@ -1,52 +1,55 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { images } from '../../../utils/images';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { API_URL } from '../../../config';
 
 export default function ClubMember() {
   const [searchKeyword, setSearchKeyword] = useState(''); // 검색 키워드 상태
   const [searchResults, setSearchResults] = useState([]); // 검색 결과 상태
   const [error, setError] = useState(''); // 에러 상태
+  // const navigate = useNavigate();
 
   // 검색 버튼 클릭 시 호출되는 함수
   const handleSearch = async () => {
-    if (!searchKeyword.trim()) {
-      setError('검색어를 입력해주세요.');
-      return;
-    }
-
-    const token = localStorage.getItem('token'); // 로컬 스토리지에서 토큰 가져오기
-    console.log('Token:', token);
-
+    const token = localStorage.getItem('Token');
+    const userRole = localStorage.getItem('role');
+    console.log(token);
+  
     if (!token) {
       setError('인증 토큰이 없습니다. 로그인 후 다시 시도해주세요.');
       return;
     }
-
-    setError('');
+  
+    if (userRole !== 'ROLE_ADMIN') {
+      setError('관리자 권한이 없습니다.');
+      return;
+    }
+  
     try {
       const response = await axios.get(
-        `http://pageback.sku-sku.com/admin/join-club/search`,
+        `${API_URL}/admin/join-club/search?keyword=${encodeURIComponent(searchKeyword)}`,
         {
-          params: { keyword: searchKeyword },
           headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },          
+            Authorization: `${token}`,
+            Accept: '*/*',
+          },
         }
       );
-
-      if (response.status !== 200) {
-        throw new Error('검색 요청 실패');
-      }
-
-      setSearchResults(response.data); // 검색 결과 저장
+      console.log(response);
+      setSearchResults(response.data);
     } catch (err) {
-      setError('검색 중 문제가 발생했습니다.');
+      if (err.response?.status === 401) {
+        setError('인증 오류: 다시 로그인 해주세요.');
+        // localStorage.clear();
+        // navigate('/admin/login');
+      } else {
+        setError('검색 중 문제가 발생했습니다.');
+      }
       console.error(err);
     }
   };
+  
 
   return (
     <div className="flex flex-col items-center w-full mt-10">
@@ -86,6 +89,8 @@ export default function ClubMember() {
         </NavLink>
       </div>
 
+      {error && <div className="mt-2 text-sm text-red-500">{error}</div>}
+
       {searchResults.length > 0 && (
         <div className="flex flex-col w-10/12 mt-5">
           {searchResults.map((result, index) => (
@@ -97,7 +102,7 @@ export default function ClubMember() {
                 <div>이름</div>
                 <div>{result.studentName}</div>
               </div>
-              
+
               <div>
                 <div>학번</div>
                 <div>({result.studentId})</div>
@@ -112,7 +117,7 @@ export default function ClubMember() {
         </div>
       )}
 
-      <div className='flex justify-end w-10/12 border-b-[2px] border-[#D1D1D3]'>
+      <div className="flex justify-end w-10/12 border-b-[2px] border-[#D1D1D3]">
         <div className="flex w-fit h-fit px-3 py-0.5 text-[8px] font-Y_spotlight bg-[#D1D1D3] rounded-[4px] mb-5">삭제</div>
       </div>
     </div>

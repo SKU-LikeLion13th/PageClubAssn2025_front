@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import AdminMain from "../pages/Admin/AdminMain";
 import ClubMember from "../pages/Admin/ClubMember/ClubMember";
 import AddClubMember from "../pages/Admin/ClubMember/AddClubMember";
+import Login from "../pages/Admin/Login";
 
 const Admin = () => {
   return (
@@ -12,6 +13,7 @@ const Admin = () => {
         <Route path="/adminMain" element={<AdminMain />} />
         <Route path="/clubMember" element={<ClubMember />} />
         <Route path="/addclubMember" element={<AddClubMember />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );

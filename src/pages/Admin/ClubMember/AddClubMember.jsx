@@ -15,19 +15,12 @@ export default function AddClubMember() {
         </div>
       </div>
 
-      <div className="flex justify-center px-3 items-center  w-10/12 mt-5 py-0.5 font-PretendardVariable max-w-[500px] border-[1px] border-[#3F3F3F] rounded-[50px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#D1D1D3]">
-        <input
-          type="text"
-          placeholder="이름이나 학번 또는 소속 동아리명 입력해주세요."
-          className="w-full text-center"
-          value={searchKeyword}
-          onChange={(e) => setSearchKeyword(e.target.value)}
-        />
-        <img
-          src={images.search}
-          alt="search"
-          className="flex cursor-pointer w-fit h-fit"
-        />
+      <div>
+        <div>동아리연합회</div>
+        <div>
+          <input />
+          <img src={images.search} alt="search" />
+        </div>
       </div>
 
       <div className="flex justify-between w-10/12 my-2 text-[12px] text-[#FF4242] font-PretendardVariable">
