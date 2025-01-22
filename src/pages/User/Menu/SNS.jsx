@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import Header from "./Header";
+import Header from "../../../components/Header";
 import PageBackground from "../PageBack";
 
 export default function SNS() {
