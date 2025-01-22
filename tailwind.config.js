@@ -7,6 +7,8 @@ module.exports = {
         Ownglyph_PDH: ["Ownglyph_PDH"],
         Ownglyph_ryurue: ["Ownglyph_ryurue"],
         Moneygraphy: ["Moneygraphy"],
+        PretendardVariable: ["PretendardVariable"],
+        Y_spotlight: ["Y_spotlight"],
       },
     },
   },
