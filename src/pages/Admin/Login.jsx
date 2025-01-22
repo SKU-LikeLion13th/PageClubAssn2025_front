@@ -55,7 +55,7 @@ export default function Login() {
       localStorage.setItem("role", role);
 
       if (role === "ROLE_ADMIN") {
-        navigate("/admin/AdminMain"); // 관리자 페이지로 이동
+        navigate("/admin/Main"); // 관리자 페이지로 이동
       } else {
         setModalOpen(true); // 일반 사용자 모달 띄우기
       }

@@ -2,6 +2,7 @@ import React from "react";
 import RibbonBackground from "../RibbonBackground";
 import Score from "./Score";
 import ScoreList from "./ScoreList";
+import Header from "../../../components/Header";
 
 export default function ExcellentClub() {
   return (
@@ -13,8 +14,8 @@ export default function ExcellentClub() {
           {/* TOP3 점수 */}
           <Score />
 
-          {/* 순위 목록 */}
-          <ScoreList />
+        {/* 순위 목록 */}
+        <ScoreList />
       </div>
     </div>
   );

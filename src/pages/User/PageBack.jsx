@@ -1,7 +1,7 @@
 import React from "react";
 import { images } from "../../utils/images";
 
-const PageBack = () => {
+const PageBackground = () => {
   return (
     <div>
       <div className="fixed w-full min-h-screen">
@@ -30,4 +30,4 @@ const PageBack = () => {
   );
 };
 
-export default PageBack;
+export default PageBackground;

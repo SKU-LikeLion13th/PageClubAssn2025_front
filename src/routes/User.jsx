@@ -17,6 +17,8 @@ const User = () => {
       <Routes>
         <Route path = "/" element = {<Main/>}/>
         <Route path = "/excellentclub" element={<ExcellentClub/>}/>
+        
+        <Route path = "/rentalitems" element={<RentalItems/>}/>
         <Route path = "/classSchedule" element={<ClassSchedule/>}/>
         <Route path = "/reservation" element={<Reservation/>}/>
         <Route path = "/rental" element={<Rental/>}/>
