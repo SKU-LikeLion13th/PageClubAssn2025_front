@@ -25,4 +25,6 @@ export const images = {
   //rentalitems
   cushion: PATH + "/assets/images/rental/cushion.png",
   line: PATH + "/assets/images/rental/Line.png",
+  rentalline : PATH + "/assets/images/rental/rentalline.png",
+  outimg : PATH + "/assets/images/rental/outimg.png"
 };
