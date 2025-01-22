@@ -25,4 +25,8 @@ export const images = {
   //rentalitems
   cushion: PATH + "/assets/images/rental/cushion.png",
   line: PATH + "/assets/images/rental/Line.png",
+
+  //ClubMember
+  search: PATH + "/assets/images/search.png",
+  click: PATH + "/assets/images/click.png"
 };

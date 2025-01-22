@@ -1,11 +1,11 @@
 import React from "react";
 
-export default function Admin() {
+export default function AdminMain() {
   const menuItems = [
     { label: "물품 예약 현황", link: "/admin/" },
     { label: "물품 대여 현황", link: "/admin/" },
     { label: "대여 물품 관리", link: "/admin/" },
-    { label: "동아리원 관리", link: "/admin/" },
+    { label: "동아리원 관리", link: "/admin/clubMember" },
     { label: "동아리 관리", link: "/admin/" },
     { label: "활동 점수 관리", link: "/admin/" },
   ];

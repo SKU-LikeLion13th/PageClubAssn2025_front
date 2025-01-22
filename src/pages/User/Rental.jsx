@@ -137,7 +137,7 @@ export default function Rental() {
             </div>
     
             {isDropdownOpen && (
-              <div className="flex flex-col bg-[#ffffff] w-full border-[#D2B48C] border rounded-[10px] shadow-lg absolute mt-0 z-50">
+              <div className="flex flex-col bg-[#ffffff] w-[80%] border-[#D2B48C] border rounded-[10px] shadow-lg absolute mt-0 z-50">
                 {testUser.clubs.map((club) => (
                   <div
                     key={club.name}
