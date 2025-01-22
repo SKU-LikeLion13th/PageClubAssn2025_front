@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
-import Header from "./Header";
+import Header from "../../../components/Header";
 import PageBackground from "../PageBackground";
 
 export default function SNS() {
   return (
-    <div className="py-8">
+    <div className="relative py-8">
       <Header />
       <PageBackground />
       <div className="flex flex-col items-center text-center bg-[#FAF4EF] min-h-screen py-8">

@@ -1,5 +1,5 @@
 import PageBackground from "../PageBackground";
-import Header from "./Header";
+import Header from "../../../components/Header";
 
 const members = [
   {
