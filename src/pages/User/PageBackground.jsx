@@ -1,18 +1,18 @@
 import React from "react";
 import { images } from "../../utils/images";
 
-const PageBack = () => {
+const PageBackground = () => {
   return (
     <div>
-      <div className="fixed min-h-screen w-full">
+      <div className="fixed w-full min-h-screen">
         <div className="flex">
           <img
             src={images.pBack}
-            className=" pb-48 max-[500px]:absolute max-[500px]:p-0 max-[500px]:top-0"
+            className="pb-48 max-[500px]:absolute max-[500px]:p-0 max-[500px]:top-0"
           />
           <img
             src={images.aBack}
-            className="pt-44 max-[500px]:absolute max-[500px]:p-0 max-[500px]:right-0 max-[500px]:top-[25%]"
+            className="ml-[11px] pt-44 max-[500px]:absolute max-[500px]:p-0 max-[500px]:right-0 max-[500px]:top-[25%]"
           />
         </div>
         <div className="flex">
@@ -22,7 +22,7 @@ const PageBack = () => {
           />
           <img
             src={images.eBack}
-            className="ml-[50px] pt-48 max-[500px]:absolute max-[500px]:p-0 max-[500px]:right-0 max-[500px]:top-[75%]"
+            className="ml-[64px] pt-48 max-[500px]:absolute max-[500px]:p-0 max-[500px]:right-0 max-[500px]:top-[75%]"
           />
         </div>
       </div>
@@ -30,4 +30,4 @@ const PageBack = () => {
   );
 };
 
-export default PageBack;
+export default PageBackground;

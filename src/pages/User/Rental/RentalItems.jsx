@@ -1,7 +1,7 @@
 import React from "react";
 import Item from "./Item";
 import PageBack from "./PageBack";
-import Header from "../Menu/Header";
+import Header from "../../../components/Header";
 
 const RentalItems = () => {
   return (
@@ -15,9 +15,9 @@ const RentalItems = () => {
           <p className="text-xl">대여 물품 LIST</p>
         </div>
         <div className="itemslist font-Moneygraphy w-[90%] z-20">
-          <Item/>
+          <Item />
         </div>
-      </div> 
+      </div>
     </div>
   );
 };
