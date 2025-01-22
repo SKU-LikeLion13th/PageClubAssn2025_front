@@ -10,8 +10,6 @@ export default function MainHeader() {
           alt="Page 로고"
         />
         <nav className="flex gap-4 items-center">
-          {" "}
-          {/* items-center를 추가하여 세로 정렬을 맞춤 */}
           <NavLink to="/mypage" className="">
             <img
               className="object-contain"
