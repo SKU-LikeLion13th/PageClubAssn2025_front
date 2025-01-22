@@ -10,7 +10,7 @@ const RentalItems = () => {
         <Header/>
       </div>
       <PageBack/>
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col items-center justify-center">
         <div className="title mt-5 mb-9 px-12 py-1 bg-white rounded-3xl border-2 border-[#D2B48C] z-20">
           <p className="text-xl">대여 물품 LIST</p>
         </div>

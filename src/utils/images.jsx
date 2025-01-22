@@ -26,5 +26,9 @@ export const images = {
   cushion: PATH + "/assets/images/rental/cushion.png",
   line: PATH + "/assets/images/rental/Line.png",
   rentalline : PATH + "/assets/images/rental/rentalline.png",
-  outimg : PATH + "/assets/images/rental/outimg.png"
+  outimg : PATH + "/assets/images/rental/outimg.png",
+
+  //ClubMember
+  search: PATH + "/assets/images/search.png",
+  click: PATH + "/assets/images/click.png"
 };

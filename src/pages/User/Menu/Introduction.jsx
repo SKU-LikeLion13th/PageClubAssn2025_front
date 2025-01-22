@@ -1,5 +1,5 @@
-import PageBackground from "../PageBackground";
-import Header from "../../../components/Header";
+import PageBack from "../PageBack";
+import Header from "./Header";
 
 const members = [
   {
@@ -78,7 +78,7 @@ export default function Introduction() {
   return (
     <div className="py-8">
       <Header />
-      <PageBackground />
+      <PageBack />
       <div className="z-12">
         <div className="flex flex-col items-center w-full mt-6">
           <div className="flex items-center justify-center w-[211px] h-[40px] border-[0.8px] border-[#D2B48C] bg-white rounded-[20px] text-[20px] text-[#996515] z-10">
@@ -108,11 +108,11 @@ export default function Introduction() {
           </p>
         </div>
 
-        <div className="flex flex-col items-center w-full mt-10 z-10">
+        <div className="z-10 flex flex-col items-center w-full mt-10">
           <div className="flex items-center justify-center w-[211px] h-[40px] border-[0.8px] border-[#D2B48C] bg-white rounded-[20px] text-[20px] text-[#996515] z-10">
             집행부 소개
           </div>
-          <div className="grid grid-cols-2 grid-flow-row gap-5 justify-center mt-4">
+          <div className="grid justify-center grid-flow-row grid-cols-2 gap-5 mt-4">
             {members.map((member) => (
               <div
                 key={member.id}

@@ -1,5 +1,5 @@
-import Header from "../../../components/Header";
-import PageBackground from "../PageBackground";
+import Header from "./Header";
+import PageBack from "../PageBack";
 
 const members = [
   {
@@ -126,9 +126,9 @@ const likeLionMembers = [
 
 export default function AboutUs() {
   return (
-    <div className=" py-8">
+    <div className="py-8 ">
       <Header />
-      <PageBackground />
+      <PageBack />
       <div className="z-12">
         <div className="flex flex-col items-center w-full mt-6">
           <div className="flex items-center justify-center w-[211px] h-[40px] border-[0.8px] border-[#D2B48C] bg-white rounded-[20px] text-[20px] text-[#996515] z-10">
@@ -175,13 +175,13 @@ export default function AboutUs() {
         </div>
 
         {/* border */}
-        <div className="mt-12 flex justify-center items-center">
+        <div className="flex items-center justify-center mt-12">
           <hr className="w-[212px] border-[#D2B48C] border-[0.8px]" />
         </div>
 
         {/* Page */}
         <div>
-          <div className="mt-6 flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center mt-6">
             <img
               src="../../assets/images/PageLogo.png"
               alt=""
@@ -193,7 +193,7 @@ export default function AboutUs() {
               제41대 Page 동아리연합회
             </p>
           </div>
-          <div className="grid grid-rows-2 grid-flow-col gap-4 justify-center mt-4">
+          <div className="grid justify-center grid-flow-col grid-rows-2 gap-4 mt-4">
             {members.map((member) => (
               <div
                 key={member.id}
@@ -204,7 +204,7 @@ export default function AboutUs() {
                   alt={member.name}
                   className="w-[38px] h-[38px]"
                 />
-                <div className="flex justify-center items-center mt-2">
+                <div className="flex items-center justify-center mt-2">
                   <img
                     src={member.logoSrc}
                     alt="Logo"
@@ -217,7 +217,7 @@ export default function AboutUs() {
                   <br />
                   {member.role}
                 </p>
-                <div className="mt-2 flex justify-center items-center">
+                <div className="flex items-center justify-center mt-2">
                   <hr className="w-[58px] border-[#D2B48C] border-[0.5px]" />
                 </div>
                 <p className="mt-2 text-[6px] leading-[7px] text-center">
@@ -230,7 +230,7 @@ export default function AboutUs() {
 
         {/* LikeLion */}
         <div className="mt-6">
-          <div className="flex flex-col items-center justify-center z-10">
+          <div className="z-10 flex flex-col items-center justify-center">
             <img
               src="../../assets/images/LikeLionLogo.png"
               alt=""
@@ -242,8 +242,8 @@ export default function AboutUs() {
               멋쟁이사자처럼 13기
             </p>
           </div>
-          <div className="flex justify-center items-center">
-            <div className="grid grid-cols-2 grid-flow-row gap-4 mt-4 ">
+          <div className="flex items-center justify-center">
+            <div className="grid grid-flow-row grid-cols-2 gap-4 mt-4 ">
               {likeLionMembers.map((member) => (
                 <div
                   key={member.id}
@@ -254,7 +254,7 @@ export default function AboutUs() {
                     alt={member.name}
                     className="w-[38px] h-[38px]"
                   />
-                  <div className="flex justify-center items-center mt-2">
+                  <div className="flex items-center justify-center mt-2">
                     <img
                       src={member.logoSrc}
                       alt="Logo"
@@ -268,7 +268,7 @@ export default function AboutUs() {
                     <br />
                     {member.role}
                   </p>
-                  <div className="mt-2 flex justify-center items-center">
+                  <div className="flex items-center justify-center mt-2">
                     <hr className="w-[58px] border-[#D2B48C] border-[0.5px]" />
                   </div>
                   <p className="mt-2 text-[6px] leading-[7px] text-center">

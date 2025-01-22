@@ -79,36 +79,36 @@ export default function Login() {
           </span>
           <form className="inputbox mt-7">
             {/* 학번 입력 */}
-            <div className="idbox flex flex-col">
-              <span className="id text-base ml-1">학번</span>
+            <div className="flex flex-col idbox">
+              <span className="ml-1 text-base id">학번</span>
               <input
                 type="text"
                 name="studentId"
                 value={studentInfo.studentId}
                 onChange={handleInputChange}
-                className="idinput border mt-1 p-3 rounded-lg"
+                className="p-3 mt-1 border rounded-lg idinput"
                 placeholder="20190826"
               />
               {!idValid && studentInfo.studentId.length > 0 && (
-                <div className="text-xs text-red-500 mt-2 ml-2">
+                <div className="mt-2 ml-2 text-xs text-red-500">
                   숫자 8자를 입력해주세요
                 </div>
               )}
             </div>
 
             {/* 이름 입력 */}
-            <div className="namebox flex flex-col mt-5">
-              <span className="name text-base ml-1">이름</span>
+            <div className="flex flex-col mt-5 namebox">
+              <span className="ml-1 text-base name">이름</span>
               <input
                 type="text"
                 name="name"
                 value={studentInfo.name}
                 onChange={handleInputChange}
-                className="nameinput border mt-1 p-3 rounded-lg"
+                className="p-3 mt-1 border rounded-lg nameinput"
                 placeholder="홍길동"
               />
               {!nameValid && studentInfo.name.length > 0 && (
-                <div className="text-xs text-red-500 mt-2 ml-2">
+                <div className="mt-2 ml-2 text-xs text-red-500">
                   한글 이름을 입력해주세요 (최소 2글자)
                 </div>
               )}
