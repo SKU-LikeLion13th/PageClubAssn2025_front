@@ -22,13 +22,30 @@ export default function Score() {
             <div
               key={item.id}
               className={`flex flex-col items-center justify-end ${
-                item.grade === 1 ? "order-2 mx-8" : item.grade === 2 ? "order-1" : "order-3"
+                item.grade === 1 ? "order-2 mx-2.5" : item.grade === 2 ? "order-1" : "order-3"
               }`}
             >
-              <img className="w-[60px] h-[60px]" src={`assets/images/${item.image}`} alt={item.name} />
+              {item.grade === 1 && (
+                <img
+                  className="w-[40px] mb-2"
+                  src="assets/images/win.png"
+                  alt="1등 트로피"
+                />
+              )}
+              <img
+                className={`${
+                  item.grade === 1
+                    ? "w-[80%]"
+                    : item.grade === 2
+                    ? "w-[60%]"
+                    : "w-[40%]"
+                }`}
+                src={`assets/images/${item.image}`}
+                alt={item.name}
+              />
               <div className="flex my-1 mx-auto font-Moneygraphy text-[8px] text-[#3f3f3f]">{item.name}</div>
               <div
-                className={`flex justify-center items-center w-[90px] ${
+                className={`flex justify-center items-center w-[5rem] ${
                   item.grade === 1 ? "h-[100px]" : item.grade === 2 ? "h-[80px]" : "h-[60px]"
                 } bg-[#F6E9D9] rounded-t-[10px]`}
               >
