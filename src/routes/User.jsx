@@ -1,8 +1,7 @@
 import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Main from "../pages/User/Maintest";
 import ExcellentClub from "../pages/User/ExcellentClub/ExcellentClub";
-import RentalItems from "../pages/User/RentalItems";
+import RentalItems from "../pages/User/Rental/RentalItems";
 import Login from "../pages/User/Login/Login";
 import LoginFailureModal from "./../pages/User/Login/LoginFailureModal";
 import UserAgreement from "../pages/User/Login/UserAgreement";
@@ -15,6 +14,7 @@ import Menu from "../pages/User/Menu/Menu";
 import Introduction from "../pages/User/Menu/Introduction";
 import SNS from "../pages/User/Menu/SNS";
 import AboutUs from "../pages/User/Menu/AboutUs";
+import Main from "../pages/User/Main";
 
 const User = () => {
   return (
@@ -36,11 +36,9 @@ const User = () => {
         <Route path="/introduction" element={<Introduction />} />
         <Route path="/sns" element={<SNS />} />
         <Route path="/aboutus" element={<AboutUs />} />
-    
       </Routes>
     </div>
   );
 };
 
 export default User;
-
