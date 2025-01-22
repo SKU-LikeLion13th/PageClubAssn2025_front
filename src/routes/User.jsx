@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ExcellentClub from "../pages/User/ExcellentClub/ExcellentClub";
 import RentalItems from "../pages/User/Rental/RentalItems";
 import Login from "../pages/User/Login/Login";
