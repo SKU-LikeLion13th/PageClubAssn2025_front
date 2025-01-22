@@ -1,5 +1,5 @@
 import Header from "../../../components/Header";
-import PageBack from "../PageBack";
+import PageBack from "../../../components/PageBack";
 
 const members = [
   {

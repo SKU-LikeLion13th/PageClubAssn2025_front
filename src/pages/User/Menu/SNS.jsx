@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 import Header from "../../../components/Header";
-import PageBackground from "../PageBack";
+import PageBack from "../../../components/PageBack"
 
 export default function SNS() {
   return (
     <div className="relative py-8">
       <Header />
-      <PageBackground />
+      <PageBack />
       <div className="flex flex-col items-center text-center bg-[#FAF4EF] min-h-screen py-8">
         {/* 메인 콘텐츠 */}
         <div className="relative z-10 flex flex-col items-center flex-grow w-full mt-5">

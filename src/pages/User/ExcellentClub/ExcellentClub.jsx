@@ -1,5 +1,5 @@
 import React from "react";
-import RibbonBackground from "../RibbonBackground";
+import RibbonBackground from "../../../components/RibbonBackground";
 import Score from "./Score";
 import ScoreList from "./ScoreList";
 import Header from "../../../components/Header";

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import RibbonBackground from './RibbonBackground';
+import RibbonBackground from '../../components/RibbonBackground';
 import { images } from "../../utils/images";
 import { IoCaretDownOutline } from "react-icons/io5";
 
