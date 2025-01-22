@@ -119,7 +119,10 @@ const Item = () => {
             />
           )}
           {modalStep === 3 && (
-            <RentalSuccess itemId={selectedItemId} closeModal={closeModal} />
+            <RentalSuccess 
+            itemId={selectedItemId}
+            itemName={selectedItemName}
+            closeModal={closeModal} />
           )}
         </div>
       )}

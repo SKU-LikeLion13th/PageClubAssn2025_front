@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Routes, useLocation} from "react-router-dom";
-import Main from '../pages/User/Maintest'
+import Main from '../pages/User/Main'
 import ExcellentClub from '../pages/User/ExcellentClub/ExcellentClub';
 import RentalItems from '../pages/User/Rental/RentalItems';
 import ClassSchedule from '../pages/User/ClassSchedule/ClassSchedule';
