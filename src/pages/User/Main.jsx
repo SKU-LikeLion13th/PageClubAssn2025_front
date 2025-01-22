@@ -20,17 +20,17 @@ export default function Main() {
             src="/assets/images/MainBook.png"
             alt="책 배경 이미지"
           />
-          <NavLink to="/">
+          <NavLink to="/rentalitems">
             {/* absolute w-[200px] h-12 border-2 top-[30%] max-w-[500px]:left-[45%] transform -translate-x-[34%] z-10 */}
             <button className="absolute w-[130px] h-12 border-2 top-[20%] max-w-[500px]:left-[30%] transform -translate-x-[65%] z-10"></button>
           </NavLink>
           <NavLink to="/">
             <button className="absolute w-[130px] h-12 border-2 top-[33%] max-w-[500px]:left-[30%] transform -translate-x-[57%] z-10"></button>
           </NavLink>
-          <NavLink to="/">
+          <NavLink to="/excellentclub">
             <button className="absolute w-[170px] h-12 border-2 top-[46%] max-w-[500px]:left-[30%] transform -translate-x-[37%] z-10"></button>
           </NavLink>
-          <NavLink to="/">
+          <NavLink to="/classSchedule">
             <button className="absolute w-[140px] h-12 border-2 top-[58.5%] max-w-[500px]:left-[30%] transform -translate-x-[37%] z-10"></button>
           </NavLink>
         </div>
