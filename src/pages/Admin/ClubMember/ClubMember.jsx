@@ -8,7 +8,7 @@ export default function ClubMember() {
   const [searchKeyword, setSearchKeyword] = useState(''); // 검색 키워드 상태
   const [searchResults, setSearchResults] = useState([]); // 검색 결과 상태
   const [error, setError] = useState(''); // 에러 상태
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // 검색 버튼 클릭 시 호출되는 함수
   const handleSearch = async () => {
@@ -41,8 +41,8 @@ export default function ClubMember() {
     } catch (err) {
       if (err.response?.status === 401) {
         setError('인증 오류: 다시 로그인 해주세요.');
-        // localStorage.clear();
-        // navigate('/admin/login');
+        localStorage.clear();
+        navigate('/admin/login');
       } else {
         setError('검색 중 문제가 발생했습니다.');
       }

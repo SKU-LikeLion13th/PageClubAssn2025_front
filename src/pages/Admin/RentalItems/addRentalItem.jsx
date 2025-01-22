@@ -47,37 +47,37 @@ export default function AddRentalItem() {
   };
 
   return (
-    <div className="font-Y_spotlight px-4">
-      <div className="mt-6 flex flex-col items-center">
+    <div className="px-4 font-Y_spotlight">
+      <div className="flex flex-col items-center mt-6">
         <p className="text-[2rem]">대여 물품 추가</p>
       </div>
       <div className="mt-6 space-y-4">
-        <div className="border border-[1.5px] border-[#D1D1D3]" />
+        <div className="border-[1.5px] border-[#D1D1D3]" />
         {/* 물품명 입력 */}
         <div className="flex justify-between px-2 font-PretendardVariable">
           <div>
-            <label className="text-sm mr-2">물품명</label>
+            <label className="mr-2 text-sm">물품명</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="border-b border-gray-300 text-sm bg-transparent focus:outline-none text-center"
+              className="text-sm text-center bg-transparent border-b border-gray-300 focus:outline-none"
             />
           </div>
         </div>
         {/* 총 수량 입력 */}
         <div className="flex px-2 font-PretendardVariable">
-          <label className="text-sm mr-2">총 수량</label>
+          <label className="mr-2 text-sm">총 수량</label>
           <input
             type="text"
             value={count}
             onChange={(e) => setCount(e.target.value)}
-            className="border-b border-gray-300 text-sm bg-transparent focus:outline-none text-center"
+            className="text-sm text-center bg-transparent border-b border-gray-300 focus:outline-none"
           />
         </div>
         {/* 이미지 입력 (파일 선택) */}
         <div className="flex items-center px-2 font-PretendardVariable">
-          <label htmlFor="file-upload" className="text-sm mr-2 cursor-pointer">
+          <label htmlFor="file-upload" className="mr-2 text-sm cursor-pointer">
             사진
           </label>
           <input
@@ -96,11 +96,11 @@ export default function AddRentalItem() {
         </div>
         {/* 이미지 미리보기 */}
         {imagePreview && (
-          <div className="mt-2 flex justify-center">
+          <div className="flex justify-center mt-2">
             <img
               src={imagePreview}
               alt="Image Preview"
-              className="w-32 h-32 object-contain"
+              className="object-contain w-32 h-32"
             />
           </div>
         )}

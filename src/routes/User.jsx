@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Routes, useLocation} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Main from '../pages/User/Main'
 import ExcellentClub from '../pages/User/ExcellentClub/ExcellentClub';
 import RentalItems from '../pages/User/Rental/RentalItems';
@@ -17,7 +17,6 @@ const User = () => {
       <Routes>
         <Route path = "/" element = {<Main/>}/>
         <Route path = "/excellentclub" element={<ExcellentClub/>}/>
-        
         <Route path = "/rentalitems" element={<RentalItems/>}/>
         <Route path = "/classSchedule" element={<ClassSchedule/>}/>
         <Route path = "/reservation" element={<Reservation/>}/>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import AdminMain from "../pages/Admin/AdminMain";
 import ClubMember from "../pages/Admin/ClubMember/ClubMember";
 import AddClubMember from "../pages/Admin/ClubMember/AddClubMember";
