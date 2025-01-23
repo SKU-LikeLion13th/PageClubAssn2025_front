@@ -3,18 +3,27 @@ import axios from 'axios';
 import { images } from '../../../utils/images';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { API_URL } from '../../../config';
+import Modal from 'react-modal';
+import { IoClose } from 'react-icons/io5';
 
 export default function ClubMember() {
-  const [searchKeyword, setSearchKeyword] = useState(''); // 검색 키워드 상태
-  const [searchResults, setSearchResults] = useState([]); // 검색 결과 상태
-  const [error, setError] = useState(''); // 에러 상태
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [error, setError] = useState('');
+  const [modalIsOpen, setModalIsOpen] = useState(false); // 모달 상태
+  const [selectedMember, setSelectedMember] = useState(null); // 선택된 멤버 상태
   const navigate = useNavigate();
 
+  const token = localStorage.getItem('Token');
+  const userRole = localStorage.getItem('role');
+
+  const handleDelete = (member) => {
+    setSelectedMember(member);
+    setModalIsOpen(true);  // Open modal
+  };
+  
   // 검색 버튼 클릭 시 호출되는 함수
   const handleSearch = async () => {
-    const token = localStorage.getItem('Token');
-    const userRole = localStorage.getItem('role');
-    console.log(token);
   
     if (!token) {
       setError('인증 토큰이 없습니다. 로그인 후 다시 시도해주세요.');
@@ -36,7 +45,6 @@ export default function ClubMember() {
           },
         }
       );
-      console.log(response);
       setSearchResults(response.data);
     } catch (err) {
       if (err.response?.status === 401) {
@@ -49,7 +57,43 @@ export default function ClubMember() {
       console.error(err);
     }
   };
+
+  const openModal = (member) => {
+    setSelectedMember(member);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedMember(null);
+    setModalIsOpen(false);
+  };
+
+  const confirmDelete = async () => {
+    if (!selectedMember) return;
   
+    try {
+      await axios.delete(
+        `${API_URL}/admin/join-club`, 
+        {
+          headers: {
+            Authorization: `${token}`,
+            'Content-Type': 'application/json',
+          },
+          data: {
+            memberId: selectedMember.memberId,
+            clubId: selectedMember.clubId,
+          },
+        }
+      );
+      setSearchResults((prevResults) =>
+        prevResults.filter((result) => result.studentId !== selectedMember.studentId)
+      );
+      closeModal();
+    } catch (err) {
+      console.error(err);
+      setError('삭제 중 문제가 발생했습니다.');
+    }
+  };
 
   return (
     <div className="flex flex-col items-center w-full mt-10">
@@ -76,50 +120,106 @@ export default function ClubMember() {
         <img
           src={images.search}
           alt="search"
-          className="flex cursor-pointer w-fit h-fit"
+          className="flex w-[15px] cursor-pointer h-[15px]"
           onClick={handleSearch} // 클릭 이벤트 추가
         />
       </div>
 
-      <div className="flex justify-between w-10/12 my-2 text-[11px] text-[#FF4242] font-PretendardVariable">
-        <div className="flex">선택할 동아리원이 없다면 멤버로 먼저 관리하세요.</div>
-        <NavLink to='/memberManage' className="flex">
-          멤버관리
-          <img src={images.click} alt="click" className="w-fit h-fit" />
-        </NavLink>
-      </div>
+      {searchResults.length === 0 && (
+        <div className="flex justify-between w-10/12 my-2 text-[11px] text-[#FF4242] font-PretendardVariable">
+          <div className="flex">선택할 동아리원이 없다면 멤버로 먼저 관리하세요.</div>
+          <NavLink to="/admin/memberManage" className="flex">
+            멤버관리
+            <img src={images.click} alt="click" className="ml-1 w-[15px] h-[15px]" />
+          </NavLink>
+        </div>
+      )}
 
       {error && <div className="mt-2 text-sm text-red-500">{error}</div>}
 
       {searchResults.length > 0 && (
-        <div className="flex flex-col w-10/12 mt-5">
+        <div className="flex flex-col w-10/12 border-t-[2px] border-[#D1D1D3] mt-5">
           {searchResults.map((result, index) => (
             <div
-              key={index}
-              className="flex justify-between p-2 text-sm border-b border-gray-300"
+              key={result.studentId}
+              className="flex flex-col text-[13px] font-PretendardVariable border-b-[2px] border-[#D1D1D3]"
             >
-              <div>
-                <div>이름</div>
-                <div>{result.studentName}</div>
-              </div>
+              <div className='flex flex-col w-full mt-5'>
+                    <div className='flex mb-3'>
+                      <div className='flex w-1/2'>
+                        <div className='flex'>이름</div>
+                        <div className='flex ml-3 px-5 border-b border-[#D1D1D3]'>{result.studentName}</div>
+                      </div>
+                      <div className='flex w-1/2'>
+                        <div className='flex'>학번</div>
+                        <div className='flex ml-3 px-5 border-b border-[#D1D1D3]'>{result.studentId}</div>
+                      </div>
+                    </div>
 
-              <div>
-                <div>학번</div>
-                <div>({result.studentId})</div>
-              </div>
+                    <div className='flex justify-center w-full'>
+                        <div className='flex'>소속 동아리</div>
+                        <div className='flex ml-3 px-5 border-b border-[#D1D1D3]'>{result.clubName}</div>
+                      </div>
+                  </div>
 
-              <div>
-                <div>소속 동아리</div>
-                <div>{result.clubName}</div>
-              </div>
+                  <div className='flex justify-end w-full my-3'>
+                    <button
+                      className="flex w-fit h-fit px-3 py-0.5 text-[8px] font-Y_spotlight bg-[#D1D1D3] rounded-[4px]"
+                      onClick={() => handleDelete(result)}
+                    >
+                      삭제
+                    </button>
+                  </div>
             </div>
           ))}
         </div>
       )}
 
-      <div className="flex justify-end w-10/12 border-b-[2px] border-[#D1D1D3]">
-        <div className="flex w-fit h-fit px-3 py-0.5 text-[8px] font-Y_spotlight bg-[#D1D1D3] rounded-[4px] mb-5">삭제</div>
-      </div>
+      {/* 삭제 확인 모달 */}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Confirm Delete"
+        ariaHideApp={false}
+        style={{
+          content: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 0,
+            border: 'none',
+            backgroundColor: 'transparent',
+          },
+        }}
+      >
+        <div className='flex flex-col items-start w-fit font-PretendardVariable border-[1px] border-[#3F3F3F] rounded-[12px]'>
+          <div className='flex justify-end w-full p-2'>
+            <IoClose className='flex cursor-pointer' onClick={closeModal} />
+          </div>
+          <div className='flex flex-col items-start w-full pb-5 px-14'>
+            <div className='flex flex-col'>
+              <div className='flex text-[10px]'>이름 : <div className='ml-3'>{selectedMember?.studentName}</div></div>
+              <div className='flex text-[10px]'>학번 : <div className='ml-3'>{selectedMember?.studentId}</div></div>
+              <div className='flex text-[10px]'>동아리 : <div className='ml-3'>{selectedMember?.clubName}</div></div>
+            </div>
+            <h2 className='flex justify-center w-full my-2'>삭제하시겠습니까?</h2>
+            <div className='flex justify-center w-full'>
+              <button
+                className='flex px-2.5 py-0.5 text-[10px] rounded-[4px] mr-2 bg-[#D1D1D3]'
+                onClick={() => confirmDelete(selectedMember)}
+              >
+                예
+              </button>
+              <button
+                className='flex px-2.5 py-0.5 text-[10px] rounded-[4px] bg-[#D1D1D380]'
+                onClick={closeModal}
+              >
+                아니요
+              </button>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

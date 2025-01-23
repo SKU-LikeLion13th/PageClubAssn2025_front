@@ -11,12 +11,10 @@ export const images = {
   gBack: PATH + "/assets/images/pagebackground/gBack.png",
   eBack: PATH + "/assets/images/pagebackground/eBack.png",
 
-  //NoReservation
+  //Reservation
   admin: PATH + "/assets/images/clubLogo/admin.png",
   likelion: PATH + "/assets/images/clubLogo/likelion.png",
   pegasuss: PATH + "/assets/images/clubLogo/pegasuss.png",
-
-  //YesReservation
   testtg: PATH + "/assets/images/testtg.png",
   testball: PATH + "/assets/images/testball.png",
   left: PATH + "/assets/images/left.png",
@@ -25,12 +23,12 @@ export const images = {
   //rentalitems
   cushion: PATH + "/assets/images/rental/cushion.png",
   line: PATH + "/assets/images/rental/Line.png",
-  rentalline: PATH + "/assets/images/rental/rentalline.png",
-  outimg: PATH + "/assets/images/rental/outimg.png",
+  rentalline: PATH + "/assets/images/rental/rentalline.jpeg",
+  outimg: PATH + "/assets/images/rental/outimg.jpeg",
 
-  //ClubMember
-  search: PATH + "/assets/images/search.png",
-  click: PATH + "/assets/images/click.png",
+  //AdminMember
+  search: PATH + "/assets/images/AdminMember/search.jpeg",
+  click: PATH + "/assets/images/AdminMember/click.jpeg",
 
   // User_MainHeader
   UserIcon: PATH + "/assets/images/MainHeader/UserIcon.png",
