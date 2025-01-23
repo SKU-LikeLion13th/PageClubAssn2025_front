@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { images } from "../utils/images";
 
 export default function MainHeader() {
   return (
@@ -13,14 +14,14 @@ export default function MainHeader() {
           <NavLink to="/mypage" className="">
             <img
               className="object-contain"
-              src="/assets/images/UserIcon.png"
+              src={images.UserIcon}
               alt="사용자 아이콘"
             />
           </NavLink>
           <NavLink to="/menu" className="">
             <img
               className="object-contain"
-              src="assets/images/MenuIcon.png"
+              src={images.MenuIcon}
               alt="메뉴 아이콘"
             />
           </NavLink>

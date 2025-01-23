@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
 import Header from "../../../components/Header";
-import PageBack from "../../../components/PageBack"
+import PageBack from "../../../components/PageBack";
+import { images } from "../../../utils/images";
 
 export default function SNS() {
   return (
-    <div className="relative py-8">
+    <div className="relative">
       <Header />
       <PageBack />
       <div className="flex flex-col items-center text-center bg-[#FAF4EF] min-h-screen py-8">
@@ -23,21 +24,21 @@ export default function SNS() {
             {" "}
             {/* items-center로 정렬 */}
             <div className="flex w-[18rem] h-[5rem] items-center justify-between border border-[#D2B48C] rounded-[10px] mt-6 px-4 bg-white">
-              <img src="../../assets/images/instagram.png" alt="" />
+              <img src={images.insta} alt="" />
               <div className="pr-8 font-Moneygraphy font-normal text-[15px] text-[#996515]">
                 <p>인스타그램</p>
                 <p>@sku_dongari41</p>
               </div>
             </div>
             <div className="flex w-[18rem] h-[5rem] items-center justify-between border border-[#D2B48C] rounded-[10px] mt-6 px-4 bg-white">
-              <img src="../../assets/images/naver_cafe.png" alt="" />
+              <img src={images.naver} alt="" />
               <div className="pr-4 font-Moneygraphy font-normal text-[15px] text-[#996515]">
                 <p>네이버카페</p>
                 <p>'성결대학교 동아리연합회'</p>
               </div>
             </div>
             <div className="flex w-[18rem] h-[5rem] items-center justify-between border border-[#D2B48C] rounded-[10px] mt-6 px-4 bg-white">
-              <img src="../../assets/images/kakao.png" alt="" />
+              <img src={images.kakao} alt="" />
               <div className="pr-6 font-Moneygraphy font-normal text-[15px] text-[#996515]">
                 <p>카카오채널</p>
                 <p>'성결대 동아리연합회'</p>

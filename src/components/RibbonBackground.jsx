@@ -6,7 +6,7 @@ export default function RibbonBackground() {
     <>
       {/* 리본 배경 */}
       <div className="absolute flex items-center justify-center w-full h-full">
-          <img src={images.ribbon} className="mt-[10%] w-full" alt="ribbon" />
+        <img src={images.ribbon} className="mt-[10%] w-full" alt="ribbon" />
       </div>
     </>
   );

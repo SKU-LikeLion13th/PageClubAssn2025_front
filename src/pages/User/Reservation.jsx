@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import RibbonBackground from '../../components/RibbonBackground';
+import React, { useState } from "react";
+import RibbonBackground from "../../components/RibbonBackground";
 import { images } from "../../utils/images";
 import { IoCaretDownOutline } from "react-icons/io5";
 
@@ -112,7 +112,9 @@ export default function Reservation() {
                   <div className="flex flex-col items-center py-5 text-center">
                     <img
                       src={testUser.reservation[currentReservationIndex].image}
-                      alt={testUser.reservation[currentReservationIndex].itemName}
+                      alt={
+                        testUser.reservation[currentReservationIndex].itemName
+                      }
                       className="w-[90px] h-[90px] object-cover mb-4"
                     />
                     <div className="mb-2">
@@ -120,7 +122,10 @@ export default function Reservation() {
                     </div>
                     <div>
                       <span className="font-bold text-[#FF7009]">
-                        {testUser.reservation[currentReservationIndex].reservationDate}
+                        {
+                          testUser.reservation[currentReservationIndex]
+                            .reservationDate
+                        }
                       </span>
                       {""}까지 <br /> 동아리연합회실로 방문해주세요.
                     </div>
@@ -133,13 +138,20 @@ export default function Reservation() {
 
                   {/* 슬라이드 버튼 */}
                   <div className="flex items-center mt-5 mb-3 text-[#996515] text-[16px] space-x-4">
-                    <button onClick={handlePrev} className="hover:text-[#FF7009]">
+                    <button
+                      onClick={handlePrev}
+                      className="hover:text-[#FF7009]"
+                    >
                       <img src={images.left} alt="left" />
                     </button>
                     <span className="text-[11px]">
-                      {currentReservationIndex + 1}/{testUser.reservation.length}
+                      {currentReservationIndex + 1}/
+                      {testUser.reservation.length}
                     </span>
-                    <button onClick={handleNext} className="hover:text-[#FF7009]">
+                    <button
+                      onClick={handleNext}
+                      className="hover:text-[#FF7009]"
+                    >
                       <img src={images.right} alt="right" />
                     </button>
                   </div>

@@ -1,9 +1,9 @@
 import React from "react";
-import { images } from "../../../utils/images";
+import { images } from "../../../utils/images.jsx";
 import RentalNoteHeader from "./RentalNoteHeader.jsx";
 
 const RentalNote = ({ itemId, closeModal, nextStep }) => {
-  console.log(itemId)
+  console.log(itemId);
   return (
     <div className="min-h-screen w-full">
       <div className="pt-8">

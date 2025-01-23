@@ -76,7 +76,7 @@ const members = [
 
 export default function Introduction() {
   return (
-    <div className="py-8">
+    <div className="">
       <Header />
       <PageBack />
       <div className="z-12">

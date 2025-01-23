@@ -19,7 +19,7 @@ export default function Score() {
 
   return (
     <div className="relative flex flex-col items-center w-full z-0 text-[#996515]">
-      <div className="flex justify-center w-fit text-[25.5px] border-[0.5px] border-[#996515] bg-[#ffffff] rounded-[62px] mt-20 px-11 py-1">
+      <div className="flex justify-center w-fit text-[25.5px] border-[0.5px] border-[#996515] bg-[#ffffff] rounded-[62px] mt-11 px-11 py-1">
         1분기 활동 점수 TOP3
       </div>
       {/* Score List */}

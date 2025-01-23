@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { images } from "../utils/images";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -9,19 +10,19 @@ export default function Header() {
   };
 
   return (
-    <div className="flex justify-between items-center w-full px-4">
+    <div className="flex justify-between items-center w-full px-4 pt-8">
       {/* 헤더 */}
       <div className="flex justify-between items-center w-full max-w-4xl px-2">
         <NavLink to="/">
           <img
-            src="/assets/images/Home.png"
+            src={images.Home}
             alt="홈 아이콘"
             className="w-[19px] h-[22px]"
           />
         </NavLink>
         <button onClick={goBack}>
           <img
-            src="/assets/images/Back.png"
+            src={images.Back}
             alt="뒤로 가기 아이콘"
             className="w-[10px] h-[20px]"
           />

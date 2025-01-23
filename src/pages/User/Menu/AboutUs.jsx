@@ -126,7 +126,7 @@ const likeLionMembers = [
 
 export default function AboutUs() {
   return (
-    <div className="py-8 ">
+    <div className="">
       <Header />
       <PageBack />
       <div className="z-12">
