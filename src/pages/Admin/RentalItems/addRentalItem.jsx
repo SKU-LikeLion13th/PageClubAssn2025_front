@@ -23,14 +23,23 @@ export default function AddRentalItem() {
       return;
     }
 
+    const token = localStorage.getItem("Token"); // 토큰 가져오기
+    if (!token) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append("name", name);
-      formData.append("count", count);
+      formData.append("count", parseInt(count)); // count를 숫자로 변환
       formData.append("image", image);
 
       const response = await fetch(`${API_URL}/admin/item`, {
         method: "POST",
+        headers: {
+          Authorization: `${token}`,
+        },
         body: formData, // FormData로 요청
       });
 
@@ -38,10 +47,13 @@ export default function AddRentalItem() {
         alert("대여 물품이 추가되었습니다.");
         navigate("/admin/RentalItems"); // 대여 물품 목록 페이지로 리다이렉트
       } else {
-        alert("대여 물품 추가에 실패했습니다.");
+        const data = await response.json();
+        alert(
+          `대여 물품 추가에 실패했습니다. ${data.message || "알 수 없는 오류"}`
+        );
       }
     } catch (error) {
-      console.error(error);
+      console.error("API 호출 실패:", error);
       alert("오류가 발생했습니다.");
     }
   };

@@ -243,7 +243,7 @@ export default function AboutUs() {
             </p>
           </div>
           <div className="flex items-center justify-center">
-            <div className="grid grid-flow-row grid-cols-2 gap-4 mt-4 ">
+            <div className="grid grid-flow-row grid-cols-2 gap-4 my-4">
               {likeLionMembers.map((member) => (
                 <div
                   key={member.id}

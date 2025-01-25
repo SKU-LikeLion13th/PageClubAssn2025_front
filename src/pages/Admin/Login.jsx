@@ -123,17 +123,6 @@ export default function Login() {
           >
             로그인
           </button>
-
-          {/* 모달 */}
-          {modalOpen && (
-            <div className="modal">
-              <div className="modal-content">
-                <h3>일반 사용자 로그인</h3>
-                <p>로그인이 완료되었습니다.</p>
-                <button onClick={() => setModalOpen(false)}>확인</button>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </>
