@@ -1,9 +1,13 @@
 import React from "react";
+import Header from "../../../components/Header";
+import RibbonBackground from "../../../components/RibbonBackground";
 
 export default function Login() {
   return (
     <>
-      <div className="w-full h-[calc(100vh-35px)] flex justify-center items-center">
+      <Header />
+
+      <div className="w-full h-[calc(100vh-95px)] flex justify-center items-center">
         <div className="w-[75%] text-center">
           <div className="font-Ownglyph_PDH text-[#996515] text-[65px]">
             LOGIN
@@ -39,8 +43,7 @@ export default function Login() {
             {/* 로그인 버튼 */}
             <button
               type="submit"
-              className="w-24 h-9 bg-[#D2B48C80] text-[#583D2C80] rounded-lg text-lg"
-            >
+              className="w-24 h-9 bg-[#D2B48C80] text-[#583D2C80] rounded-lg text-lg">
               로그인
             </button>
           </form>
