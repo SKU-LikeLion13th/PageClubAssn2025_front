@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import Header from "../../../components/Header";
+import { API_URL } from "../../../config";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function UserAgreement() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const studentInfo = location.state?.studentInfo;
   const [allChecked, setAllChecked] = useState(false);
   const [individualChecks, setIndividualChecks] = useState({
     items: false,
@@ -87,6 +93,29 @@ export default function UserAgreement() {
     </div>
   );
 
+  const handleAgreement = async () => {
+    try {
+      if (!studentInfo) {
+        navigate("/login");
+        return;
+      }
+
+      const response = await axios.post(`${API_URL}/agree`, studentInfo, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      // 토큰 저장
+      localStorage.setItem("Token", response.data.accessToken);
+      localStorage.setItem("role", response.data.role);
+
+      navigate("/"); // 메인 페이지로 이동
+    } catch (error) {
+      console.error("UserAgreement 에러 : ", error);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -117,10 +146,10 @@ export default function UserAgreement() {
           {/* 개인정보 동의란 */}
           <div className="w-[85%] mt-10 space-y-2">
             {/* 전체 동의 */}
-            <label className="flex items-center space-x-3 cursor-pointer">
+            <div className="flex items-center space-x-3 cursor-pointer">
               <MainCheckbox checked={allChecked} onChange={handleAllCheck} />
               <span className="text-[17.15px] text-[#3F3F3F]">전체 동의</span>
-            </label>
+            </div>
 
             <p className="font-PretendardVariable text-[#999999] text-[8px] text-left">
               *위의 개인정보 수집•이용에 대한 동의를 거부할 권리가 있습니다.
@@ -132,7 +161,7 @@ export default function UserAgreement() {
             {/* 수집 이용 항목 */}
             <div className="w-[47%] text-[#996515]">
               <div className="flex items-center justify-between cursor-pointer">
-                <label className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2">
                   <CustomCheckbox
                     checked={individualChecks.items}
                     onChange={() => handleIndividualCheck("items")}
@@ -142,9 +171,9 @@ export default function UserAgreement() {
                     onClick={() => toggleSection("items")}>
                     수집 이용 항목
                   </span>
-                </label>
+                </div>
                 <span onClick={() => toggleSection("items")}>
-                  {expandedSections.purpose ? (
+                  {expandedSections.items ? (
                     <MdOutlineKeyboardArrowUp />
                   ) : (
                     <MdOutlineKeyboardArrowDown />
@@ -163,7 +192,7 @@ export default function UserAgreement() {
             {/* 수집 이용 목적 */}
             <div className="w-[47%] text-[#996515]">
               <div className="flex items-center justify-between cursor-pointer">
-                <label className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2">
                   <CustomCheckbox
                     checked={individualChecks.purpose}
                     onChange={() => handleIndividualCheck("purpose")}
@@ -173,7 +202,7 @@ export default function UserAgreement() {
                     onClick={() => toggleSection("purpose")}>
                     수집 이용 목적
                   </span>
-                </label>
+                </div>
                 <span onClick={() => toggleSection("purpose")}>
                   {expandedSections.purpose ? (
                     <MdOutlineKeyboardArrowUp />
@@ -194,7 +223,7 @@ export default function UserAgreement() {
             {/* 보유 기간 */}
             <div className="w-[47%] text-[#996515]">
               <div className="flex items-center justify-between cursor-pointer">
-                <label className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2">
                   <CustomCheckbox
                     checked={individualChecks.duration}
                     onChange={() => handleIndividualCheck("duration")}
@@ -204,9 +233,10 @@ export default function UserAgreement() {
                     onClick={() => toggleSection("duration")}>
                     보유 기간
                   </span>
-                </label>
+                </div>
+
                 <span onClick={() => toggleSection("duration")}>
-                  {expandedSections.purpose ? (
+                  {expandedSections.duration ? (
                     <MdOutlineKeyboardArrowUp />
                   ) : (
                     <MdOutlineKeyboardArrowDown />
@@ -227,8 +257,13 @@ export default function UserAgreement() {
 
           {/* 확인 버튼 */}
           <button
-            className="w-24 h-9 bg-[#D2B48C80] text-[#583D2C80] rounded-lg text-lg mt-4"
-            disabled={!allChecked}>
+            className={`w-24 h-9 rounded-lg text-lg mt-4 ${
+              allChecked
+                ? "bg-[#D2B48C] text-[#583D2C]" // 모든 항목 체크시 활성화
+                : "bg-[#D2B48C80] text-[#583D2C80]" // 비활성화 상태
+            }`}
+            disabled={!allChecked}
+            onClick={handleAgreement}>
             확인
           </button>
         </div>
