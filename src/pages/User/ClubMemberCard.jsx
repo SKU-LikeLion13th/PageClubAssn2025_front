@@ -1,28 +1,31 @@
 import React from "react";
+import Header from "../../components/Header";
+import PageBackground from "../../components/PageBack";
 
 export default function ClubMemberCard() {
   return (
     <>
-      <div className="w-full h-[calc(100vh-35px)] flex flex-col items-center">
+      <PageBackground />
+      <Header />
+
+      <div className="relative z-10 w-full h-[calc(100vh-95px)] flex flex-col items-center">
         {/* 성결대 로고 */}
-        <div>
+        <div className="mt-10">
           <img
             src="https://i.namu.wiki/i/KKQ4uvGiknbINplKFU848NUDYuecDZlrh8XlSxbPyPaz5eOXAevvPJPeIaf3qtmUuH78TvfyQoap9WTgynGNbg.svg"
             className="w-24 h-24"
             alt="성결대학교 로고"
           />
         </div>
-
         {/* 성결대학교 동아리원증 타이틀 */}
         <div className="h-[45.22px] flex justify-center items-center bg-[#FFFFFF] border border-[#D2B48C] rounded-full px-3 my-12">
           <img
-            src="assets/images/page.png"
+            src="assets/images/PageLogo.png"
             alt="page 로고"
             className="h-[36.6px]"
           />
           <p className="text-2xl text-[#996515] pr-3">성결대학교 동아리원증</p>
         </div>
-
         {/* 동아리원증 */}
         <div className="w-[90%] font-Moneygraphy text-center bg-[#FFFBFB] border border-[#D2B48C] rounded-2xl">
           <div className="min-h-[140px] flex items-center px-3">
@@ -38,7 +41,7 @@ export default function ClubMemberCard() {
             </div>
           </div>
 
-          <div className="min-h-[60px] text-[14px] text-[#583D2C] bg-[#D2B48C] rounded-b-xl flex justify-center items-center">
+          <div className="font-PretendardVariable min-h-[60px] text-[14px] text-[#583D2C] bg-[#D2B48C] rounded-b-xl flex justify-center items-center">
             <p>
               위 동아리원증은
               <br />
