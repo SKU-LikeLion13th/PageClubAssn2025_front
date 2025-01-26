@@ -26,7 +26,7 @@ export default function MyPage() {
               <img
                 src="assets/images/likelion.png"
                 alt="Club Logo"
-                className="w-full h-full object-cover"
+                className="object-cover w-full h-full"
               />
             </div>
             {/* Text */}
