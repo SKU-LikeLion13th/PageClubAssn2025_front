@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import RibbonBackground from "../../components/RibbonBackground";
-import { IoCaretDownOutline } from "react-icons/io5";
 import { images } from "../../utils/images";
+import MemberContainer from "./MemberContainer";
 
 export default function Rental() {
   // {/* YesRental */}
@@ -35,14 +35,7 @@ export default function Rental() {
   //   ],
   // }
 
-  const [selectedClub, setSelectedClub] = useState(testUser.clubs[0]);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [currentReservationIndex, setCurrentReservationIndex] = useState(0);
-
-  const handleClubSelect = (club) => {
-    setSelectedClub(club);
-    setIsDropdownOpen(false);
-  };
 
   const handleNext = () => {
     setCurrentReservationIndex((prev) =>
@@ -121,47 +114,7 @@ export default function Rental() {
         <div className="flex flex-col items-center text-[#996515] h-screen">
           <div className="text-[50px] mt-7">MY PAGE</div>
 
-          {/* 드롭다운 컨테이너 */}
-          <div className="relative flex flex-col items-center justify-center w-full mt-5 text-[14px] font-Moneygraphy">
-            <div
-              className="flex items-center bg-[#ffffff] w-[80%] px-4 py-2 border-[#D2B48C] rounded-[10px] cursor-pointer relative z-10"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-              <div>
-                <img
-                  src={selectedClub.logo}
-                  alt="clublogo"
-                  className="w-[60px] my-1 object-cover rounded-full"
-                />
-              </div>
-              <div className="flex flex-col items-center justify-center text-[14px] w-full">
-                <div className="flex items-center">
-                  {selectedClub.name}
-                  <IoCaretDownOutline className="ml-2" />
-                </div>
-                <div>{testUser.name}</div>
-              </div>
-            </div>
-
-            {isDropdownOpen && (
-              <div className="flex flex-col bg-[#ffffff] w-[80%] border-[#D2B48C] border rounded-[10px] shadow-lg absolute mt-0 z-50">
-                {testUser.clubs.map((club) => (
-                  <div
-                    key={club.name}
-                    className="flex items-center px-4 py-2 cursor-pointer hover:bg-[#f8f8f8] first:rounded-t-[10px] last:rounded-b-[10px]"
-                    onClick={() => handleClubSelect(club)}
-                  >
-                    <img
-                      src={club.logo}
-                      alt={`${club.name} logo`}
-                      className="w-[40px] h-[40px] object-cover rounded-full mr-3"
-                    />
-                    <span>{club.name}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <MemberContainer />
 
           {/* 대여 현황 컨테이너 */}
           <div className="flex flex-col items-center w-full">

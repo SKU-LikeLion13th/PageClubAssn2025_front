@@ -79,7 +79,7 @@ export default function Login() {
           </div>
 
           <form onSubmit={handleLogin} className="font-Moneygraphy">
-            <div className="space-y-8 my-24">
+            <div className="my-24 space-y-8">
               {/* 이름 입력 */}
               <div className="flex items-center bg-[#FFFFFF] border border-[#D2B48C] rounded-lg h-11">
                 <label className="ml-5 pr-4 mr-4 text-[#996515] border-r-[0.5px] border-[#CBB189]">
