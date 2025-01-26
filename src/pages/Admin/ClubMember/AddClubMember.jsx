@@ -6,23 +6,49 @@ import { FaAngleDown } from "react-icons/fa6";
 import { API_URL } from '../../../config';
 
 export default function AddClubMember() {
-  const clubs = [
-    "멋쟁이사자처럼",
-    "동아리연합회",
-    "애드마인",
-    "페가수스"
-  ];
-
   const [searchKeyword, setSearchKeyword] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]); // 선택된 멤버 관리
   const [error, setError] = useState('');
-  const [selectedClub, setSelectedClub] = useState(clubs[0]);
+  const [selectedClub, setSelectedClub] = useState('');
+  const [clubs, setClubs] = useState([]); // 동아리 목록 상태 추가
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleSelect = (club) => {
-    setSelectedClub(club);
+  // API에서 동아리 목록 가져오기
+  useEffect(() => {
+    const fetchClubs = async () => {
+      const token = localStorage.getItem('Token');
+      if (!token) {
+        setError('인증 토큰이 없습니다. 로그인 후 다시 시도해주세요.');
+        return;
+      }
+
+      try {
+        const response = await axios.get(`${API_URL}/admin/club/all`, {
+          headers: {
+            Authorization: `${token}`,
+            // Accept: '*/*',
+          },
+        });
+
+        if (response.status === 200) {
+          setClubs(response.data); // API에서 받아온 데이터 저장
+          setSelectedClub(response.data[0]?.name || ''); // 기본 선택값 설정
+        } else {
+          throw new Error('Failed to fetch clubs');
+        }
+      } catch (error) {
+        console.error('Error fetching clubs:', error);
+        setError('동아리 데이터를 불러오는 데 실패했습니다.');
+      }
+    };
+
+    fetchClubs();
+  }, []);
+
+  const handleSelect = (clubName) => {
+    setSelectedClub(clubName);
     setIsOpen(false); // 선택 시 드롭다운 닫힘
   };
 
@@ -135,13 +161,13 @@ export default function AddClubMember() {
           <FaAngleDown className="flex ml-2 cursor-pointer" />
           {isOpen && (
             <div className="absolute mt-2 text-[14px] w-full bg-white border rounded shadow -left-1 top-5">
-              {clubs.map((club, index) => (
+              {clubs.map((club) => (
                 <div
-                  key={index}
-                  onClick={() => handleSelect(club)}
+                  key={club.id}
+                  onClick={() => handleSelect(club.name)}
                   className="p-2 cursor-pointer hover:bg-gray-200"
                 >
-                  {club}
+                  {club.name}
                 </div>
               ))}
             </div>
@@ -154,6 +180,11 @@ export default function AddClubMember() {
             className="flex text-center outline-none w-full text-[12px]"
             value={searchKeyword}
             onChange={(e) => setSearchKeyword(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleSearch();
+              }
+            }}
           />
           <img src={images.search} alt="search" className="flex w-[15px] h-[15px]" onClick={handleSearch} />
         </div>
