@@ -108,10 +108,10 @@ export default function Rental() {
   };
 
   return (
-    <div className="relative w-full min-h-screen">
+    <div className="relative w-full">
       <RibbonBackground />
       <div>
-        <div className="flex flex-col items-center text-[#996515] h-screen">
+        <div className="flex flex-col items-center text-[#996515]">
           <div className="text-[50px] mt-7">MY PAGE</div>
 
           <MemberContainer />
