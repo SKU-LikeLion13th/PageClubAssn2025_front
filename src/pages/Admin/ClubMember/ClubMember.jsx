@@ -9,9 +9,9 @@ import { IoClose } from 'react-icons/io5';
 export default function ClubMember() {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [error, setError] = useState('');
-  const [modalIsOpen, setModalIsOpen] = useState(false); // 모달 상태
-  const [selectedMember, setSelectedMember] = useState(null); // 선택된 멤버 상태
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedMember, setSelectedMember] = useState(null);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
   const navigate = useNavigate();
 
   const token = localStorage.getItem('Token');
@@ -19,19 +19,12 @@ export default function ClubMember() {
 
   const handleDelete = (member) => {
     setSelectedMember(member);
-    setModalIsOpen(true);  // Open modal
+    setModalIsOpen(true);
   };
   
   // 검색 버튼 클릭 시 호출되는 함수
   const handleSearch = async () => {
-  
-    if (!token) {
-      setError('인증 토큰이 없습니다. 로그인 후 다시 시도해주세요.');
-      return;
-    }
-  
-    if (userRole !== 'ROLE_ADMIN') {
-      setError('관리자 권한이 없습니다.');
+    if (!token || userRole !== 'ROLE_ADMIN') {
       return;
     }
   
@@ -46,13 +39,11 @@ export default function ClubMember() {
         }
       );
       setSearchResults(response.data);
+      console.log(response.data);
     } catch (err) {
       if (err.response?.status === 401) {
-        setError('인증 오류: 다시 로그인 해주세요.');
         localStorage.clear();
         navigate('/admin/login');
-      } else {
-        setError('검색 중 문제가 발생했습니다.');
       }
       console.error(err);
     }
@@ -80,18 +71,18 @@ export default function ClubMember() {
             'Content-Type': 'application/json',
           },
           data: {
-            memberId: selectedMember.memberId,
-            clubId: selectedMember.clubId,
+            clubName: selectedMember.clubName,
+            memberId: selectedMember.studentId
           },
         }
       );
       setSearchResults((prevResults) =>
         prevResults.filter((result) => result.studentId !== selectedMember.studentId)
       );
-      closeModal();
+      setDeleteSuccess(true); // 삭제 성공 상태 업데이트
+      setTimeout(() => setDeleteSuccess(false), 3000); // 3초 후 상태 초기화
     } catch (err) {
       console.error(err);
-      setError('삭제 중 문제가 발생했습니다.');
     }
   };
 
@@ -121,7 +112,7 @@ export default function ClubMember() {
           src={images.search}
           alt="search"
           className="flex w-[15px] cursor-pointer h-[15px]"
-          onClick={handleSearch} // 클릭 이벤트 추가
+          onClick={handleSearch}
         />
       </div>
 
@@ -135,13 +126,11 @@ export default function ClubMember() {
         </div>
       )}
 
-      {error && <div className="mt-2 text-sm text-red-500">{error}</div>}
-
       {searchResults.length > 0 && (
         <div className="flex flex-col w-10/12 border-t-[2px] border-[#D1D1D3] mt-5">
           {searchResults.map((result, index) => (
             <div
-              key={result.studentId}
+              key={`${result.studentId}-${index}`}
               className="flex flex-col text-[13px] font-PretendardVariable border-b-[2px] border-[#D1D1D3]"
             >
               <div className='flex flex-col w-full mt-5'>
@@ -197,26 +186,34 @@ export default function ClubMember() {
             <IoClose className='flex cursor-pointer' onClick={closeModal} />
           </div>
           <div className='flex flex-col items-start w-full pb-5 px-14'>
-            <div className='flex flex-col'>
-              <div className='flex text-[10px]'>이름 : <div className='ml-3'>{selectedMember?.studentName}</div></div>
-              <div className='flex text-[10px]'>학번 : <div className='ml-3'>{selectedMember?.studentId}</div></div>
-              <div className='flex text-[10px]'>동아리 : <div className='ml-3'>{selectedMember?.clubName}</div></div>
-            </div>
-            <h2 className='flex justify-center w-full my-2'>삭제하시겠습니까?</h2>
-            <div className='flex justify-center w-full'>
-              <button
-                className='flex px-2.5 py-0.5 text-[10px] rounded-[4px] mr-2 bg-[#D1D1D3]'
-                onClick={() => confirmDelete(selectedMember)}
-              >
-                예
-              </button>
-              <button
-                className='flex px-2.5 py-0.5 text-[10px] rounded-[4px] bg-[#D1D1D380]'
-                onClick={closeModal}
-              >
-                아니요
-              </button>
-            </div>
+            {deleteSuccess ? (
+              <div className='flex justify-center w-full my-2 text-[13px] text-[#FF4242]'>
+                삭제가 완료되었습니다.
+              </div>
+            ) : (
+              <>
+                <div className='flex flex-col'>
+                  <div className='flex text-[10px]'>이름 : <div className='ml-3'>{selectedMember?.studentName}</div></div>
+                  <div className='flex text-[10px]'>학번 : <div className='ml-3'>{selectedMember?.studentId}</div></div>
+                  <div className='flex text-[10px]'>동아리 : <div className='ml-3'>{selectedMember?.clubName}</div></div>
+                </div>
+                <h2 className='flex justify-center w-full my-2'>삭제하시겠습니까?</h2>            
+                <div className='flex justify-center w-full mt-3'>
+                  <button
+                    className='flex px-2.5 py-0.5 text-[10px] rounded-[4px] mr-2 bg-[#D1D1D3]'
+                    onClick={() => confirmDelete(selectedMember)}
+                  >
+                    예
+                  </button>
+                  <button
+                    className='flex px-2.5 py-0.5 text-[10px] rounded-[4px] bg-[#D1D1D380]'
+                    onClick={closeModal}
+                  >
+                    아니요
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </Modal>
