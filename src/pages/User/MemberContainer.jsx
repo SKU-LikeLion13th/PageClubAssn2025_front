@@ -80,7 +80,7 @@ export default function MemberContainer() {
   }
 
   return (
-    <div className="relative w-full min-h-screen">
+    <div className="relative w-full">
       {/* 드롭다운 컨테이너 */}
       <div className="relative flex flex-col items-center w-full mt-5 text-[14px] font-Moneygraphy">
         <div
