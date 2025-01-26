@@ -16,8 +16,8 @@ export default function MemberContainer() {
     axios
       .get(`${API_URL}/mypage`, {
         headers: {
-          "Accept": "*/*",
-          "Authorization": `${token}`,
+          Accept: "*/*",
+          Authorization: `${token}`,
         },
       })
       .then((response) => {
@@ -31,13 +31,13 @@ export default function MemberContainer() {
     axios
       .get(`${API_URL}/joined-list`, {
         headers: {
-          "Accept": "*/*",
-          "Authorization": `${token}`,
+          Accept: "*/*",
+          Authorization: `${token}`,
         },
       })
       .then((response) => {
         // 이미지 데이터를 파싱하여 추가
-        const clubsWithLogo = response.data.map(item => ({
+        const clubsWithLogo = response.data.map((item) => ({
           ...item,
           logo: `data:image/jpeg;base64,${item.logo}`, // 이미지 데이터 파싱
         }));
@@ -45,9 +45,9 @@ export default function MemberContainer() {
         if (clubsWithLogo.length > 0) {
           setSelectedClub(clubsWithLogo[0]);
         }
-        setUserData(prevState => ({
+        setUserData((prevState) => ({
           ...prevState,
-          clubs: clubsWithLogo
+          clubs: clubsWithLogo,
         }));
       })
       .catch((error) => {
@@ -80,13 +80,12 @@ export default function MemberContainer() {
   }
 
   return (
-    <div className="relative w-full min-h-screen">
+    <div className="relative w-full">
       {/* 드롭다운 컨테이너 */}
       <div className="relative flex flex-col items-center w-full mt-5 text-[14px] font-Moneygraphy">
         <div
           className="flex items-center bg-[#ffffff] w-[80%] px-4 py-2 border-[#D2B48C] rounded-[10px] cursor-pointer relative z-10"
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        >
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
           <div>
             {/* selectedClub이 있을 경우 로고를 표시 */}
             {selectedClub && (
@@ -109,15 +108,13 @@ export default function MemberContainer() {
         {isDropdownOpen && (
           <div
             ref={dropdownRef} // 드롭다운 영역 참조
-            className="flex flex-col bg-[#ffffff] w-10/12 rounded-[10px] shadow-lg absolute mt-0 z-50"
-          >
+            className="flex flex-col bg-[#ffffff] w-10/12 rounded-[10px] shadow-lg absolute mt-0 z-50">
             {/* userData.clubs이 있을 경우 목록을 표시 */}
             {userData.clubs.map((club) => (
               <div
                 key={club.name}
                 className="flex items-center px-4 py-2 cursor-pointer hover:bg-[#f8f8f8] first:rounded-t-[10px] last:rounded-b-[10px]"
-                onClick={() => handleClubSelect(club)}
-              >
+                onClick={() => handleClubSelect(club)}>
                 <img
                   src={club.logo} // 동아리 로고
                   alt={`${club.name} logo`}
