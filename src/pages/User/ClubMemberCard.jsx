@@ -136,7 +136,11 @@ export default function ClubMemberCard() {
               {/* 동아리선택 드롭다운 토글 */}
               <div
                 className="w-full flex items-center cursor-pointer px-4 relative"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                onClick={() => {
+                  if (userData.clubs.length > 1) {
+                    setIsDropdownOpen(!isDropdownOpen);
+                  }
+                }}>
                 <p
                   className={`text-center flex-1 ${
                     userData.clubName.length > 10 ? "text-base" : "text-lg"
@@ -147,7 +151,7 @@ export default function ClubMemberCard() {
               </div>
 
               {/* 드롭다운 */}
-              {isDropdownOpen && (
+              {userData.clubs.length > 1 && isDropdownOpen && (
                 <div
                   ref={dropdownRef}
                   className="absolute top-[45px] w-[230px] bg-[#FFFFFF] border border-[#D2B48C] rounded-lg z-50 max-h-[200px] overflow-y-auto">
