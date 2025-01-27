@@ -1,22 +1,7 @@
 import React from "react";
 import { images } from "../../../utils/images";
 
-export default function Score() {
-  const top3 = [
-    {
-      id: 1,
-      name: "성결대학교 멋쟁이사자처럼",
-      image: images.likelion,
-      score: 300,
-    },
-    { id: 2, name: "페가수스", image: images.pegasuss, score: 200 },
-    { id: 3, name: "애드마인", image: images.admin, score: 100 },
-  ];
-
-  const sortedTop3 = top3
-    .sort((a, b) => b.score - a.score)
-    .map((item, index) => ({ ...item, grade: index + 1 }));
-
+export default function Score({clubScore = []}) {
   return (
     <div className="relative flex flex-col items-center w-full z-0 text-[#996515]">
       <div className="flex justify-center w-fit text-[25.5px] border-[0.5px] border-[#996515] bg-[#ffffff] rounded-[62px] mt-11 px-11 py-1">
@@ -24,7 +9,7 @@ export default function Score() {
       </div>
       {/* Score List */}
       <div className="relative z-10 flex justify-center w-full pt-10">
-        {sortedTop3.map((item) => (
+        {clubScore.map((item) => (
           <div
             key={item.id}
             className={`flex flex-col items-center justify-end ${
