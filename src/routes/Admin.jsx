@@ -14,6 +14,7 @@ import AddMember from "../pages/Admin/ClubMember/AddMember";
 import DeleteMember from "../pages/Admin/ClubMember/DeleteMember";
 import MemberManage from "../pages/Admin/ClubMember/MemberManage";
 import PrivateRoute from "../components/PrivateRoute";
+import ClubScoreManagement from "../pages/Admin/ClubScore/ClubScoreManagement";
 
 const Admin = () => {
   return (
@@ -21,17 +22,102 @@ const Admin = () => {
       <AdminHeader />
       <Routes>
         <Route path="/adminlogin" element={<AdminLogin />} />
-        <Route path="/" element={<PrivateRoute><AdminMain /></PrivateRoute>} />
-        <Route path="/RentalItems" element={<PrivateRoute><RentalItems /></PrivateRoute>} />
-        <Route path="/AddRentalItem" element={<PrivateRoute><AddRentalItem /></PrivateRoute>} />
-        <Route path="/EditRentalItem/:id" element={<PrivateRoute><EditRentalItem /></PrivateRoute>} />
-        <Route path="/rentalstatus" element={<PrivateRoute><RentalStatus /></PrivateRoute>} />
-        <Route path="/reservestatus" element={<PrivateRoute><ReserveStatus /></PrivateRoute>} />
-        <Route path="/clubMember" element={<PrivateRoute><ClubMember /></PrivateRoute>} />
-        <Route path="/addclubMember" element={<PrivateRoute><AddClubMember /></PrivateRoute>} />
-        <Route path="/addMember" element={<PrivateRoute><AddMember /></PrivateRoute>} />
-        <Route path="/deleteMember" element={<PrivateRoute><DeleteMember /></PrivateRoute>} />
-        <Route path="/memberManage" element={<PrivateRoute><MemberManage /></PrivateRoute>} />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <AdminMain />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/RentalItems"
+          element={
+            <PrivateRoute>
+              <RentalItems />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/AddRentalItem"
+          element={
+            <PrivateRoute>
+              <AddRentalItem />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/EditRentalItem/:id"
+          element={
+            <PrivateRoute>
+              <EditRentalItem />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/rentalstatus"
+          element={
+            <PrivateRoute>
+              <RentalStatus />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/reservestatus"
+          element={
+            <PrivateRoute>
+              <ReserveStatus />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/clubMember"
+          element={
+            <PrivateRoute>
+              <ClubMember />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/addclubMember"
+          element={
+            <PrivateRoute>
+              <AddClubMember />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/addMember"
+          element={
+            <PrivateRoute>
+              <AddMember />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/deleteMember"
+          element={
+            <PrivateRoute>
+              <DeleteMember />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/memberManage"
+          element={
+            <PrivateRoute>
+              <MemberManage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/club-score-management"
+          element={
+            <PrivateRoute>
+              <ClubScoreManagement />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </div>
   );
