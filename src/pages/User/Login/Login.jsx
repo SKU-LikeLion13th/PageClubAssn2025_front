@@ -39,15 +39,11 @@ export default function Login() {
         },
       });
 
-      if (response.data.role === "ROLE_ADMIN") {
-        window.location.reload();
-      } else {
-        // 토큰 저장
-        localStorage.setItem("Token", response.data.accessToken);
-        localStorage.setItem("role", response.data.role);
+      // 토큰 저장
+      localStorage.setItem("Token", response.data.accessToken);
+      localStorage.setItem("role", response.data.role);
 
-        navigate("/", { replace: true });
-      }
+      navigate("/", { replace: true });
     } catch (error) {
       const status = error.response.status;
 

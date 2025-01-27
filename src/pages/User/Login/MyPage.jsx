@@ -124,7 +124,11 @@ export default function MyPage() {
           <div className="relative flex flex-col items-center mb-4">
             <div
               className="flex items-center w-full bg-[#FFFFFF] border border-[#D2B48C] p-3 rounded-lg cursor-pointer"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+              onClick={() => {
+                if (userData.clubs.length > 1) {
+                  setIsDropdownOpen(!isDropdownOpen);
+                }
+              }}>
               <div>
                 {userData && (
                   <img
@@ -147,7 +151,7 @@ export default function MyPage() {
               </div>
             </div>
 
-            {isDropdownOpen && (
+            {userData.clubs.length > 1 && isDropdownOpen && (
               <div
                 ref={dropdownRef}
                 className="absolute top-full mt-1 w-full bg-[#FFFFFF] border border-[#D2B48C] rounded-lg z-50 max-h-[200px] overflow-y-auto">
