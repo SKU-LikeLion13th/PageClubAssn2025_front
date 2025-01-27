@@ -46,4 +46,7 @@ export const images = {
   insta: PATH + "/assets/images/SNS/instagram.png",
   naver: PATH + "/assets/images/SNS/naver_cafe.png",
   kakao: PATH + "/assets/images/SNS/kakao.png",
+
+  // AdminMain
+  PageLogo: PATH + "/assets/images/PageLogo.png",
 };
