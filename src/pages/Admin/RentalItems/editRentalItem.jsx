@@ -9,8 +9,8 @@ export default function EditRentalItem({ handleUpdateItem }) {
   const { id } = useParams();
   const [name, setName] = useState("");
   const [count, setCount] = useState("");
-  const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState("");
+  const [image, setImage] = useState(null); // 실제 이미지 파일 상태
+  const [imagePreview, setImagePreview] = useState(""); // 미리보기 이미지 상태
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -29,8 +29,12 @@ export default function EditRentalItem({ handleUpdateItem }) {
         const data = response.data;
         setName(data.name);
         setCount(data.count);
-        setImage(data.image);
-        setImagePreview(data.image);
+
+        // 서버에서 가져온 이미지가 Base64 문자열로 되어있다면 이를 디코딩해서 미리보기 설정
+        if (data.image) {
+          const decodedImage = `data:image/jpeg;base64,${data.image}`;
+          setImagePreview(decodedImage); // Base64로 디코딩된 이미지를 미리보기로 설정
+        }
       } catch (error) {
         console.error("Error fetching item:", error);
       }
@@ -50,9 +54,13 @@ export default function EditRentalItem({ handleUpdateItem }) {
         setImagePreview(""); // 미리보기 초기화
       } else {
         setErrorMessage(""); // 오류 메시지 초기화
-        setImage(file);
-        setImagePreview(URL.createObjectURL(file));
+        setImage(file); // 실제 이미지 파일 설정
+        setImagePreview(URL.createObjectURL(file)); // 미리보기 설정
       }
+    } else {
+      // 파일을 선택하지 않았을 때 처리 (이미지 제거)
+      setImage(null);
+      setImagePreview("");
     }
   };
 
@@ -68,8 +76,10 @@ export default function EditRentalItem({ handleUpdateItem }) {
       formData.append("itemId", id);
       formData.append("name", name);
       formData.append("count", parseInt(count, 10));
+
+      // 이미지가 있을 때만 파일 추가
       if (image) {
-        formData.append("file", image);
+        formData.append("image", image); // 올바르게 `image` 필드에 파일 추가
       }
 
       const response = await axios.put(`${API_URL}/admin/item`, formData, {
@@ -77,11 +87,11 @@ export default function EditRentalItem({ handleUpdateItem }) {
           Authorization: `${token}`,
         },
       });
+
       console.log("응답 상태 코드:", response.status);
 
       // 응답 상태 코드가 201일 경우 처리
       if (response.status === 201) {
-        // handleUpdateItem(response.data);
         alert("수정이 완료되었습니다.");
         setTimeout(() => {
           window.location.href = "/admin/RentalItems";

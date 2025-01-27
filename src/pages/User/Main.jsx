@@ -5,7 +5,7 @@ import MainHeader from "../../components/MainHeader";
 
 export default function Main() {
   return (
-    <div className="flex flex-col items-center text-center bg-[#FAF4EF] min-h-screen py-8">
+    <div className="flex flex-col items-center text-center min-h-screen py-8">
       <MainHeader />
       {/* 메인 콘텐츠 */}
       <div className="flex flex-col w-full mt-5">

@@ -3,7 +3,7 @@ import Header from "../../../components/Header";
 
 export default function Menu() {
   return (
-    <div className="flex flex-col items-center text-center bg-[#FAF4EF] min-h-screen">
+    <div className="flex flex-col items-center text-center min-h-screen">
       <Header />
       {/* 메인 콘텐츠 */}
       <div className="flex flex-col mt-5 w-full">
