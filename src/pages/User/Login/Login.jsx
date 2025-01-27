@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../../components/Header";
 import LoginFailureModal from "./LoginFailureModal";
-import RibbonBackground from "../../../components/RibbonBackground";
 import axios from "axios";
 import { API_URL } from "../../../config";
+import { images } from "../../../utils/images";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -79,8 +79,13 @@ export default function Login() {
     <>
       <Header />
 
-      <div className="w-full h-[calc(100vh-95px)] flex justify-center items-center">
-        <div className="w-[75%] text-center">
+      <div className="relative w-full h-[calc(100vh-95px)] flex justify-center items-center">
+        {/* 리본 배경 */}
+        <div className="absolute flex items-center justify-center w-full h-full">
+          <img src={images.ribbon} className=" w-full" alt="ribbon" />
+        </div>
+
+        <div className="z-[50] w-[75%] text-center">
           <div className="font-Ownglyph_PDH text-[#996515] text-[65px]">
             LOGIN
           </div>

@@ -4,6 +4,7 @@ import { IoCaretDownOutline } from "react-icons/io5";
 import Header from "../../../components/Header";
 import { API_URL } from "../../../config";
 import axios from "axios";
+import { images } from "../../../utils/images";
 
 export default function MyPage() {
   const navigate = useNavigate();
@@ -109,8 +110,13 @@ export default function MyPage() {
   return (
     <>
       <Header />
-      <div className="w-full h-[calc(100vh-95px)] flex justify-center ">
-        <div className="font-Moneygraphy text-[#996515] w-[85%] text-center">
+      <div className="relative w-full h-[calc(100vh-95px)] flex justify-center ">
+        {/* 리본 배경 */}
+        <div className="absolute flex items-center justify-center w-full h-full">
+          <img src={images.ribbon} className=" w-full" alt="ribbon" />
+        </div>
+
+        <div className="z-[50] font-Moneygraphy text-[#996515] w-[85%] text-center">
           <div className="mt-12 mb-10">
             <div className="font-Ownglyph_PDH text-[55px]">MY PAGE</div>
           </div>
