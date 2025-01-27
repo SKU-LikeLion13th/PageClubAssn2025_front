@@ -101,7 +101,7 @@ export default function ClubMemberCard() {
     <>
       <PageBackground />
 
-      <div className="relative z-10 w-full h-[calc(100vh-35px)] flex flex-col items-center">
+      <div className="relative z-10 w-full min-h-[calc(100vh-75px)] flex flex-col items-center">
         <Header />
 
         {/* 성결대 로고 */}
@@ -140,11 +140,13 @@ export default function ClubMemberCard() {
                   if (userData.clubs.length > 1) {
                     setIsDropdownOpen(!isDropdownOpen);
                   }
-                }}>
+                }}
+              >
                 <p
                   className={`text-center flex-1 ${
                     userData.clubName.length > 10 ? "text-base" : "text-lg"
-                  }`}>
+                  }`}
+                >
                   {userData.clubName}
                 </p>
                 <IoCaretDownOutline className="text-[#D2B48C] absolute right-0" />
@@ -154,14 +156,16 @@ export default function ClubMemberCard() {
               {userData.clubs.length > 1 && isDropdownOpen && (
                 <div
                   ref={dropdownRef}
-                  className="absolute top-[45px] w-[230px] bg-[#FFFFFF] border border-[#D2B48C] rounded-lg z-50 max-h-[200px] overflow-y-auto">
+                  className="absolute top-[45px] w-[230px] bg-[#FFFFFF] border border-[#D2B48C] rounded-lg z-50 max-h-[200px] overflow-y-auto"
+                >
                   {userData.clubs
                     .filter((club) => club.id !== userData.clubId)
                     .map((club) => (
                       <div
                         key={club.id}
                         className="flex items-center p-2 hover:bg-[#f0f0f0] cursor-pointer"
-                        onClick={() => handleClubSelect(club)}>
+                        onClick={() => handleClubSelect(club)}
+                      >
                         <img
                           src={club.logo}
                           alt={`${club.name} logo`}
