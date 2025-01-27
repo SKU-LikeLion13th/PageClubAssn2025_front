@@ -11,7 +11,7 @@ export default function MemberContainer() {
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
-
+  
     // 유저 데이터 가져오기
     axios
       .get(`${API_URL}/mypage`, {
@@ -21,12 +21,17 @@ export default function MemberContainer() {
         },
       })
       .then((response) => {
-        setUserData(response.data); // userData 업데이트
+        const data = response.data;
+        const decodedLogo = `data:image/jpeg;base64,${data.logo}`; // 이미지 디코딩
+        setUserData({
+          ...data,
+          logo: decodedLogo, // 디코딩된 로고 설정
+        });
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
       });
-
+  
     // 동아리 목록 가져오기
     axios
       .get(`${API_URL}/joined-list`, {
@@ -36,15 +41,15 @@ export default function MemberContainer() {
         },
       })
       .then((response) => {
-        // 이미지 데이터를 파싱하여 추가
         const clubsWithLogo = response.data.map((item) => ({
           ...item,
-          logo: `data:image/jpeg;base64,${item.logo}`, // 이미지 데이터 파싱
+          logo: `data:image/jpeg;base64,${item.logo}`, // 이미지 디코딩
         }));
-        // 첫 번째 동아리를 기본 선택으로 설정
+  
         if (clubsWithLogo.length > 0) {
           setSelectedClub(clubsWithLogo[0]);
         }
+  
         setUserData((prevState) => ({
           ...prevState,
           clubs: clubsWithLogo,
@@ -54,6 +59,7 @@ export default function MemberContainer() {
         console.error("Error fetching joined clubs:", error);
       });
   }, []);
+  
 
   const handleClubSelect = (club) => {
     setSelectedClub(club); // 선택된 동아리 설정
@@ -88,9 +94,9 @@ export default function MemberContainer() {
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
           <div>
             {/* selectedClub이 있을 경우 로고를 표시 */}
-            {selectedClub && (
+            {userData && (
               <img
-                src={selectedClub.logo} // 선택된 동아리 로고
+                src={userData.logo} // 선택된 동아리 로고
                 alt="clubLogo"
                 className="w-[60px] object-cover rounded-full"
               />
