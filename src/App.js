@@ -6,7 +6,7 @@ import Admin from "./routes/Admin";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App ">
       {/* Main Content */}
       <Routes>
         <Route path="/*" element={<User />} />
@@ -19,4 +19,3 @@ function App() {
 }
 
 export default App;
-

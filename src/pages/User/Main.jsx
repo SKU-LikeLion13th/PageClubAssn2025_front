@@ -5,7 +5,7 @@ import MainHeader from "../../components/MainHeader";
 
 export default function Main() {
   return (
-    <div className="flex flex-col items-center text-center bg-[#FAF4EF] min-h-screen py-8">
+    <div className="flex flex-col items-center text-center min-h-screen py-8">
       <MainHeader />
       {/* 메인 콘텐츠 */}
       <div className="flex flex-col w-full mt-5">
@@ -25,7 +25,7 @@ export default function Main() {
             {/* absolute w-[200px] h-12 border-2 top-[30%] max-w-[500px]:left-[45%] transform -translate-x-[34%] z-10 */}
             <button className="absolute w-[130px] h-12 border-2 top-[20%] max-w-[500px]:left-[30%] transform -translate-x-[65%] z-10"></button>
           </NavLink>
-          <NavLink to="/">
+          <NavLink to="/member-card">
             <button className="absolute w-[130px] h-12 border-2 top-[33%] max-w-[500px]:left-[30%] transform -translate-x-[57%] z-10"></button>
           </NavLink>
           <NavLink to="/excellentclub">

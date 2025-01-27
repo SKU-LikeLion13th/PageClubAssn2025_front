@@ -5,10 +5,10 @@ import { images } from "../../../utils/images";
 
 export default function SNS() {
   return (
-    <div className="relative">
+    <div className="">
       <Header />
       <PageBack />
-      <div className="flex flex-col items-center text-center bg-[#FAF4EF] min-h-screen py-8">
+      <div className="flex flex-col items-center text-center min-h-screen py-8">
         {/* 메인 콘텐츠 */}
         <div className="relative z-10 flex flex-col items-center flex-grow w-full mt-5">
           {" "}

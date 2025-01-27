@@ -104,7 +104,7 @@ export default function Introduction() {
             <br />
             이러한 추억 페이지를 엮어서
             <br />
-            이야기르 만들겠습니다.
+            이야기를 만들겠습니다.
           </p>
         </div>
 
