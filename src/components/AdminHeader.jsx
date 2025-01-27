@@ -10,10 +10,10 @@ export default function Header() {
   };
 
   return (
-    <div className="flex justify-between items-center w-full">
+    <div className="flex items-center justify-between w-full">
       {/* 헤더 */}
-      <div className="flex justify-between items-center w-full max-w-4xl px-2">
-        <NavLink to="/admin/Main">
+      <div className="flex items-center justify-between w-full max-w-4xl px-2">
+        <NavLink to="/admin/">
           <img
             src={images.adHome}
             alt="홈 아이콘"

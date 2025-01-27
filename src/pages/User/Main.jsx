@@ -25,7 +25,7 @@ export default function Main() {
             {/* absolute w-[200px] h-12 border-2 top-[30%] max-w-[500px]:left-[45%] transform -translate-x-[34%] z-10 */}
             <button className="absolute w-[130px] h-12 border-2 top-[20%] max-w-[500px]:left-[30%] transform -translate-x-[65%] z-10"></button>
           </NavLink>
-          <NavLink to="/">
+          <NavLink to="/member-card">
             <button className="absolute w-[130px] h-12 border-2 top-[33%] max-w-[500px]:left-[30%] transform -translate-x-[57%] z-10"></button>
           </NavLink>
           <NavLink to="/excellentclub">
