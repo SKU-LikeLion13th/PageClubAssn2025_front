@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../config";
 
-export default function Login() {
+export default function AdminLogin() {
   const [studentInfo, setStudentInfo] = useState({
     studentId: "",
     name: "",
@@ -55,7 +55,7 @@ export default function Login() {
       localStorage.setItem("role", role);
 
       if (role === "ROLE_ADMIN") {
-        navigate("/admin/Main"); // 관리자 페이지로 이동
+        navigate("/admin/"); // 관리자 페이지로 이동
       } else {
         setModalOpen(true); // 일반 사용자 모달 띄우기
       }
