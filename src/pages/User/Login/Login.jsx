@@ -39,11 +39,15 @@ export default function Login() {
         },
       });
 
-      // 토큰 저장
-      localStorage.setItem("Token", response.data.accessToken);
-      localStorage.setItem("role", response.data.role);
+      if (response.data.role === "ROLE_ADMIN") {
+        window.location.reload();
+      } else {
+        // 토큰 저장
+        localStorage.setItem("Token", response.data.accessToken);
+        localStorage.setItem("role", response.data.role);
 
-      navigate("/");
+        navigate("/", { replace: true });
+      }
     } catch (error) {
       const status = error.response.status;
 
@@ -60,6 +64,9 @@ export default function Login() {
       //401에러 Unauthorized - 개인정보 동의 안했을 경우
       else if (status === 401) {
         navigate("/user-agreement", { state: { studentInfo } });
+      } else {
+        console.error("Unexpected error:", error);
+        alert("예기치 않은 오류가 발생했습니다.");
       }
     }
   };
