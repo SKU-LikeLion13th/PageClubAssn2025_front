@@ -124,7 +124,7 @@ export default function EditRentalItem({ handleUpdateItem }) {
   };
 
   return (
-    <div className="font-Y_spotlight px-4">
+    <div className="px-4 font-Y_spotlight">
       <div className="flex flex-col items-center mt-6">
         <p className="text-[2rem]">대여 물품 수정</p>
       </div>
@@ -133,7 +133,7 @@ export default function EditRentalItem({ handleUpdateItem }) {
         <div className="flex justify-between px-2 font-PretendardVariable">
           <div className="flex justify-between w-full">
             <div>
-              <label className="text-sm mr-2">물품명</label>
+              <label className="mr-2 text-sm">물품명</label>
               <input
                 type="text"
                 value={name}
@@ -152,16 +152,16 @@ export default function EditRentalItem({ handleUpdateItem }) {
           </div>
         </div>
         <div className="flex px-2 font-PretendardVariable">
-          <label className="text-sm mr-2">총 수량</label>
+          <label className="mr-2 text-sm">총 수량</label>
           <input
             type="text"
             value={count}
             onChange={(e) => setCount(e.target.value)}
-            className="border-b border-gray-300 text-sm bg-transparent focus:outline-none text-center"
+            className="text-sm text-center bg-transparent border-b border-gray-300 focus:outline-none"
           />
         </div>
         <div className="flex items-center px-2 font-PretendardVariable">
-          <label htmlFor="file-upload" className="text-sm mr-2 cursor-pointer">
+          <label htmlFor="file-upload" className="mr-2 text-sm cursor-pointer">
             사진
           </label>
           <input
@@ -179,14 +179,14 @@ export default function EditRentalItem({ handleUpdateItem }) {
         </div>
         {/* 파일 크기 초과시 오류 메시지 */}
         {errorMessage && (
-          <div className="text-red-500 text-sm mt-2">{errorMessage}</div>
+          <div className="mt-2 text-sm text-red-500">{errorMessage}</div>
         )}
         {imagePreview && (
-          <div className="mt-2 flex justify-center">
+          <div className="flex justify-center mt-2">
             <img
               src={imagePreview}
               alt="Image Preview"
-              className="w-32 h-32 object-contain"
+              className="object-contain w-32 h-32"
             />
           </div>
         )}
