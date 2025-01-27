@@ -3,7 +3,7 @@ import React from "react";
 export default function ClubScoreManagement() {
   return (
     <>
-      <div className="font-Y_spotlight mt-10 min-h-screen mx-6">
+      <div className="font-Y_spotlight mt-6 min-h-screen mx-6">
         {/* 타이틀 */}
         <div>
           <p className="text-[30px] text-center">활동 점수 관리</p>
