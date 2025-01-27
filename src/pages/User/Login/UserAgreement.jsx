@@ -68,7 +68,8 @@ export default function UserAgreement() {
           stroke="currentColor"
           strokeWidth="2.5"
           strokeLinecap="round"
-          strokeLinejoin="round">
+          strokeLinejoin="round"
+        >
           <polyline points="20 6 9 17 4 12" />
         </svg>
       )}
@@ -87,7 +88,8 @@ export default function UserAgreement() {
         stroke="currentColor"
         strokeWidth="2.5"
         strokeLinecap="round"
-        strokeLinejoin="round">
+        strokeLinejoin="round"
+      >
         <polyline points="20 6 9 17 4 12" />
       </svg>
     </div>
@@ -120,7 +122,7 @@ export default function UserAgreement() {
     <>
       <Header />
 
-      <div className="w-full h-[calc(100vh-95px)]">
+      <div className="w-full min-h-[calc(100vh-130px)]">
         <div className="flex flex-col items-center text-center font-Moneygraphy">
           {/* 개인정보 수집 타이틀 */}
           <div className="mt-10 w-[296px] h-[87px] bg-[#FFFFFF] border border-[#D2B48C] rounded-lg flex justify-center items-center mb-10">
@@ -168,7 +170,8 @@ export default function UserAgreement() {
                   />
                   <span
                     className="text-[14.51px]"
-                    onClick={() => toggleSection("items")}>
+                    onClick={() => toggleSection("items")}
+                  >
                     수집 이용 항목
                   </span>
                 </div>
@@ -199,7 +202,8 @@ export default function UserAgreement() {
                   />
                   <span
                     className="text-[14.51px]"
-                    onClick={() => toggleSection("purpose")}>
+                    onClick={() => toggleSection("purpose")}
+                  >
                     수집 이용 목적
                   </span>
                 </div>
@@ -230,7 +234,8 @@ export default function UserAgreement() {
                   />
                   <span
                     className="text-[14.51px]"
-                    onClick={() => toggleSection("duration")}>
+                    onClick={() => toggleSection("duration")}
+                  >
                     보유 기간
                   </span>
                 </div>
@@ -257,13 +262,14 @@ export default function UserAgreement() {
 
           {/* 확인 버튼 */}
           <button
-            className={`w-24 h-9 rounded-lg text-lg mt-4 ${
+            className={`w-24 h-9 rounded-lg text-lg mt-14 mb-4 ${
               allChecked
                 ? "bg-[#D2B48C] text-[#583D2C]" // 모든 항목 체크시 활성화
                 : "bg-[#D2B48C80] text-[#583D2C80]" // 비활성화 상태
             }`}
             disabled={!allChecked}
-            onClick={handleAgreement}>
+            onClick={handleAgreement}
+          >
             확인
           </button>
         </div>

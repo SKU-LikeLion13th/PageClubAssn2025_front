@@ -110,7 +110,7 @@ export default function MyPage() {
   return (
     <>
       <Header />
-      <div className="relative w-full h-[calc(100vh-95px)] flex justify-center ">
+      <div className="relative w-full min-h-[calc(100vh-130px)] flex justify-center ">
         {/* 리본 배경 */}
         <div className="absolute flex items-center justify-center w-full h-full">
           <img src={images.ribbon} className=" w-full" alt="ribbon" />
@@ -128,7 +128,8 @@ export default function MyPage() {
                 if (userData.clubs.length > 1) {
                   setIsDropdownOpen(!isDropdownOpen);
                 }
-              }}>
+              }}
+            >
               <div>
                 {userData && (
                   <img
@@ -154,14 +155,16 @@ export default function MyPage() {
             {userData.clubs.length > 1 && isDropdownOpen && (
               <div
                 ref={dropdownRef}
-                className="absolute top-full mt-1 w-full bg-[#FFFFFF] border border-[#D2B48C] rounded-lg z-50 max-h-[200px] overflow-y-auto">
+                className="absolute top-full mt-1 w-full bg-[#FFFFFF] border border-[#D2B48C] rounded-lg z-50 max-h-[200px] overflow-y-auto"
+              >
                 {userData.clubs
                   .filter((club) => club.id !== userData.clubId)
                   .map((club) => (
                     <div
                       key={club.id}
                       className="flex items-center p-2 hover:bg-[#f0f0f0] cursor-pointer"
-                      onClick={() => handleClubSelect(club)}>
+                      onClick={() => handleClubSelect(club)}
+                    >
                       <img
                         src={club.logo}
                         alt={`${club.name} logo`}
@@ -178,12 +181,14 @@ export default function MyPage() {
             <p className="font-Ownglyph_PDH text-[32.21px]">물품대여</p>
             <button
               className="w-[75%] bg-[#FFFFFF] border border-[#D2B48C] p-3 rounded-lg mb-3"
-              onClick={() => handleNavigate("reservation")}>
+              onClick={() => handleNavigate("reservation")}
+            >
               나의 예약 현황
             </button>
             <button
               className="w-[75%] bg-[#FFFFFF] border border-[#D2B48C] p-3 rounded-lg mb-3"
-              onClick={() => handleNavigate("rental")}>
+              onClick={() => handleNavigate("rental")}
+            >
               나의 대여 현황
             </button>
           </div>
@@ -192,7 +197,8 @@ export default function MyPage() {
             <p className="font-Ownglyph_PDH text-[32.21px]">동아리원증</p>
             <button
               className="w-[75%] bg-[#FFFFFF] border border-[#D2B48C] p-3 rounded-lg"
-              onClick={() => handleNavigate("member-card")}>
+              onClick={() => handleNavigate("member-card")}
+            >
               {userData.name}님의 동아리원증
             </button>
           </div>
@@ -200,7 +206,8 @@ export default function MyPage() {
           <div>
             <button
               onClick={handleLogout}
-              className="w-[97px] h-[37.96px] bg-[#D2B48C] text-[16px] text-[#583D2C] rounded-xl mt-8">
+              className="w-[97px] h-[37.96px] bg-[#D2B48C] text-[16px] text-[#583D2C] rounded-xl my-8"
+            >
               로그아웃
             </button>
           </div>

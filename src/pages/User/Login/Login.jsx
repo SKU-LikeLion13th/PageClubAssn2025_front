@@ -75,7 +75,7 @@ export default function Login() {
     <>
       <Header />
 
-      <div className="relative w-full h-[calc(100vh-95px)] flex justify-center items-center">
+      <div className="relative w-full min-h-[calc(100vh-130px)] flex justify-center items-center">
         {/* 리본 배경 */}
         <div className="absolute flex items-center justify-center w-full h-full">
           <img src={images.ribbon} className=" w-full" alt="ribbon" />
@@ -127,7 +127,8 @@ export default function Login() {
                   ? "bg-[#D2B48C] text-[#583D2C]" // 활성화 버튼
                   : "bg-[#D2B48C80] text-[#583D2C80]" // 비활성화 버튼
               }`}
-              disabled={!isFormFilled}>
+              disabled={!isFormFilled}
+            >
               로그인
             </button>
           </form>
