@@ -119,7 +119,7 @@ export default function Login() {
               </div>
             </div>
 
-            {/* 로그인 버튼 - 동적 스타일링 */}
+            {/* 로그인 버튼 */}
             <button
               type="submit"
               className={`w-24 h-9 rounded-lg text-lg ${
@@ -127,8 +127,7 @@ export default function Login() {
                   ? "bg-[#D2B48C] text-[#583D2C]" // 활성화 버튼
                   : "bg-[#D2B48C80] text-[#583D2C80]" // 비활성화 버튼
               }`}
-              disabled={!isFormFilled}
-            >
+              disabled={!isFormFilled}>
               로그인
             </button>
           </form>
