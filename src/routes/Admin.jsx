@@ -16,6 +16,9 @@ import MemberManage from "../pages/Admin/ClubMember/MemberManage";
 import PrivateRoute from "../components/PrivateRoute";
 import ClubScoreManagement from "../pages/Admin/ClubScore/ClubScoreManagement";
 import UpdateClubScore from "../pages/Admin/ClubScore/UpdateClubScore";
+import ClubManagement from "../pages/Admin/ClubManagement/ClubManagement";
+import ClubEdit from "../pages/Admin/ClubManagement/ClubEdit";
+import ClubAdd from "../pages/Admin/ClubManagement/ClubAdd";
 
 const Admin = () => {
   return (
@@ -124,6 +127,30 @@ const Admin = () => {
           element={
             <PrivateRoute>
               <UpdateClubScore />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/club-management"
+          element={
+            <PrivateRoute>
+              <ClubManagement />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/club-edit"
+          element={
+            <PrivateRoute>
+              <ClubEdit />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/club-add"
+          element={
+            <PrivateRoute>
+              <ClubAdd />
             </PrivateRoute>
           }
         />
