@@ -52,7 +52,12 @@ export default function ClubManagement() {
       console.log(response);
       setClubs(response.data);
     } catch (error) {
-      console.error(error.message);
+      const errorStatus = error.status;
+      if (errorStatus == 401) {
+        navigate("/admin/adminlogin");
+      } else {
+        console.error("동아리 데이터 받아오기 실패", error.message);
+      }
     }
   };
 
@@ -88,7 +93,12 @@ export default function ClubManagement() {
       handleCloseModal();
       fetchClubs();
     } catch (error) {
-      console.error("동아리 삭제 중 오류 발생:", error);
+      const errorStatus = error.status;
+      if (errorStatus == 401) {
+        navigate("/admin/adminlogin");
+      } else {
+        console.error("동아리 삭제 중 오류 발생:", error);
+      }
     }
   };
 

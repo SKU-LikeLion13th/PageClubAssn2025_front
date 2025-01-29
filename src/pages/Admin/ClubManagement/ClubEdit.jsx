@@ -42,7 +42,12 @@ export default function ClubEdit() {
 
       navigate(-1);
     } catch (error) {
-      console.error("동아리 수정 중 오류 발생:", error);
+      const errorStatus = error.status;
+      if (errorStatus == 401) {
+        navigate("/admin/adminlogin");
+      } else {
+        console.error("동아리 수정 중 오류 발생:", error);
+      }
     }
   };
 
