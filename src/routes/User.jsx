@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import ExcellentClub from "../pages/User/ExcellentClub/ExcellentClub";
 import RentalItems from "../pages/User/Rental/RentalItems";
 import Login from "../pages/User/Login/Login";
-import LoginFailureModal from "./../pages/User/Login/LoginFailureModal";
 import UserAgreement from "../pages/User/Login/UserAgreement";
 import MyPage from "../pages/User/Login/MyPage";
 import ClubMemberCard from "../pages/User/ClubMemberCard";
@@ -21,7 +20,6 @@ const User = () => {
     <div>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/login-failure" element={<LoginFailureModal />} />
         <Route path="/user-agreement" element={<UserAgreement />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/member-card" element={<ClubMemberCard />} />
