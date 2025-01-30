@@ -9,7 +9,6 @@ export default function RentalItems() {
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
-    console.log("Token:", token);
 
     if (!token) {
       console.log("Token is missing");
@@ -30,7 +29,6 @@ export default function RentalItems() {
             (a, b) => a.name.localeCompare(b.name, "ko") // 가나다 순 정렬
           );
           setItems(sortedItems); // 상태 업데이트
-          console.log(response.data);
         } else {
           console.log("No items found");
         }
@@ -57,7 +55,7 @@ export default function RentalItems() {
 
       {/* 로딩 상태 표시 */}
       {loading ? (
-        <div className="flex justify-center items-center mt-6">
+        <div className="flex items-center justify-center mt-6">
           <p className="text-sm">로딩 중...</p>
         </div>
       ) : (
