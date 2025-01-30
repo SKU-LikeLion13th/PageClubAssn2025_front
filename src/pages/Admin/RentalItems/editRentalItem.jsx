@@ -88,8 +88,6 @@ export default function EditRentalItem({ handleUpdateItem }) {
         },
       });
 
-      console.log("응답 상태 코드:", response.status);
-
       // 응답 상태 코드가 201일 경우 처리
       if (response.status === 201) {
         alert("수정이 완료되었습니다.");

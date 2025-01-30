@@ -21,6 +21,7 @@ export default function ExcellentClub() {
     })
     .then((response) => {
       setClubScore(response.data);
+      console.log(response.data);
     })
     .catch((error) => {
       console.error("Error fetching joined clubs:", error);
