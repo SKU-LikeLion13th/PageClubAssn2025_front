@@ -20,8 +20,16 @@ export default function ExcellentClub() {
       },
     })
     .then((response) => {
-      setClubScore(response.data);
-      console.log(response.data);
+      // Base64 이미지 디코딩
+      const decodedData = response.data.map((item) => ({
+        ...item,
+        logo: item.logo.startsWith("data:image")
+          ? item.logo
+          : `data:image/png;base64,${item.logo}`, // Base64 이미지 변환
+      }));
+
+      setClubScore(decodedData);
+      console.log(decodedData);
     })
     .catch((error) => {
       console.error("Error fetching joined clubs:", error);

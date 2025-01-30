@@ -1,88 +1,99 @@
 import React, { useEffect, useState, useRef } from "react";
 import { IoCaretDownOutline } from "react-icons/io5";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
 
 export default function MemberContainer() {
-  const [userData, setUserData] = useState(null); // userData 초기값을 null로 설정
-  const [selectedClub, setSelectedClub] = useState(null); // selectedClub 초기값을 null로 설정
+  const navigate = useNavigate();
+
+  const dropdownRef = useRef(null);
+  const [userData, setUserData] = useState({
+    logo: "", // 기본값을 빈 문자열로 설정
+    clubName: "",
+    name: "",
+    clubs: [],
+  });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null); // 드롭다운 영역 참조
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
-  
-    // 유저 데이터 가져오기
-    axios
-      .get(`${API_URL}/mypage`, {
-        headers: {
-          Accept: "*/*",
-          Authorization: `${token}`,
-        },
-      })
-      .then((response) => {
-        const data = response.data;
-        const decodedLogo = `data:image/jpeg;base64,${data.logo}`; // 이미지 디코딩
-        setUserData({
-          ...data,
-          logo: decodedLogo, // 디코딩된 로고 설정
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-      });
-  
-    // 동아리 목록 가져오기
-    axios
-      .get(`${API_URL}/joined-list`, {
-        headers: {
-          Accept: "*/*",
-          Authorization: `${token}`,
-        },
-      })
-      .then((response) => {
-        const clubsWithLogo = response.data.map((item) => ({
-          ...item,
-          logo: `data:image/jpeg;base64,${item.logo}`, // 이미지 디코딩
+
+    const fetchData = async () => {
+      try {
+        const [userResponse, clubsResponse] = await Promise.all([
+          axios.get(`${API_URL}/mypage`, {
+            headers: { Authorization: `${token}` },
+          }),
+          axios.get(`${API_URL}/joined-list`, {
+            headers: { Authorization: `${token}` },
+          }),
+        ]);
+
+        const clubsWithLogo = clubsResponse.data.map((club) => ({
+          ...club,
+          logo: club.logo.startsWith("data:image")
+            ? club.logo
+            : `data:image/png;base64,${club.logo}`,
         }));
-  
-        if (clubsWithLogo.length > 0) {
-          setSelectedClub(clubsWithLogo[0]);
-        }
-  
-        setUserData((prevState) => ({
-          ...prevState,
+
+        const updatedUserData = {
+          ...userResponse.data,
+          logo: userResponse.data.logo.startsWith("data:image")
+            ? userResponse.data.logo
+            : `data:image/png;base64,${userResponse.data.logo}`,
           clubs: clubsWithLogo,
-        }));
-      })
-      .catch((error) => {
-        console.error("Error fetching joined clubs:", error);
-      });
-  }, []);
-  
+        };
 
-  const handleClubSelect = (club) => {
-    setSelectedClub(club); // 선택된 동아리 설정
-    setIsDropdownOpen(false); // 드롭다운 닫기
-  };
+        setUserData(updatedUserData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        localStorage.clear();
+        navigate("/login");
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsDropdownOpen(false); // 드롭다운 외부 클릭 시 드롭다운 닫기
+    fetchData();
+  }, [navigate]);
+
+  const handleClubSelect = async (club) => {
+    try {
+      const token = localStorage.getItem("Token");
+      await axios.post(
+        `${API_URL}/changeIconClub`,
+        { clubId: club.id },
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setUserData((prevData) => ({
+        ...prevData,
+        clubId: club.id,
+        clubName: club.name,
+        logo: club.logo.startsWith("data:image")
+          ? club.logo
+          : `data:image/png;base64,${club.logo}`,
+      }));
+
+      setIsDropdownOpen(false);
+    } catch (error) {
+      console.error("Error changing club:", error);
     }
   };
 
-  useEffect(() => {
-    // 외부 클릭 감지
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  if (!userData || !userData.clubs) {
-    return <div>Loading...</div>; // userData나 userData.clubs가 없을 때 로딩 화면 표시
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
+        Loading...
+      </div>
+    );
   }
 
   return (
@@ -104,7 +115,7 @@ export default function MemberContainer() {
           </div>
           <div className="flex flex-col items-center justify-center w-full">
             <div className="flex items-center">
-              {selectedClub?.name}
+              {userData?.clubName}
               <IoCaretDownOutline className="ml-2" />
             </div>
             <div>{userData.name}</div>
