@@ -5,12 +5,12 @@ export default function Header({ closeModal }) {
   const navigate = useNavigate();
 
   return (
-    <div className="flex justify-between items-center w-full px-4">
+    <div className="flex justify-between items-center w-full px-2">
       {/* 헤더 */}
-      <div className="flex justify-between items-center w-full max-w-4xl px-2">
+      <div className="flex justify-between items-center w-full max-w-4xl">
         <NavLink to="/">
           <img
-            src="/assets/images/Home.png"
+            src={images.Home}
             alt="홈 아이콘"
             className="w-[19px] h-[22px]"
           />

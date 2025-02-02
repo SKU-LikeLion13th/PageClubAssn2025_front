@@ -1,129 +1,124 @@
-import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { API_URL } from "../../../config";
 import { images } from "../../../utils/images";
 import RentalNote from "./RentalNote";
-import { RentalConfirm } from "./RModal";
-import { RentalSuccess } from "./RModal";
+import { RentalConfirm, RentalSuccess } from "./RModal";
 
 const Item = () => {
-  const [selectedItemId, setSelectedItemId] = useState(null); // 선택된 아이템 ID
-  const [selectedItemName, setSelectedItemName] = useState(null); // 선택된 아이템 이름
+  const [selectedItem, setSelectedItem] = useState(null); // 선택된 아이템 객체
+  const [items, setItems] = useState([]); // 아이템 상태값
   const [showModal, setShowModal] = useState(false); // 모달 표시 상태
   const [modalStep, setModalStep] = useState(1); // 모달 단계
 
-  // 임시 데이터
-  const items = [
-    {
-      id: 1,
-      name: "기도방석",
-      total: 5,
-      rented: 2,
-      waiting: 1,
-      available: 2,
-    },
-    {
-      id: 2,
-      name: "간이 탁구 네트",
-      total: 10,
-      rented: 6,
-      waiting: 2,
-      available: 2,
-    },
-    {
-      id: 3,
-      name: "경식 야구공",
-      total: 8,
-      rented: 4,
-      waiting: 1,
-      available: 3,
-    },
-  ];
+  const fetchItems = async () => {
+    const token = localStorage.getItem("Token");
+
+    if (!token) {
+      console.log("Token is missing");
+      return;
+    }
+
+    try {
+      const response = await axios.get(`${API_URL}/item-rent/list`, {
+        headers: { Authorization: token },
+      });
+
+      const updatedItems = response.data.map((item) => ({
+        ...item,
+        available: item.count - item.rentingCount,
+        status:
+          item.count - (item.rentingCount + item.bookingCount) > 0
+            ? "대여 가능"
+            : "대여 불가능",
+        image: `data:image/jpeg;base64,${item.image}`,
+      }));
+
+      setItems(updatedItems); // 상태 업데이트
+    } catch (error) {
+      console.error("Error fetching rental items:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchItems(); // 처음 마운트될 때 데이터 가져오기
+  }, []);
+
   // 예약 버튼 클릭 핸들러
-  const handleReserve = (id, name) => {
-    setSelectedItemId(id); // 선택한 아이템 ID 설정
-    setSelectedItemName(name);
-    setShowModal(true); // 모달 열기
+  const handleReserve = (item) => {
+    document.body.style.overflow = "hidden";
+    setSelectedItem(item);
+    setShowModal(true);
     setModalStep(1);
   };
-  // 모달 닫기 핸들러
+
+  // 모달 닫기 + 최신 데이터 반영
   const closeModal = () => {
+    document.body.style.overflow = "auto";
     setShowModal(false);
-    setSelectedItemId(null);
-    setSelectedItemName(null);
+    setSelectedItem(null);
     setModalStep(1);
+    fetchItems(); // 최신 데이터 불러오기
   };
+
   const nextStep = () => {
-    setModalStep((prevStep) => prevStep + 1); // 다음 단계로 이동
+    setModalStep((prevStep) => prevStep + 1);
   };
 
   return (
     <div>
       {items.map((item) => (
-        <div
-          key={item.id}
-          className="bg-white w-full rounded-xl h-[150px] px-5 py-4 border-[2px] border-[#D2B48C] mb-4"
-        >
+        <div key={item.id} className="bg-white w-full rounded-xl h-[150px] px-5 py-4 border-[2px] border-[#D2B48C] mb-4">
           <div className="item flex justify-start text-xs h-full">
             <div className="img-status flex flex-col h-full justify-between items-center w-[37%]">
-              <img src={images.cushion} className="w-full" alt="이미지" />
-              <p className="rounded-xl px-[9px] py-1 bg-[#FFCB99]">대여 가능</p>
+              <img src={item.image} className="w-full rounded-full" alt="이미지" />
+              <p className={`rounded-xl px-[9px] py-1 ${item.status === "대여 가능" ? "bg-[#FFCB99]" : "bg-[#FF7009] text-[#FDF1F5]"}`}>
+                {item.status}
+              </p>
             </div>
-            <div className="itemcontent pl-4 w-full">
+            <div className="itemcontent pl-4 w-full pt-1">
               <div className="itemname flex justify-between items-center mb-1">
-                <p className="text-xl">{item.name}</p>
+                <p style={{ fontSize: `${Math.max(0.9, 1.5 - item.name.length * 0.05)}rem` }} className="w-[60%]">
+                  {item.name}
+                </p>
                 <button
-                  onClick={() => handleReserve(item.id, item.name)}
-                  className="rounded-xl px-4 h-5 bg-[#D2B48C] text-[#583D2C]"
+                  onClick={() => handleReserve(item)}
+                  className={`rounded-xl px-4 h-5 mb-1 w-[40%] ${item.status === "대여 가능" ? "bg-[#D2B48C] text-[#583D2C]" : "bg-gray-400 text-gray-200 cursor-not-allowed"}`}
+                  disabled={item.status === "대여 불가능"}
                 >
                   예약하기
                 </button>
               </div>
-              <img src={images.line} className="pb-2 pt-1" />
+              <img src={images.line} className="pb-2 pt-1" alt="line" />
               <div className="grid grid-cols-2 text-center gap-5 mt-2">
-                <p className="rounded-lg border-[1px] border-[#D2B48C]">
-                  총 개수 : {item.total}개
-                </p>
-                <p className="rounded-lg border-[1px] border-[#D2B48C]">
-                  대여 중 : {item.rented}개
-                </p>
-                <p className="rounded-lg border-[1px] border-[#D2B48C]">
-                  예약 대기 : {item.waiting}개
-                </p>
-                <p className="rounded-lg border-[1px] border-[#D2B48C]">
-                  대여 가능 : {item.available}개
-                </p>
+                <p className="rounded-lg border-[1px] border-[#D2B48C]">총 개수 : {item.count}개</p>
+                <p className="rounded-lg border-[1px] border-[#D2B48C]">대여 중 : {item.rentingCount}개</p>
+                <p className="rounded-lg border-[1px] border-[#D2B48C]">예약 : {item.bookingCount}개</p>
+                <p className="rounded-lg border-[1px] border-[#D2B48C]">대여가능 : {item.count - (item.rentingCount + item.bookingCount)}개</p>
               </div>
             </div>
           </div>
         </div>
       ))}
+
       {/* 모달 */}
       {showModal && (
-        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center z-50">
-          {modalStep === 1 && (
-            <div className="bg-[#FFF6EC] w-[100%] p-5">
-              <RentalNote
-                itemId={selectedItemId}
-                itemName={selectedItemName}
-                closeModal={closeModal}
-                nextStep={nextStep}
-              />
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 bg-black bg-opacity-30">
+          {modalStep === 1 && selectedItem && (
+            <div className="bg-[#FFF6EC] w-[375px] p-5">
+              <RentalNote item={selectedItem} closeModal={closeModal} nextStep={nextStep} />
             </div>
           )}
-          {modalStep === 2 && (
-            <RentalConfirm
-              itemId={selectedItemId}
-              itemName={selectedItemName}
-              closeModal={closeModal}
-              nextStep={nextStep}
-            />
+          {modalStep === 2 && selectedItem && (
+            <div className="w-[450px] h-[55rem] p-5">
+              <RentalConfirm item={selectedItem} closeModal={closeModal} nextStep={nextStep} />
+            </div>
           )}
-          {modalStep === 3 && (
-            <RentalSuccess
-              itemId={selectedItemId}
-              itemName={selectedItemName}
-              closeModal={closeModal}
-            />
+          {modalStep === 3 && selectedItem && (
+            <div className="w-[450px] h-[55rem] p-5">
+              <RentalSuccess item={selectedItem} closeModal={closeModal} />
+            </div>
           )}
         </div>
       )}
