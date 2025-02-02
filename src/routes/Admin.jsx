@@ -7,7 +7,6 @@ import RentalItems from "../pages/Admin/RentalItems/RentalItems";
 import AddRentalItem from "../pages/Admin/RentalItems/addRentalItem";
 import EditRentalItem from "../pages/Admin/RentalItems/editRentalItem";
 import RentalStatus from "../pages/Admin/ItemsStatus/RentalStatus";
-import ReserveStatus from "../pages/Admin/ItemsStatus/ReserveStatus";
 import ClubMember from "../pages/Admin/ClubMember/ClubMember";
 import AddClubMember from "../pages/Admin/ClubMember/AddClubMember";
 import AddMember from "../pages/Admin/ClubMember/AddMember";
@@ -19,6 +18,7 @@ import UpdateClubScore from "../pages/Admin/ClubScore/UpdateClubScore";
 import ClubManagement from "../pages/Admin/ClubManagement/ClubManagement";
 import ClubEdit from "../pages/Admin/ClubManagement/ClubEdit";
 import ClubAdd from "../pages/Admin/ClubManagement/ClubAdd";
+import ItemReservationStatus from "../pages/Admin/ItemsStatus/ReserveStatus";
 
 const Admin = () => {
   return (
@@ -70,7 +70,7 @@ const Admin = () => {
           path="/reservestatus"
           element={
             <PrivateRoute>
-              <ReserveStatus />
+              <ItemReservationStatus />
             </PrivateRoute>
           }
         />

@@ -2,7 +2,7 @@ import axios from "axios";
 import { API_URL } from "../../../config";
 import {images} from "../../../utils/images"
 
-export const RentalConfirm = ({ item, closeModal, nextStep }) => {
+export const RentalConfirm = ({ item, closeModal, nextStep, setModalStep }) => {
   const handleConfirm = async () => {
     const token = localStorage.getItem("Token");
 
@@ -14,20 +14,27 @@ export const RentalConfirm = ({ item, closeModal, nextStep }) => {
     try {
       const response = await axios.post(
         `${API_URL}/item-rent`,
-        {
-          itemId: item.id, 
-          count: 1,
-        },
-        {
-          headers: {
-            Authorization: token, 
-          },
-        }
+        { itemId: item.id, count: 1 },
+        { headers: { Authorization: token } }
       );
 
       console.log("예약 성공:", response.data);
-      nextStep(); // 다음 단계로 이동
+      nextStep(); // 성공하면 다음 단계로 이동
     } catch (error) {
+      if (error.response && error.response.status === 403) {
+        if (error.response.data === "물품은 세 종류까지만 대여가 가능합니다.") {
+          setModalStep(4); //setModalStep을 사용하여 모달 변경
+          return;
+        }
+        if (error.response.data === "미반납") {
+          setModalStep(5); //setModalStep을 사용하여 모달 변경
+          return;
+        }
+        if (error.response.data === "수량초과") {
+          setModalStep(6); //setModalStep을 사용하여 모달 변경
+          return;
+        }
+      }
       console.error("예약 실패:", error);
     }
   };
@@ -94,16 +101,14 @@ export const RentalSuccess = ({ item, closeModal }) => {
   );
 };
 
-export const RentalLimit = ({ item, closeModal, itemName }) => {
+export const RentalLimit = ({ closeModal }) => {
   return (
-    <div className="w-full h-full flex items-center justify-center bg-black bg-opacity-30">
+    <div className="w-full h-full flex items-center justify-center bg-opacity-30">
       <div className="relative rounded-lg w-3/4 h-[40%] bg-white shadow-lg text-[#3F3F3F]">
         <div className="flex flex-col justify-center items-center h-full">
-          <div className="title text-xl mb-2">{itemName}</div>
-          <img src={images.cushion} className="rounded-full" />
           <div className="mt-4 text-center leading-[22px]">
             <p>
-              예약 완료 되었습니다.
+              3개가 한계.
               <br />
               <span className="text-[#FF7009]">12월 26일</span>까지
               <br />
