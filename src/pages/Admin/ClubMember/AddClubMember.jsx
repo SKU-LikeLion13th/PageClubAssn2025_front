@@ -25,7 +25,7 @@ export default function AddClubMember() {
       }
 
       try {
-        const response = await axios.get(`${API_URL}/admin/club/all`, {
+        const response = await axios.get(`${API_URL}/admin/club/summary`, {
           headers: {
             Authorization: `${token}`,
             // Accept: '*/*',
