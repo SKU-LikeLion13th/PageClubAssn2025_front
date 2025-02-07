@@ -11,7 +11,7 @@ const PrivateRoute = ({ children }) => {
 
   if (role !== "ROLE_ADMIN") {
     alert("관리자만 이용할 수 있는 페이지입니다."); // 경고 메시지 띄우기
-    return <Navigate to="/" replace />; // 로그인 페이지로 리다이렉트
+    return <Navigate to="/admin/adminlogin" replace />; // 로그인 페이지로 리다이렉트
   }
 
   return children; // ROLE_ADMIN일 경우 컴포넌트 렌더링
