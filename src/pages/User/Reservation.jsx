@@ -6,7 +6,21 @@ import axios from "axios";
 import { API_URL } from "../../config";
 
 export default function Reservation() {
-  const [rentItem, setRentItem] = useState([]); // rentItem 초기값을 빈 배열로 설정
+  const [reservations, setReservations] = useState([]);
+  const [currentReservationIndex, setCurrentReservationIndex] = useState(0);
+
+  const decodeBase64Image = (base64String) => {
+    try {
+      // Base64 문자열이 데이터 URL 형식이 아니라면 추가
+      if (!base64String.startsWith('data:image')) {
+        base64String = `data:image/jpeg;base64,${base64String}`;
+      }
+      return base64String;
+    } catch (error) {
+      console.error("이미지 디코딩 중 오류:", error);
+      return null;
+    }
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
@@ -14,29 +28,60 @@ export default function Reservation() {
     axios
       .get(`${API_URL}/item-rent/book-list`, {
         headers: {
-          "Accept": "*/*",
           "Authorization": `${token}`,
         },
       })
       .then((response) => {
-        setRentItem(response.data);
+        const processedItems = response.data.map(item => ({
+          ...item,
+          image: item.image ? decodeBase64Image(item.image) : null
+        }));
+
+        setReservations(processedItems);
       })
-      .catch((error) => console.log("Error fetching user data:", error));
+      .catch((error) => console.log("사용자 데이터 가져오기 오류:", error));
   }, []);
 
-  const [currentReservationIndex, setCurrentReservationIndex] = useState(0);
-
+  // 슬라이드 버튼 핸들러
   const handleNext = () => {
     setCurrentReservationIndex((prev) =>
-      prev < rentItem.length - 1 ? prev + 1 : 0
+      prev < reservations.length - 1 ? prev + 1 : 0
     );
   };
 
   const handlePrev = () => {
     setCurrentReservationIndex((prev) =>
-      prev > 0 ? prev - 1 : rentItem.length - 1
+      prev > 0 ? prev - 1 : reservations.length - 1
     );
   };
+
+  // 예약 취소 처리
+  const handleCancelReservation = () => {
+    const token = localStorage.getItem("Token");
+    const itemRentId = reservations[currentReservationIndex].itemRentId; // 현재 항목의 대여 번호
+  
+    axios
+      .delete(
+        `${API_URL}/item-rent`, 
+        {
+          headers: {
+            "Authorization": `${token}`,
+            "Content-Type": "application/json",
+          },
+          data: { itemRentId }, // 요청 본문에 itemRentId를 포함
+        }
+      )
+      .then((response) => {
+        console.log("예약 취소 성공:", response.data);
+        // 취소 후 렌탈 아이템 목록을 갱신 (혹은 화면에서 삭제)
+        const updatedItems = reservations.filter((item, index) => index !== currentReservationIndex);
+        setReservations(updatedItems);
+      })
+      .catch((error) => {
+        console.error("예약 취소 실패:", error);
+      });
+  };
+  
 
   return (
     <div className="relative w-full">
@@ -44,40 +89,42 @@ export default function Reservation() {
       <div>
         <div className="flex flex-col items-center text-[#996515]">
           <div className="text-[50px] mt-7">MY PAGE</div>
-
           <MemberContainer />
 
           {/* 예약 현황 컨테이너 */}
           <div className="flex flex-col items-center w-full">
             <div className="text-[35px] mt-7">예약 현황</div>
             <div className="relative flex justify-center items-center w-[85%] h-[22rem] px-10 font-Moneygraphy text-[17px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] mt-7">
-              {rentItem && rentItem.length > 0 ? (
+              {reservations && reservations.length > 0 ? (
                 <div className="flex flex-col items-center">
                   {/* 예약된 물품 정보 */}
-                  <div className="flex flex-col items-center py-5 text-center">
+                  <div className="flex flex-col items-center text-center py-7">
                     <img
-                      src={rentItem[currentReservationIndex].image}
-                      alt={rentItem[currentReservationIndex].itemName}
-                      className="w-[90px] h-[90px] object-cover mb-4"
+                      src={reservations[currentReservationIndex].image}
+                      alt={reservations[currentReservationIndex].itemName}
+                      className="w-[80px] h-[80px] object-cover mb-5"
                     />
                     <div className="mb-2">
-                      {rentItem[currentReservationIndex].itemName}
+                      {reservations[currentReservationIndex].itemName}
                     </div>
                     <div>
                       <span className="font-bold text-[#FF7009]">
-                        {new Date(rentItem[currentReservationIndex].needReceiveTime).toLocaleDateString()}
+                        {new Date(reservations[currentReservationIndex].needReceiveTime).toLocaleDateString()}
                       </span>
                       {""}까지 <br /> 동아리연합회실로 방문해주세요.
                     </div>
                   </div>
 
                   {/* 예약 취소 버튼 */}
-                  <div className="flex justify-center w-fit px-5 py-1 rounded-[20px] mb-3 text-[13px] text-[#583D2C] bg-[#D2B48C]">
+                  <div
+                    onClick={handleCancelReservation}
+                    className="flex justify-center w-fit px-5 py-1 rounded-[20px] text-[13px] text-[#583D2C] bg-[#D2B48C] cursor-pointer"
+                  >
                     예약 취소
                   </div>
 
                   {/* 슬라이드 버튼 */}
-                  <div className="flex items-center mt-5 mb-3 text-[#996515] text-[16px] space-x-4">
+                  <div className="flex items-center mt-4 text-[#996515] text-[16px] space-x-4">
                     <button
                       onClick={handlePrev}
                       className="hover:text-[#FF7009]"
@@ -85,7 +132,7 @@ export default function Reservation() {
                       <img src={images.left} alt="left" />
                     </button>
                     <span className="text-[11px]">
-                      {currentReservationIndex + 1}/{rentItem.length}
+                      {currentReservationIndex + 1}/{reservations.length}
                     </span>
                     <button
                       onClick={handleNext}

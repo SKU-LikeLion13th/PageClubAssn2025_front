@@ -113,7 +113,7 @@ export default function MyPage() {
       <div className="relative w-full min-h-[calc(100vh-130px)] flex justify-center ">
         {/* 리본 배경 */}
         <div className="absolute flex items-center justify-center w-full h-full">
-          <img src={images.ribbon} className=" w-full" alt="ribbon" />
+          <img src={images.ribbon} className="w-full " alt="ribbon" />
         </div>
 
         <div className="z-[50] font-Moneygraphy text-[#996515] w-[85%] text-center">
@@ -139,8 +139,8 @@ export default function MyPage() {
                   />
                 )}
               </div>
-              <div className="flex-1 flex-col flex items-center justify-center pr-1">
-                <div className="flex w-full items-center justify-between">
+              <div className="flex flex-col items-center justify-center flex-1 pr-1">
+                <div className="flex items-center justify-between w-full">
                   <p className="flex-1 text-center">{userData?.clubName}</p>
                   <p className="ml-2">
                     <IoCaretDownOutline className="text-[#D2B48C]" />
@@ -187,7 +187,7 @@ export default function MyPage() {
             </button>
             <button
               className="w-[75%] bg-[#FFFFFF] border border-[#D2B48C] p-3 rounded-lg mb-3"
-              onClick={() => handleNavigate("rental")}
+              onClick={() => handleNavigate("rentalclick")}
             >
               나의 대여 현황
             </button>

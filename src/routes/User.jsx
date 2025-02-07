@@ -8,7 +8,7 @@ import MyPage from "../pages/User/Login/MyPage";
 import ClubMemberCard from "../pages/User/ClubMemberCard";
 import ClassSchedule from "../pages/User/ClassSchedule/ClassSchedule";
 import Reservation from "../pages/User/Reservation";
-import Rental from "../pages/User/Rental";
+import RentalClick from '../pages/User/RentalClick';
 import Menu from "../pages/User/Menu/Menu";
 import Introduction from "../pages/User/Menu/Introduction";
 import SNS from "../pages/User/Menu/SNS";
@@ -28,7 +28,7 @@ const User = () => {
         <Route path="/rentalitems" element={<RentalItems />} />
         <Route path="/classSchedule" element={<ClassSchedule />} />
         <Route path="/reservation" element={<Reservation />} />
-        <Route path="/rental" element={<Rental />} />
+        <Route path="/rentalclick" element={<RentalClick />} />
         <Route path="/rentalitems" element={<RentalItems />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/introduction" element={<Introduction />} />
