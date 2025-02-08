@@ -21,10 +21,12 @@ export const images = {
   right: PATH + "/assets/images/right.png",
 
   //rentalitems
-  cushion: PATH + "/assets/images/rental/cushion.png",
   line: PATH + "/assets/images/rental/Line.png",
   rentalline: PATH + "/assets/images/rental/rentalline.png",
   outimg: PATH + "/assets/images/rental/outimg.png",
+  delay: PATH + "/assets/images/rental/delay.png",
+  notReturned: PATH + "/assets/images/rental/notReturned.png",
+  quantity: PATH + "/assets/images/rental/quantity.png",
 
   //AdminMember
   search: PATH + "/assets/images/AdminMember/search.jpeg",

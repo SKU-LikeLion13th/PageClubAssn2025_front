@@ -4,7 +4,7 @@ import axios from "axios";
 import { API_URL } from "../../../config";
 import { images } from "../../../utils/images";
 import RentalNote from "./RentalNote";
-import { RentalConfirm, RentalSuccess, RentalLimit } from "./RModal";
+import { RentalConfirm, RentalSuccess, RentalLimit, NoneReturn, ReturnOver } from "./RModal";
 
 const Item = () => {
   const navigate = useNavigate();
@@ -163,7 +163,8 @@ const Item = () => {
                 item={selectedItem}
                 closeModal={closeModal}
                 nextStep={nextStep}
-                setModalStep={setModalStep} // 추가됨!
+                setModalStep={setModalStep}
+                setSelectedItem={setSelectedItem} // ✅ 추가
               />
             </div>
           )}
@@ -179,12 +180,12 @@ const Item = () => {
           )}
           {modalStep === 5 && (
             <div className="w-[450px] h-[55rem] p-5">
-              <RentalLimit closeModal={closeModal} />
+              <NoneReturn closeModal={closeModal} />
             </div>
           )}
           {modalStep === 6 && (
             <div className="w-[450px] h-[55rem] p-5">
-              <RentalLimit closeModal={closeModal} />
+              <ReturnOver closeModal={closeModal} />
             </div>
           )}
         </div>
