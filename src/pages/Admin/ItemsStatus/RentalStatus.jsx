@@ -15,17 +15,24 @@ const RentalStatus = () => {
           headers: { Authorization: token },
         });
         const items = result.data.map((item) => {
-          // 년/월/일 형식으로 rentTime 변환
-          const rentDate = new Date(item.rentTime);
+          //날짜 변환
+          let rentDate = new Date(item.rentTime);
+          let returnDeadLine = new Date(item.returnDeadLine);
           const formattedRentTime = rentDate.toLocaleDateString("ko-KR");
-          return { ...item, rentTime: formattedRentTime };
+          const formattedReturnDeadLine = returnDeadLine.toLocaleDateString("ko-KR");
+          //연체 여부
+          const status = item.NO_DELAY ? "연체" : "연체 아님";
+  
+          return { ...item, rentTime: formattedRentTime, returnDeadLine: formattedReturnDeadLine, status };
         });
         setData(items);
       } catch (err) {
         if (err.response && err.response.status === 401) {
           console.error("권한 없음. 관리자 토큰을 확인해주세요.");
         } else {
-          console.error(err);
+          if(err.response){
+            console.error(err);
+          }
         }
         setError(err);
       }
@@ -38,22 +45,26 @@ const RentalStatus = () => {
 
   const handleReturn = async (itemRentId) => {
     const token = localStorage.getItem("Token");
-    // 반납 기능
     try {
-      await axios.put(`/admin/item-rent`,{itemRentId},{
+      const response = await axios.post(`${API_URL}/admin/item-rent`, { itemRentId }, {
         headers: { Authorization: token },
       });
-      setData(data.filter((item) => item.itemRentId !== itemRentId));
+      if (response.status === 200){
+        alert("반납 처리에 성공하였습니다.")
+        setData((prevData) => prevData.filter((item) => item.itemRentId !== itemRentId));
+      }
     } catch (err) {
-      console.error(err);
-      if (error.response) {
-        const statusCode = error.response.status;
+      console.error("반납 처리 실패", err);
+      if (err.response) {
+        const statusCode = err.response.status;
         if (statusCode === 401) {
           localStorage.clear();
         }
       }
+      alert("반납 처리에 실패했습니다.");
     }
   };
+  
 
   return (
     <div>
@@ -86,9 +97,9 @@ const RentalStatus = () => {
                     <p>동아리 : {result.iconClub}</p>
                     <p>대여 물품 : {result.itemName}</p>
                     <p>수량 : {result.count}</p>
-                    <p>대여일 : {result.rentStartTime}</p>
-                    <p>반납일 : {result.rentEndTime}</p>
-                    <p>연체 현황 : {result.rentStatus}</p>
+                    <p>대여일 : {result.rentTime}</p>
+                    <p>반납일 : {result.returnDeadLine}</p>
+                    <p>연체 현황 : {result.status}</p>
                   </div>
                   <div className="flex items-end justify-end text-xs mt-3">
                     <button className="bg-[#D1D1D3] text-[#3F3F3F] p-1 px-3 rounded-lg" onClick={() => handleReturn(result.itemRentId)}>

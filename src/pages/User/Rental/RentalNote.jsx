@@ -5,7 +5,7 @@ import RentalNoteHeader from "./RentalNoteHeader.jsx";
 const RentalNote = ({ itemId, closeModal, nextStep }) => {
   console.log(itemId);
   return (
-    <div className="h-screen w-full top-0">
+    <div className="h-min-screen w-full top-0">
       <div className="pt-8">
         <RentalNoteHeader closeModal={closeModal} />
       </div>
