@@ -14,7 +14,7 @@ export default function Score({ scores = [] }) {
       <div className="flex items-end justify-center w-full pt-10 gap-x-3">
         {scores.map((item) => (
           <div
-            key={item.id}
+            key={item.id || item.ranking}
             className={`flex flex-col items-center justify-end`}
             style={{
               order: item.ranking === 1 ? 2 : item.ranking === 2 ? 1 : 3,

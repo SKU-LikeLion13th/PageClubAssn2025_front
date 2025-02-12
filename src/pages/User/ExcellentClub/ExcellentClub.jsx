@@ -29,7 +29,6 @@ export default function ExcellentClub() {
       }));
 
       setClubScore(decodedData);
-      console.log(decodedData);
     })
     .catch((error) => {
       console.error("Error fetching joined clubs:", error);

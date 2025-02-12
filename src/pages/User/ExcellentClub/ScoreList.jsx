@@ -13,7 +13,7 @@ export default function ScoreList({ scores = [] }) {
     <div className="flex flex-col font-Moneygraphy w-[85%] bg-[#ffffff] border-[1px] border-[#d2b48c] text-[#996515] rounded-[10px] mt-10 z-10">
       {scores.map((item, index) => (
         <div
-          key={item.id}
+          key={item.id || index}
           className={`flex px-3 py-4 ${
             index !== scores.length - 1
               ? "border-b-[1px] border-[#d2b48c]"
