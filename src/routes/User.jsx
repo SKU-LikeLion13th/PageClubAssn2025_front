@@ -8,12 +8,13 @@ import MyPage from "../pages/User/Login/MyPage";
 import ClubMemberCard from "../pages/User/ClubMemberCard";
 import ClassSchedule from "../pages/User/ClassSchedule/ClassSchedule";
 import Reservation from "../pages/User/Reservation";
-import RentalClick from '../pages/User/RentalClick';
+import RentalClick from "../pages/User/RentalClick";
 import Menu from "../pages/User/Menu/Menu";
 import Introduction from "../pages/User/Menu/Introduction";
 import SNS from "../pages/User/Menu/SNS";
 import AboutUs from "../pages/User/Menu/AboutUs";
 import Main from "../pages/User/Main";
+import Footer from "../components/Footer";
 
 const User = () => {
   return (
@@ -35,6 +36,7 @@ const User = () => {
         <Route path="/sns" element={<SNS />} />
         <Route path="/aboutus" element={<AboutUs />} />
       </Routes>
+      <Footer className="text-[#d2b48c] pb-5" />
     </div>
   );
 };

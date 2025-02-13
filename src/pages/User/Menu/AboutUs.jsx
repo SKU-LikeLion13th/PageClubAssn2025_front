@@ -134,33 +134,33 @@ export default function AboutUs() {
           <div className="flex items-center justify-center w-[211px] h-[40px] border-[0.8px] border-[#D2B48C] bg-white rounded-[20px] text-[20px] text-[#996515] z-10">
             만든이들
           </div>
-          <div className="flex z-10 w-[240px] items-center mt-6">
-            <div className="mr-[2.3rem]">
+          <div className="flex z-10 items-center mt-6">
+            <div className="mr-[1rem] flex flex-col items-center">
               <img
                 src="../../assets/images/PageLogo.png"
                 alt=""
-                className="w-[73px] h-[60px] "
+                className="w-[78px] h-[65px] "
               />
-              <p className="text-[6px] text-center font-Moneygraphy text-[#996515]">
+              <p className="text-[10px] text-center font-Moneygraphy text-[#996515]">
                 성결대학교
                 <br />
                 제41대 Page 동아리연합회
               </p>
             </div>
-            <div className="">
+            <div className="flex flex-col items-center">
               <img
                 src="../../assets/images/Group501.png"
                 alt=""
-                className="w-[28px] h-[25px]"
+                className="w-[30px] h-[27px]"
               />
             </div>
-            <div className="ml-[3rem] flex flex-col items-center">
+            <div className="ml-[2rem] flex flex-col items-center">
               <img
                 src="../../assets/images/LikeLionLogo.png"
                 alt=""
-                className="w-[43px] h-[43px] mt-2"
+                className="w-[48px] h-[48px] mt-2"
               />
-              <p className="text-[6px] text-center font-Moneygraphy text-[#996515] mt-[0.5rem]">
+              <p className="text-[10px] text-center font-Moneygraphy text-[#996515] mt-[0.5rem]">
                 성결대학교
                 <br />
                 멋쟁이사자처럼 13기
@@ -185,9 +185,9 @@ export default function AboutUs() {
             <img
               src="../../assets/images/PageLogo.png"
               alt=""
-              className="w-[73px] h-[60px] text-center"
+              className="w-[90px] text-center"
             />
-            <p className="text-[6px] text-center font-Moneygraphy text-[#996515]">
+            <p className="text-[10px] text-center font-Moneygraphy text-[#996515]">
               성결대학교
               <br />
               제41대 Page 동아리연합회
@@ -197,12 +197,12 @@ export default function AboutUs() {
             {members.map((member) => (
               <div
                 key={member.id}
-                className="border-[0.5px] border-[#D2B48C] rounded-[10px] bg-white text-center flex flex-col justify-center items-center w-[7rem] z-10 px-4 pt-6 pb-4 font-Moneygraphy"
+                className="border-[0.5px] border-[#D2B48C] rounded-[10px] bg-white text-center flex flex-col justify-center items-center w-[7rem] z-10 px-4 pt-4 pb-3 font-Moneygraphy"
               >
                 <img
                   src={member.imgSrc}
                   alt={member.name}
-                  className="w-[38px] h-[38px]"
+                  className="w-[70px]"
                 />
                 <div className="flex items-center justify-center mt-2">
                   <img
@@ -210,17 +210,17 @@ export default function AboutUs() {
                     alt="Logo"
                     className="w-[30px] h-auto mr-2"
                   />
-                  <p className="text-[8px]">{member.name}</p>
+                  <p className="text-[10px]">{member.name}</p>
                 </div>
-                <p className="text-[6px] leading-[7px] text-center mt-2">
+                <p className="text-[6px] leading-[7px] text-center">
                   {member.department}
                   <br />
                   {member.role}
                 </p>
-                <div className="flex items-center justify-center mt-2">
+                <div className="flex items-center justify-center mt-3">
                   <hr className="w-[58px] border-[#D2B48C] border-[0.5px]" />
                 </div>
-                <p className="mt-2 text-[6px] leading-[7px] text-center">
+                <p className="mt-3 text-[6px] leading-[7px] text-center">
                   {member.task}
                 </p>
               </div>
@@ -247,26 +247,25 @@ export default function AboutUs() {
               {likeLionMembers.map((member) => (
                 <div
                   key={member.id}
-                  className="border-[0.5px] border-[#D2B48C] rounded-[10px] bg-white text-center flex flex-col justify-center items-center w-[7rem] z-10 px-4 pt-6 pb-4 font-Moneygraphy"
+                  className="border-[0.5px] border-[#D2B48C] rounded-[10px] bg-white text-center flex flex-col justify-center items-center w-[7rem] z-10 px-4 pt-4 pb-3 font-Moneygraphy"
                 >
                   <img
                     src={member.imgSrc}
                     alt={member.name}
-                    className="w-[38px] h-[38px]"
+                    className="w-[70px]"
                   />
                   <div className="flex items-center justify-center mt-2">
                     <img
                       src={member.logoSrc}
                       alt="Logo"
-                      className="w-[12px] h-auto mr-2"
+                      className="w-[13px] h-auto mr-2"
                     />
-                    <p className="text-[8px]">{member.name}</p>
+                    <p className="text-[10px]">{member.name}</p>
                   </div>
                   <p className="text-[6px] leading-[7px] text-center mt-2">
                     {member.department}
-                    <p>{member.task}</p>
                     <br />
-                    {member.role}
+                    <div className="text-[8px] mt-1">{member.role}</div>
                   </p>
                   <div className="flex items-center justify-center mt-2">
                     <hr className="w-[58px] border-[#D2B48C] border-[0.5px]" />

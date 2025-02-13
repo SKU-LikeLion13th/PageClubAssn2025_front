@@ -109,7 +109,7 @@ export default function RentalItems() {
         </div>
       )}
 
-      <div className="border-[1.5px] border-[#D1D1D3] mt-3" />
+      <div className="border-[1.5px] border-[#D1D1D3] mt-3 mb-8" />
     </div>
   );
 }

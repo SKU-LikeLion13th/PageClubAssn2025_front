@@ -19,6 +19,7 @@ import ClubManagement from "../pages/Admin/ClubManagement/ClubManagement";
 import ClubEdit from "../pages/Admin/ClubManagement/ClubEdit";
 import ClubAdd from "../pages/Admin/ClubManagement/ClubAdd";
 import ItemReservationStatus from "../pages/Admin/ItemsStatus/ReserveStatus";
+import Footer from "../components/Footer";
 
 const Admin = () => {
   return (
@@ -155,6 +156,7 @@ const Admin = () => {
           }
         />
       </Routes>
+      <Footer className="text-[#D1D1D3]" />
     </div>
   );
 };

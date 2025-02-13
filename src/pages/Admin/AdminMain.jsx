@@ -21,12 +21,13 @@ export default function AdminMain() {
       </div>
 
       {/* Main Content */}
-      <main className="mt-6 flex flex-col items-center gap-6 w-60 font-Y_spotlight text-[28px]">
+      <main className="my-6 flex flex-col items-center gap-6 w-60 font-Y_spotlight text-[28px]">
         {menuItems.map((item, index) => (
           <button
             key={index}
             onClick={() => (window.location.href = item.link)}
-            className="w-[13rem] h-[4.2rem] py-3 border border-[#585858] rounded-lg text-center hover:bg-white hover:text-black transition">
+            className="w-[13rem] h-[4.2rem] py-3 border border-[#585858] rounded-lg text-center hover:bg-white hover:text-black transition"
+          >
             {item.label}
           </button>
         ))}
