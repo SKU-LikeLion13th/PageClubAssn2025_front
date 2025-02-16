@@ -3,33 +3,31 @@ import axios from "axios";
 import RibbonBackground from "../../components/RibbonBackground";
 import { images } from "../../utils/images";
 import MemberContainer from "./MemberContainer";
+import Header from "../../components/Header";
 import { API_URL } from '../../config';
 
 export default function RentalClick() {
-  const [rentItem, setRentItem] = useState([]);
+  const [rentItems, setRentItems] = useState([]);
   const [currentReservationIndex, setCurrentReservationIndex] = useState(0);
   
   const decodeBase64Image = (base64String) => {
-    try {
-      // Base64 문자열이 데이터 URL 형식이 아니라면 추가
-      if (!base64String.startsWith('data:image')) {
-        base64String = `data:image/jpeg;base64,${base64String}`;
-      }
-      return base64String;
-    } catch (error) {
-      console.error("이미지 디코딩 중 오류:", error);
-      return null;
+    if (!base64String?.startsWith('data:image')) {
+      return `data:image/jpeg;base64,${base64String}`;
     }
+    return base64String;
   };
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
 
+    if (!token) {
+      console.error("토큰이 없습니다.");
+      return;
+    }
+
     axios
       .get(`${API_URL}/item-rent/rent-list`, {
-        headers: {
-          "Authorization": `${token}`,
-        },
+        headers: { "Authorization": token },
       })
       .then((response) => {
         const processedItems = response.data.map(item => ({
@@ -37,81 +35,90 @@ export default function RentalClick() {
           image: item.image ? decodeBase64Image(item.image) : null
         }));
 
-        setRentItem(processedItems);
+        setRentItems(processedItems);
       })
-      .catch((error) => console.log("사용자 데이터 가져오기 오류:", error));
+      .catch((error) => console.error("사용자 데이터 가져오기 오류:", error));
   }, []);
 
-  const handleNext = () => {
-    setCurrentReservationIndex((prev) =>
-      prev < rentItem.length - 1 ? prev + 1 : 0
-    );
+  const isOverdue = (item) => {
+    if (!item?.needReturnTime) return false;
+    const returnDate = new Date(item.needReturnTime);
+    const today = new Date();
+    return returnDate < today;
   };
+  
 
-  const handlePrev = () => {
-    setCurrentReservationIndex((prev) =>
-      prev > 0 ? prev - 1 : rentItem.length - 1
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
+  };  
+
+  const DateInfo = ({ rentItem }) => (
+    rentItem ? (
+      isOverdue(rentItem) ? (
+        <div className="text-center text-[#FF7009] font-bold">
+          연체되었습니다.<br/>
+          빠른 시일 내에 동아리연합회실로 반납해주세요.
+        </div>
+      ) : (
+        <div>
+          대여일 : {formatDate(rentItem.rentTime)} <br />
+          반납일 : {formatDate(rentItem.needReturnTime)}
+        </div>
+      )
+    ) : null
+  );  
+
+  const handleNavigation = (direction) => {
+    setCurrentReservationIndex((prev) => 
+      direction === "next" 
+        ? (prev < rentItems.length - 1 ? prev + 1 : 0)
+        : (prev > 0 ? prev - 1 : rentItems.length - 1)
     );
   };
 
   return (
     <div className="relative w-full">
-          <RibbonBackground />
-          <div>
-            <div className="flex flex-col items-center text-[#996515]">
-              <div className="text-[50px] mt-7">MY PAGE</div>
-              <MemberContainer />
-    
-              {/* 예약 현황 컨테이너 */}
-              <div className="flex flex-col items-center w-full">
-                <div className="text-[35px] mt-7">예약 현황</div>
-                <div className="relative flex justify-center items-center w-[85%] h-[22rem] px-10 font-Moneygraphy text-[17px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] mt-7">
-                  {rentItem && rentItem.length > 0 ? (
-                    <div className="flex flex-col items-center">
-                      {/* 예약된 물품 정보 */}
-                      <div className="flex flex-col items-center text-center py-7">
-                        <img
-                          src={rentItem[currentReservationIndex].image}
-                          alt={rentItem[currentReservationIndex].itemName}
-                          className="w-[80px] h-[80px] object-cover mb-5"
-                        />
-                        <div className="mb-2">
-                          {rentItem[currentReservationIndex].itemName}
-                        </div>
-                        <div>
-                          <span className="font-bold text-[#FF7009]">
-                            {new Date(rentItem[currentReservationIndex].needReceiveTime).toLocaleDateString()}
-                          </span>
-                          {""}까지 <br /> 동아리연합회실로 방문해주세요.
-                        </div>
-                      </div>
-    
-                      {/* 슬라이드 버튼 */}
-                      <div className="flex items-center mt-4 text-[#996515] text-[16px] space-x-4">
-                        <button
-                          onClick={handlePrev}
-                          className="hover:text-[#FF7009]"
-                        >
-                          <img src={images.left} alt="left" />
-                        </button>
-                        <span className="text-[11px]">
-                          {currentReservationIndex + 1}/{rentItem.length}
-                        </span>
-                        <button
-                          onClick={handleNext}
-                          className="hover:text-[#FF7009]"
-                        >
-                          <img src={images.right} alt="right" />
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div>대여 중인 물품이 없습니다.</div>
+      <RibbonBackground />
+      <Header />
+      <div className="w-11/12 mx-auto text-[#996515] flex flex-col items-center">
+        <h1 className="text-[50px] mt-7">MY PAGE</h1>
+        <MemberContainer />
+        <div className="flex flex-col items-center w-full">
+          <h2 className="text-[35px] mt-7">대여 현황</h2>
+          <div className="relative font-Moneygraphy flex justify-center items-center w-[85%] h-[22rem] px-10 text-[16px] bg-white border border-[#D2B48C] rounded-[13px] mt-7">
+            {rentItems.length > 0 ? (
+              <div className='flex flex-col items-center'>
+                <div className="flex flex-col items-center py-5 text-center">
+                  {rentItems[currentReservationIndex] && (
+                    <>
+                      <img
+                        src={rentItems[currentReservationIndex].image}
+                        alt={rentItems[currentReservationIndex].itemName}
+                        className="w-[90px] h-[90px] object-cover mb-4"
+                      />
+                      <div className='w-full mb-5'>{rentItems[currentReservationIndex].itemName}</div>
+                      <DateInfo rentItem={rentItems[currentReservationIndex]} />
+                    </>
                   )}
                 </div>
+                <div className="flex items-center mt-5 mb-3 text-[#996515] text-[16px] space-x-4">
+                  <button onClick={() => handleNavigation("prev")} className="hover:text-[#FF7009]">
+                    <img src={images.left} alt="left" />
+                  </button>
+                  <span className='text-[11px]'>{currentReservationIndex + 1}/{rentItems.length}</span>
+                  <button onClick={() => handleNavigation("next")} className="hover:text-[#FF7009]">
+                    <img src={images.right} alt="right" />
+                  </button>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div>대여 중인 물품이 없습니다.</div>
+            )}
           </div>
         </div>
+      </div>
+    </div>
   );
 }

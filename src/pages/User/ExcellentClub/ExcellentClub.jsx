@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import RibbonBackground from "../../../components/RibbonBackground";
+import { images } from "../../../utils/images";
 import Score from "./Score";
 import ScoreList from "./ScoreList";
 import Header from "../../../components/Header";
@@ -37,8 +37,12 @@ export default function ExcellentClub() {
 
   return (
     <div className="relative w-full min-h-screen">
+      {/* 리본 배경 */}
+      <div className="absolute flex items-center justify-center w-full h-full">
+        <img src={images.ribbon} className="w-full " alt="ribbon" />
+      </div>
+      
       <Header />
-      <RibbonBackground />
 
       {/* 콘텐츠 */}
       <div className="z-10 flex flex-col items-center h-full">
