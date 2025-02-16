@@ -35,8 +35,10 @@ export default function ClubManagement() {
   const [clubs, setClubs] = useState([]);
   const [selectedClub, setSelectedClub] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchClubs = async () => {
+    setLoading(true);
     try {
       const token = localStorage.getItem("Token");
       if (!token) {
@@ -49,7 +51,6 @@ export default function ClubManagement() {
         },
       });
 
-      console.log(response);
       setClubs(response.data);
     } catch (error) {
       const errorStatus = error.status;
@@ -58,6 +59,8 @@ export default function ClubManagement() {
       } else {
         console.error("동아리 데이터 받아오기 실패", error.message);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -89,7 +92,7 @@ export default function ClubManagement() {
         },
       });
 
-      // 모달 닫고 새로고침
+      // 모달 닫고 데이터 새로고침
       handleCloseModal();
       fetchClubs();
     } catch (error) {
@@ -118,15 +121,19 @@ export default function ClubManagement() {
         </div>
       </div>
 
-      <div className="font-PretendardVariable">
-        {clubs.map((club) => (
-          <ClubItem
-            key={club.id}
-            club={club}
-            onDeleteClick={handleDeleteClick}
-          />
-        ))}
-      </div>
+      {loading ? (
+        <div className="text-center mt-14">Loading...</div>
+      ) : (
+        <div className="font-PretendardVariable">
+          {clubs.map((club) => (
+            <ClubItem
+              key={club.id}
+              club={club}
+              onDeleteClick={handleDeleteClick}
+            />
+          ))}
+        </div>
+      )}
 
       {showDeleteModal && (
         <ClubDeleteModal

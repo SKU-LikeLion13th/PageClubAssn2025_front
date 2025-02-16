@@ -52,28 +52,27 @@ export default function UserAgreement() {
   };
 
   const MainCheckbox = ({ checked, onChange }) => (
-    <div className="relative w-6 h-6">
+    <label className="relative w-6 h-6 cursor-pointer">
       <input
         type="checkbox"
-        className="w-full h-full appearance-none border border-[#D2B48C] rounded-sm bg-white cursor-pointer checked:border-[#996515]"
+        className="w-full h-full appearance-none border border-[#D2B48C] rounded-sm bg-white checked:border-[#996515] cursor-pointer"
         checked={checked}
         onChange={onChange}
       />
       {checked && (
         <svg
-          className="absolute top-1/2 left-1/2 w-[18px] h-[18px] -translate-x-1/2 -translate-y-1/2 text-[#996515]"
+          className="absolute top-1/2 left-1/2 w-[18px] h-[18px] -translate-x-1/2 -translate-y-1/2 text-[#996515] pointer-events-none"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           strokeWidth="2.5"
           strokeLinecap="round"
-          strokeLinejoin="round"
-        >
+          strokeLinejoin="round">
           <polyline points="20 6 9 17 4 12" />
         </svg>
       )}
-    </div>
+    </label>
   );
 
   const CustomCheckbox = ({ checked, onChange }) => (
@@ -88,8 +87,7 @@ export default function UserAgreement() {
         stroke="currentColor"
         strokeWidth="2.5"
         strokeLinecap="round"
-        strokeLinejoin="round"
-      >
+        strokeLinejoin="round">
         <polyline points="20 6 9 17 4 12" />
       </svg>
     </div>
@@ -108,11 +106,10 @@ export default function UserAgreement() {
         },
       });
 
-      // 토큰 저장
       localStorage.setItem("Token", response.data.accessToken);
       localStorage.setItem("role", response.data.role);
 
-      navigate("/"); // 메인 페이지로 이동
+      navigate("/");
     } catch (error) {
       console.error("UserAgreement 에러 : ", error);
     }
@@ -124,7 +121,6 @@ export default function UserAgreement() {
 
       <div className="w-full min-h-[calc(100vh-130px)]">
         <div className="flex flex-col items-center text-center font-Moneygraphy">
-          {/* 개인정보 수집 타이틀 */}
           <div className="mt-10 w-[296px] h-[87px] bg-[#FFFFFF] border border-[#D2B48C] rounded-lg flex justify-center items-center mb-10">
             <p className="font-Ownglyph_PDH text-[25px] text-[#996515]">
               Page 웹사이트 사용을 위한
@@ -132,7 +128,6 @@ export default function UserAgreement() {
             </p>
           </div>
 
-          {/* 개인정보 수집 안내 */}
           <div className="text-[13px] text-[#3F3F3F] space-y-5">
             <p>
               제41대 동아리연합회는 동아리에 소속된 학우들에게
@@ -145,10 +140,10 @@ export default function UserAgreement() {
             </p>
           </div>
 
-          {/* 개인정보 동의란 */}
           <div className="w-[85%] mt-10 space-y-2">
-            {/* 전체 동의 */}
-            <div className="flex items-center space-x-3 cursor-pointer">
+            <div
+              className="flex items-center space-x-3 cursor-pointer"
+              onClick={handleAllCheck}>
               <MainCheckbox checked={allChecked} onChange={handleAllCheck} />
               <span className="text-[17.15px] text-[#3F3F3F]">전체 동의</span>
             </div>
@@ -170,8 +165,7 @@ export default function UserAgreement() {
                   />
                   <span
                     className="text-[14.51px]"
-                    onClick={() => toggleSection("items")}
-                  >
+                    onClick={() => toggleSection("items")}>
                     수집 이용 항목
                   </span>
                 </div>
@@ -202,8 +196,7 @@ export default function UserAgreement() {
                   />
                   <span
                     className="text-[14.51px]"
-                    onClick={() => toggleSection("purpose")}
-                  >
+                    onClick={() => toggleSection("purpose")}>
                     수집 이용 목적
                   </span>
                 </div>
@@ -234,8 +227,7 @@ export default function UserAgreement() {
                   />
                   <span
                     className="text-[14.51px]"
-                    onClick={() => toggleSection("duration")}
-                  >
+                    onClick={() => toggleSection("duration")}>
                     보유 기간
                   </span>
                 </div>
@@ -262,14 +254,13 @@ export default function UserAgreement() {
 
           {/* 확인 버튼 */}
           <button
-            className={`w-24 h-9 rounded-lg text-lg mt-14 mb-4 ${
+            className={`w-24 h-9 rounded-lg text-lg mt-14 mb-16 ${
               allChecked
-                ? "bg-[#D2B48C] text-[#583D2C]" // 모든 항목 체크시 활성화
-                : "bg-[#D2B48C80] text-[#583D2C80]" // 비활성화 상태
+                ? "bg-[#D2B48C] text-[#583D2C]"
+                : "bg-[#D2B48C80] text-[#583D2C80]"
             }`}
             disabled={!allChecked}
-            onClick={handleAgreement}
-          >
+            onClick={handleAgreement}>
             확인
           </button>
         </div>
