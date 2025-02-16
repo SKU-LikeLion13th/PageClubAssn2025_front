@@ -37,12 +37,12 @@ export default function ExcellentClub() {
 
   return (
     <div className="relative w-full min-h-screen">
+      <Header />
       {/* 리본 배경 */}
       <div className="absolute flex items-center justify-center w-full h-full">
         <img src={images.ribbon} className="w-full " alt="ribbon" />
       </div>
       
-      <Header />
 
       {/* 콘텐츠 */}
       <div className="z-10 flex flex-col items-center h-full">
