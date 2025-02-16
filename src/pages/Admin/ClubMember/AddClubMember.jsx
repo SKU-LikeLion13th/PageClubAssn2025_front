@@ -83,6 +83,13 @@ export default function AddClubMember() {
 
       if (response.status === 200) {
         setSearchResults(response.data);
+
+        // 검색 결과가 없으면 에러 메시지 설정
+        if (response.data.length === 0) {
+          setError('존재하지 않는 멤버입니다. \n멤버 추가에서 먼저 추가해주세요.');
+        } else {
+          setError(''); // 검색 결과가 있으면 에러 메시지 초기화
+        }
       } else {
         throw new Error('Network response was not ok');
       }
@@ -161,9 +168,9 @@ export default function AddClubMember() {
           <FaAngleDown className="flex ml-2 cursor-pointer" />
           {isOpen && (
             <div className="absolute mt-2 text-[14px] w-full bg-white border rounded shadow -left-1 top-5">
-              {clubs.map((club) => (
+              {clubs.map((club, index) => (
                 <div
-                  key={club.id}
+                  key={index} // 고유하지 않지만, 순서가 변경되지 않으면 괜찮을 수 있음
                   onClick={() => handleSelect(club.name)}
                   className="p-2 cursor-pointer hover:bg-gray-200"
                 >
@@ -202,15 +209,15 @@ export default function AddClubMember() {
         <div className="flex w-fit h-fit px-3 py-0.5 text-[8px] font-Y_spotlight bg-[#D1D1D3] rounded-[4px] mt-2 mb-2">엑셀 파일 관리</div>
       </div>
 
-      <div className="flex flex-col items-center border-[1px] border-[#3F3F3F] rounded-[12px] w-10/12 h-[500px]">
+      <div className="flex flex-col items-center border-[1px] border-[#3F3F3F] rounded-[12px] w-10/12 h-[500px] overflow-y-auto">
         <div className="flex justify-between w-[100%] text-[14px] h-fit py-1.5 border-b-[1px] border-[#3F3F3F]">
           <div className="flex justify-center w-1/3">학번</div>
           <div className="flex justify-center w-1/3">이름</div>
           <div className="flex justify-center w-1/3">선택</div>
         </div>
 
-        {searchResults.map((result, index) => (
-          <div className="flex w-full my-3 text-[13px]" key={index}>
+        {searchResults.map((result) => (
+          <div className="flex w-full my-3 text-[13px]" key={result.studentId}> {/* studentId를 key로 사용 */}
             <div className="flex justify-center w-1/3">{result.studentId}</div>
             <div className="flex justify-center w-1/3">{result.name}</div>
             <label className="flex justify-center w-1/3">
@@ -222,6 +229,15 @@ export default function AddClubMember() {
             </label>
           </div>
         ))}
+
+        {error && (
+          <div
+            className="flex justify-center mt-11 text-center w-fit h-full text-[12px] text-red-500 my-3"
+            style={{ whiteSpace: 'pre-line' }} // 줄바꿈을 반영하도록 설정
+          >
+            {error}
+          </div>
+        )}
       </div>
 
       <div
