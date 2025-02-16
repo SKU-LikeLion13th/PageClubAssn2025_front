@@ -83,6 +83,13 @@ export default function AddClubMember() {
 
       if (response.status === 200) {
         setSearchResults(response.data);
+
+        // 검색 결과가 없으면 에러 메시지 설정
+        if (response.data.length === 0) {
+          setError('존재하지 않는 멤버입니다. \n멤버 추가에서 먼저 추가해주세요.');
+        } else {
+          setError(''); // 검색 결과가 있으면 에러 메시지 초기화
+        }
       } else {
         throw new Error('Network response was not ok');
       }
@@ -202,7 +209,7 @@ export default function AddClubMember() {
         <div className="flex w-fit h-fit px-3 py-0.5 text-[8px] font-Y_spotlight bg-[#D1D1D3] rounded-[4px] mt-2 mb-2">엑셀 파일 관리</div>
       </div>
 
-      <div className="flex flex-col items-center border-[1px] border-[#3F3F3F] rounded-[12px] w-10/12 h-[500px]">
+      <div className="flex flex-col items-center border-[1px] border-[#3F3F3F] rounded-[12px] w-10/12 h-[500px] overflow-y-auto">
         <div className="flex justify-between w-[100%] text-[14px] h-fit py-1.5 border-b-[1px] border-[#3F3F3F]">
           <div className="flex justify-center w-1/3">학번</div>
           <div className="flex justify-center w-1/3">이름</div>
@@ -222,6 +229,15 @@ export default function AddClubMember() {
             </label>
           </div>
         ))}
+
+        {error && (
+          <div
+            className="flex justify-center mt-11 text-center w-fit h-full text-[12px] text-red-500 my-3"
+            style={{ whiteSpace: 'pre-line' }} // 줄바꿈을 반영하도록 설정
+          >
+            {error}
+          </div>
+        )}
       </div>
 
       <div

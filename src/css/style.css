@@ -56,3 +56,7 @@ body {
   margin: 0;
   font-family: "Ownglyph_PDH";
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
