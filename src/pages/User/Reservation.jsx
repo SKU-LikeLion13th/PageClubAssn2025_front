@@ -3,6 +3,7 @@ import RibbonBackground from "../../components/RibbonBackground";
 import { images } from "../../utils/images";
 import MemberContainer from "./MemberContainer";
 import axios from "axios";
+import Header from "../../components/Header";
 import { API_URL } from "../../config";
 
 export default function Reservation() {
@@ -18,7 +19,6 @@ export default function Reservation() {
       return base64String;
     } catch (error) {
       console.error("이미지 디코딩 중 오류:", error);
-      return null;
     }
   };
 
@@ -86,9 +86,10 @@ export default function Reservation() {
   return (
     <div className="relative w-full">
       <RibbonBackground />
-      <div>
+      <Header />
+      <div className="w-11/12 mx-auto">
         <div className="flex flex-col items-center text-[#996515]">
-          <div className="text-[50px] mt-7">MY PAGE</div>
+          <div className="flex justify-center text-[50px] mt-7">MY PAGE</div>
           <MemberContainer />
 
           {/* 예약 현황 컨테이너 */}

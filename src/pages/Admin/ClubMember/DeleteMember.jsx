@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { images } from '../../../utils/images';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
@@ -14,25 +14,36 @@ export default function DeleteMember() {
   const [currentStudentId, setCurrentStudentId] = useState('');
   const token = localStorage.getItem('Token');
 
+  // Modal의 AppElement 설정
+  useEffect(() => {
+    Modal.setAppElement('#root');  // '#root'는 일반적으로 React 앱의 루트 div입니다.
+  }, []);
+
   const handleDelete = (id) => {
     setCurrentStudentId(id);
     setIsOpen(true);  // Open modal
   };
 
-  const confirmDelete = async (id) => {
+  const confirmDelete = async () => {
     try {
-      const response = await axios.delete(
-        `${API_URL}/admin/member/delete?studentId=${encodeURIComponent(studentId)}`,
+      await axios.delete(
+        `${API_URL}/admin/member/delete?studentId=${encodeURIComponent(currentStudentId)}`,
         {
           headers: {
             Authorization: `${token}`,
-            Accept: '*/*',
           },
         }
       );
+      
       setMessage('삭제가 성공적으로 완료되었습니다.');
-      setSearchResults(searchResults.filter((result) => result.studentId !== id));
-      setIsOpen(false);  // Close modal
+      
+      // UI에서 바로 삭제된 것처럼 보이게 하기
+      setSearchResults((prevResults) => prevResults.filter((result) => result.studentId !== currentStudentId));
+  
+      setIsOpen(false); // 모달 닫기
+  
+      // 최신 데이터 다시 불러오기
+      handleSearch();
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setMessage('학번이 올바른지 확인해주세요.');
@@ -82,7 +93,7 @@ export default function DeleteMember() {
           value={studentId}
           onChange={(e) => setStudentId(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' && studentId.trim() !== '') { // studentId가 비어있지 않은 경우만 검색
               handleSearch();
             }
           }}
@@ -141,7 +152,7 @@ export default function DeleteMember() {
         </div>
       )}
 
-      <div className="flex justify-end w-10/12 border-b-[2px] border-[#D1D1D3]"></div>
+      <div className="flex justify-center w-10/12 border-b-[2px] border-[#D1D1D3]"></div>
 
       {searchResults.length > 0 && (
         <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Confirm Delete" style={{
@@ -150,11 +161,13 @@ export default function DeleteMember() {
             justifyContent: 'center',
             alignItems: 'center',
             padding: 0,
+            margin: 'auto',
             border: 'none',
             backgroundColor: 'transparent',
+            width: 'fit-content',
           },
         }}>
-          <div className='flex flex-col items-start w-1/2 font-PretendardVariable border-[1px] border-[#3F3F3F] rounded-[12px]'>
+          <div className='flex flex-col w-fit items-center font-PretendardVariable border-[1px] border-[#3F3F3F] rounded-[12px]'>
             <div className='flex justify-end w-full p-2'>
               <IoClose className='flex' onClick={closeModal} />
             </div>

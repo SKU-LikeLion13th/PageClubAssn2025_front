@@ -10,7 +10,7 @@ const getRankingSuffix = (rank) => {
 
 export default function ScoreList({ scores = [] }) {
   return (
-    <div className="flex flex-col font-Moneygraphy w-[85%] bg-[#ffffff] border-[1px] border-[#d2b48c] text-[#996515] rounded-[10px] mt-10 z-10">
+    <div className="flex flex-col font-Moneygraphy w-10/12 bg-[#ffffff] border-[1px] border-[#d2b48c] text-[#996515] rounded-[10px] mt-10 z-10">
       {scores.map((item, index) => (
         <div
           key={item.id || index}
