@@ -85,8 +85,8 @@ export default function Reservation() {
 
   return (
     <div className="relative w-full">
-      <RibbonBackground />
       <Header />
+      <RibbonBackground />
       <div className="w-11/12 mx-auto">
         <div className="flex flex-col items-center text-[#996515]">
           <div className="flex justify-center text-[50px] mt-7">MY PAGE</div>

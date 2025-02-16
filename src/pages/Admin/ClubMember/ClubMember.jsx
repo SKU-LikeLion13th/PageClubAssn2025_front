@@ -87,7 +87,7 @@ export default function ClubMember() {
   };
 
   return (
-    <div className="flex flex-col items-center w-full mt-10">
+    <div className="flex flex-col items-center w-full min-h-screen mt-10">
       <div className="flex flex-col w-full font-Y_spotlight">
         <div className="flex justify-center text-[30px]">동아리원 관리</div>
         <div className="flex justify-end w-10/12 mx-auto border-b-2 border-[#D1D1D3]">

@@ -80,8 +80,8 @@ export default function RentalClick() {
 
   return (
     <div className="relative w-full">
-      <RibbonBackground />
       <Header />
+      <RibbonBackground />
       <div className="w-11/12 mx-auto text-[#996515] flex flex-col items-center">
         <h1 className="text-[50px] mt-7">MY PAGE</h1>
         <MemberContainer />
