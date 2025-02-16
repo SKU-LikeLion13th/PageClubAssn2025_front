@@ -168,9 +168,9 @@ export default function AddClubMember() {
           <FaAngleDown className="flex ml-2 cursor-pointer" />
           {isOpen && (
             <div className="absolute mt-2 text-[14px] w-full bg-white border rounded shadow -left-1 top-5">
-              {clubs.map((club) => (
+              {clubs.map((club, index) => (
                 <div
-                  key={club.id}
+                  key={index} // 고유하지 않지만, 순서가 변경되지 않으면 괜찮을 수 있음
                   onClick={() => handleSelect(club.name)}
                   className="p-2 cursor-pointer hover:bg-gray-200"
                 >
@@ -216,8 +216,8 @@ export default function AddClubMember() {
           <div className="flex justify-center w-1/3">선택</div>
         </div>
 
-        {searchResults.map((result, index) => (
-          <div className="flex w-full my-3 text-[13px]" key={index}>
+        {searchResults.map((result) => (
+          <div className="flex w-full my-3 text-[13px]" key={result.studentId}> {/* studentId를 key로 사용 */}
             <div className="flex justify-center w-1/3">{result.studentId}</div>
             <div className="flex justify-center w-1/3">{result.name}</div>
             <label className="flex justify-center w-1/3">
