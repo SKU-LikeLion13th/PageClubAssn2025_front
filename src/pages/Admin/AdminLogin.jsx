@@ -119,7 +119,7 @@ export default function AdminLogin() {
           <button
             onClick={handleLogin}
             disabled={notAllow}
-            className="submit mt-10 w-[100%] h-14 rounded-full bg-[#FFF6EC] text-[#744A2F] shadow-lg disabled:bg-[#dadada] disabled:text-white"
+            className="submit mt-10 w-[100%] h-14 rounded-full bg-[#D1D1D3] text-[#3F3F3F] shadow-lg disabled:bg-[#E8E8E9] disabled:text-[#939394]"
           >
             로그인
           </button>

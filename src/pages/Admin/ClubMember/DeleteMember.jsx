@@ -38,12 +38,10 @@ export default function DeleteMember() {
         }
       );
 
-      // 검색 결과가 있는 경우
       if (response.data && response.data.length > 0) {
         setSearchResults(response.data);
-        setMessage(''); // 이전 메시지 초기화
+        setMessage(''); 
       } else {
-        // 검색 결과가 없는 경우
         setSearchResults([]);
         setMessage('존재하지 않는 멤버입니다.');
       }
@@ -54,7 +52,6 @@ export default function DeleteMember() {
     }
   };
 
-  // 나머지 기존 코드는 동일하게 유지...
   const handleDelete = (id) => {
     setCurrentStudentId(id);
     setIsOpen(true);
@@ -139,7 +136,7 @@ export default function DeleteMember() {
       <div className="flex justify-center px-3 items-center w-10/12 mt-5 py-0.5 font-PretendardVariable border-[1px] border-[#3F3F3F] rounded-[50px] text-[11px] focus:outline-none focus:ring-2 focus:ring-[#D1D1D3]">
         <input
           type="text"
-          placeholder="학번 8자리 입력"
+          placeholder="학번 또는 이름 입력"
           className="w-full text-center"
           value={studentId}
           onChange={(e) => setStudentId(e.target.value)}

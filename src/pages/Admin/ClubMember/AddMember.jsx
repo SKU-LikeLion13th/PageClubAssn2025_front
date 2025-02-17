@@ -9,10 +9,10 @@ export default function AddMember() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [message, setMessage] = useState("");
 
-  const navigate = useNavigate(); // useNavigate 초기화
+  const navigate = useNavigate();
 
   const handleAddMember = async () => {
-    const role = isAdmin ? "ROLE_ADMIN" : "ROLE_MEMBER"; // 관리자 여부에 따라 역할 설정
+    const role = isAdmin ? "ROLE_ADMIN" : "ROLE_MEMBER";
     const payload = { studentId, name, role };
     const token = localStorage.getItem('Token');
 
@@ -33,7 +33,6 @@ export default function AddMember() {
         return;
       }
 
-      // 멤버가 존재하지 않으면 추가
       const response = await axios.post(
         `${API_URL}/admin/member/add`,
         payload,
@@ -48,7 +47,9 @@ export default function AddMember() {
 
       if (response.status === 201) {
         setMessage("멤버가 성공적으로 추가되었습니다!");
-        navigate("/admin/clubMember"); // 성공 시 페이지 이동
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       } else {
         setMessage("멤버 추가에 실패했습니다.");
       }

@@ -12,6 +12,7 @@ export default function ClubMember() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
   const [deleteSuccess, setDeleteSuccess] = useState(false);
+  const [isSearched, setIsSearched] = useState(false);
   const navigate = useNavigate();
 
   const token = localStorage.getItem('Token');
@@ -22,7 +23,6 @@ export default function ClubMember() {
     setModalIsOpen(true);
   };
   
-  // 검색 버튼 클릭 시 호출되는 함수
   const handleSearch = async () => {
     if (!token || userRole !== 'ROLE_ADMIN') {
       return;
@@ -34,11 +34,11 @@ export default function ClubMember() {
         {
           headers: {
             Authorization: `${token}`,
-            Accept: '*/*',
           },
         }
       );
       setSearchResults(response.data);
+      setIsSearched(true);
       console.log(response.data);
     } catch (err) {
       if (err.response?.status === 401) {
@@ -48,6 +48,7 @@ export default function ClubMember() {
       console.error(err);
     }
   };
+  
 
   const openModal = (member) => {
     setSelectedMember(member);
@@ -79,8 +80,8 @@ export default function ClubMember() {
       setSearchResults((prevResults) =>
         prevResults.filter((result) => result.studentId !== selectedMember.studentId)
       );
-      setDeleteSuccess(true); // 삭제 성공 상태 업데이트
-      setTimeout(() => setDeleteSuccess(false), 3000); // 3초 후 상태 초기화
+      setDeleteSuccess(true);
+      setTimeout(() => setDeleteSuccess(false), 3000);
     } catch (err) {
       console.error(err);
     }
@@ -116,15 +117,13 @@ export default function ClubMember() {
         />
       </div>
 
-      {searchResults.length === 0 && (
-        <div className="flex justify-between w-10/12 my-2 text-[11px] text-[#FF4242] font-PretendardVariable">
-          <div className="flex">선택할 동아리원이 없다면 멤버로 먼저 관리하세요.</div>
-          <NavLink to="/admin/memberManage" className="flex">
-            멤버관리
-            <img src={images.click} alt="click" className="ml-1 w-[15px] h-[15px]" />
-          </NavLink>
-        </div>
-      )}
+      <div className="flex justify-between w-10/12 my-2 text-[11px] text-[#FF4242] font-PretendardVariable">
+        <div className="flex">선택할 동아리원이 없다면 멤버로 먼저 관리하세요.</div>
+        <NavLink to="/admin/memberManage" className="flex">
+          멤버관리
+          <img src={images.click} alt="click" className="ml-1 w-[15px] h-[15px]" />
+        </NavLink>
+      </div>
 
       {searchResults.length > 0 && (
         <div className="flex flex-col w-10/12 border-t-[2px] border-[#D1D1D3] mt-5">
@@ -161,6 +160,12 @@ export default function ClubMember() {
                   </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {isSearched && searchResults.length === 0 && (
+        <div className="flex justify-center text-center w-10/12 my-2 text-[11px] text-[#FF4242] font-PretendardVariable py-3 border-y-[2px] border-[#D1D1D3]">
+          동아리원이 존재하지 않습니다. <br />동아리원 추가에서 동아리를 추가해주세요!
         </div>
       )}
 
