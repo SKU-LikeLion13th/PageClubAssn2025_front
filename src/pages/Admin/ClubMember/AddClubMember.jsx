@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // axios import
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import { images } from '../../../utils/images';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FaAngleDown } from "react-icons/fa6";
@@ -13,6 +13,8 @@ export default function AddClubMember() {
   const [selectedClub, setSelectedClub] = useState('');
   const [clubs, setClubs] = useState([]); // 동아리 목록 상태 추가
   const [isOpen, setIsOpen] = useState(false);
+  const [isUploading, setIsUploading] = useState(false); // 업로드 진행 상태를 관리
+  const fileInputRef = useRef(null); // 파일 입력을 위한 ref
   const navigate = useNavigate();
 
   // API에서 동아리 목록 가져오기
@@ -28,7 +30,6 @@ export default function AddClubMember() {
         const response = await axios.get(`${API_URL}/admin/club/summary`, {
           headers: {
             Authorization: `${token}`,
-            // Accept: '*/*',
           },
         });
 
@@ -155,6 +156,55 @@ export default function AddClubMember() {
     };
   }, [isOpen]);
 
+  const handleFileSelect = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+    if (!['xlsx', 'xls'].includes(fileExtension)) {
+      setError('엑셀 파일(.xlsx 또는 .xls)만 업로드 가능합니다.');
+      return;
+    }
+
+    const token = localStorage.getItem('Token');
+    if (!token) {
+      setError('인증 토큰이 없습니다. 로그인 후 다시 시도해주세요.');
+      return;
+    }
+
+    setIsUploading(true); // 업로드 시작 상태 설정
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await axios.post(
+        `${API_URL}/admin/excel/upload`, 
+        formData,
+        {
+          headers: {
+            'Authorization': `${token}`,
+          },
+        }
+      );
+
+      if (response.status === 201) {
+        alert('엑셀 파일이 성공적으로 업로드되었습니다.');
+      }
+    } catch (error) {
+      console.error('파일 업로드 중 오류가 발생했습니다:', error);
+      setError('파일 업로드에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col items-center w-full min-h-screen mt-10 font-PretendardVariable">
       <div className="flex flex-col w-full font-Y_spotlight">
@@ -205,8 +255,32 @@ export default function AddClubMember() {
         </NavLink>
       </div>
 
+      {isUploading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="flex items-center justify-center p-4 bg-white rounded-lg shadow-md animate-pulse">
+            <span className="text-lg">파일을 업로드 중입니다. 잠시만 기다려주세요...</span>
+          </div>
+        </div>
+      )}
+
+      {/* 엑셀 파일 관리 버튼 및 파일 업로드 */}
       <div className='flex justify-end w-[80%]'>
-        <div className="flex w-fit h-fit px-3 py-0.5 text-[8px] font-Y_spotlight bg-[#D1D1D3] rounded-[4px] mt-2 mb-2">엑셀 파일 관리</div>
+        <input
+          type="file"
+          ref={fileInputRef}
+          className="hidden"
+          accept=".xlsx,.xls"
+          onChange={handleFileUpload}
+        />
+        <div
+          className={`flex w-fit h-fit px-3 py-0.5 text-[8px] font-Y_spotlight 
+            ${isUploading ? 'bg-gray-400' : 'bg-[#D1D1D3] hover:bg-gray-300'} 
+            rounded-[4px] mt-2 mb-2 cursor-pointer transition-colors`}
+          onClick={handleFileSelect}
+          style={{ pointerEvents: isUploading ? 'none' : 'auto' }}
+        >
+          {isUploading ? '업로드 중...' : '엑셀 파일 관리'}
+        </div>
       </div>
 
       <div className="flex flex-col items-center border-[1px] border-[#3F3F3F] rounded-[12px] w-10/12 h-[500px] overflow-y-auto">
