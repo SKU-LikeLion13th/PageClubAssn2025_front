@@ -27,134 +27,22 @@ const Admin = () => {
       <AdminHeader />
       <Routes>
         <Route path="/adminlogin" element={<AdminLogin />} />
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <AdminMain />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/RentalItems"
-          element={
-            <PrivateRoute>
-              <RentalItems />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/AddRentalItem"
-          element={
-            <PrivateRoute>
-              <AddRentalItem />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/EditRentalItem/:id"
-          element={
-            <PrivateRoute>
-              <EditRentalItem />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/rentalstatus"
-          element={
-            <PrivateRoute>
-              <RentalStatus />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/reservestatus"
-          element={
-            <PrivateRoute>
-              <ItemReservationStatus />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/clubMember"
-          element={
-            <PrivateRoute>
-              <ClubMember />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/addclubMember"
-          element={
-            <PrivateRoute>
-              <AddClubMember />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/addMember"
-          element={
-            <PrivateRoute>
-              <AddMember />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/deleteMember"
-          element={
-            <PrivateRoute>
-              <DeleteMember />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/memberManage"
-          element={
-            <PrivateRoute>
-              <MemberManage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/club-score-management"
-          element={
-            <PrivateRoute>
-              <ClubScoreManagement />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/update-club-score"
-          element={
-            <PrivateRoute>
-              <UpdateClubScore />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/club-management"
-          element={
-            <PrivateRoute>
-              <ClubManagement />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/club-edit"
-          element={
-            <PrivateRoute>
-              <ClubEdit />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/club-add"
-          element={
-            <PrivateRoute>
-              <ClubAdd />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/" element={<PrivateRoute><AdminMain /></PrivateRoute>} />
+        <Route path="/RentalItems" element={<PrivateRoute><RentalItems /></PrivateRoute>} />
+        <Route path="/AddRentalItem" element={<PrivateRoute><AddRentalItem /></PrivateRoute>} />
+        <Route path="/EditRentalItem/:id" element={<PrivateRoute><EditRentalItem /></PrivateRoute>} />
+        <Route path="/rentalstatus" element={<PrivateRoute><RentalStatus /></PrivateRoute>} />
+        <Route path="/reservestatus" element={<PrivateRoute><ItemReservationStatus /></PrivateRoute>} />
+        <Route path="/clubMember" element={<PrivateRoute><ClubMember /></PrivateRoute>} />
+        <Route path="/addclubMember" element={<PrivateRoute><AddClubMember /></PrivateRoute>} />
+        <Route path="/addMember" element={<PrivateRoute><AddMember /></PrivateRoute>} />
+        <Route path="/deleteMember" element={<PrivateRoute><DeleteMember /></PrivateRoute>} />
+        <Route path="/memberManage" element={<PrivateRoute><MemberManage /></PrivateRoute>} />
+        <Route path="/club-score-management" element={<PrivateRoute><ClubScoreManagement /></PrivateRoute>} />
+        <Route path="/update-club-score" element={<PrivateRoute><UpdateClubScore /></PrivateRoute>} />
+        <Route path="/club-management" element={<PrivateRoute><ClubManagement /></PrivateRoute>} />
+        <Route path="/club-edit" element={<PrivateRoute><ClubEdit /></PrivateRoute>} />
+        <Route path="/club-add" element={<PrivateRoute><ClubAdd /></PrivateRoute>} />
       </Routes>
       <Footer className="text-[#D1D1D3]" />
     </div>

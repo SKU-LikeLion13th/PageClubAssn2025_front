@@ -139,10 +139,12 @@ export default function AddClubMember() {
         )
       );
 
-      await Promise.all(promises); // 모든 요청 완료 시까지 대기
+      await Promise.all(promises);
       alert('선택한 멤버가 성공적으로 추가되었습니다.');
-      setSelectedMembers([]); // 선택 초기화
-      navigate('/admin/clubMember');
+      setSelectedMembers([]);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } catch (error) {
       console.error('Error adding members:', error);
       setError('멤버 추가 중 오류가 발생했습니다.');
@@ -150,9 +152,9 @@ export default function AddClubMember() {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside); // 외부 클릭 이벤트
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside); // 컴포넌트 언마운트 시 이벤트 제거
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen]);
 
