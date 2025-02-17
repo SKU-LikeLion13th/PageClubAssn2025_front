@@ -12,16 +12,52 @@ export default function DeleteMember() {
   const [message, setMessage] = useState('');
   const [modalIsOpen, setIsOpen] = useState(false);
   const [currentStudentId, setCurrentStudentId] = useState('');
+  const [deleteAllModalIsOpen, setDeleteAllModalIsOpen] = useState(false);
   const token = localStorage.getItem('Token');
 
-  // Modal의 AppElement 설정
   useEffect(() => {
-    Modal.setAppElement('#root');  // '#root'는 일반적으로 React 앱의 루트 div입니다.
+    Modal.setAppElement('#root');
   }, []);
 
+  const handleSearch = async () => {
+    // 검색어가 비어있는 경우 처리
+    if (!studentId.trim()) {
+      setMessage('검색어를 입력해주세요.');
+      setSearchResults([]);
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `${API_URL}/admin/member/find?keyword=${encodeURIComponent(studentId)}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            Accept: '*/*',
+          },
+        }
+      );
+
+      // 검색 결과가 있는 경우
+      if (response.data && response.data.length > 0) {
+        setSearchResults(response.data);
+        setMessage(''); // 이전 메시지 초기화
+      } else {
+        // 검색 결과가 없는 경우
+        setSearchResults([]);
+        setMessage('존재하지 않는 멤버입니다.');
+      }
+    } catch (error) {
+      console.error('검색 중 오류 발생:', error);
+      setSearchResults([]);
+      setMessage('서버와의 연결에 실패했습니다.');
+    }
+  };
+
+  // 나머지 기존 코드는 동일하게 유지...
   const handleDelete = (id) => {
     setCurrentStudentId(id);
-    setIsOpen(true);  // Open modal
+    setIsOpen(true);
   };
 
   const confirmDelete = async () => {
@@ -36,13 +72,8 @@ export default function DeleteMember() {
       );
       
       setMessage('삭제가 성공적으로 완료되었습니다.');
-      
-      // UI에서 바로 삭제된 것처럼 보이게 하기
       setSearchResults((prevResults) => prevResults.filter((result) => result.studentId !== currentStudentId));
-  
-      setIsOpen(false); // 모달 닫기
-  
-      // 최신 데이터 다시 불러오기
+      setIsOpen(false);
       handleSearch();
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -53,21 +84,29 @@ export default function DeleteMember() {
     }
   };
 
-  const handleSearch = async () => {
+  const handleDeleteAll = () => {
+    setDeleteAllModalIsOpen(true);
+  };
+  
+  const confirmDeleteAll = async () => {
     try {
-      const response = await axios.get(
-        `${API_URL}/admin/member/find?keyword=${encodeURIComponent(studentId)}`,
-        {
-          headers: {
-            Authorization: `${token}`,
-            Accept: '*/*',
-          },
-        }
-      );
-      setSearchResults(response.data); // Update search results
+      await axios.delete(`${API_URL}/admin/all-member`, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+  
+      setMessage('모든 멤버가 성공적으로 삭제되었습니다.');
+      setSearchResults([]);
     } catch (error) {
       setMessage('서버와의 연결에 실패했습니다.');
+    } finally {
+      setDeleteAllModalIsOpen(false);
     }
+  };
+  
+  const closeDeleteAllModal = () => {
+    setDeleteAllModalIsOpen(false);
   };
 
   const closeModal = () => {
@@ -78,10 +117,22 @@ export default function DeleteMember() {
     <div className="flex flex-col items-center w-full min-h-screen mt-10">
       <div className="flex flex-col w-full font-Y_spotlight">
         <div className="flex justify-center text-[30px]">멤버 삭제</div>
-        <div className="flex justify-end w-10/12 mx-auto border-b-2 border-[#D1D1D3]">
-          <NavLink to="/admin/addMember" className="flex w-fit h-fit px-2 py-0.5 text-[8px] bg-[#D1D1D3] rounded-[4px] mb-2">
-            + 추가
+
+        <div className='flex mt-2 justify-end w-10/12 mx-auto border-b-2 border-[#D1D1D3]'>
+          <div className="flex">
+            <NavLink to="/admin/addMember" className="flex w-fit h-fit px-2 py-0.5 text-[8px] bg-[#D1D1D3] rounded-[4px] mb-2">
+              + 추가
+            </NavLink>
+          </div>
+          <div className="flex ml-2">
+          <NavLink
+            to="#"
+            className="flex w-fit h-fit px-2 py-0.5 text-[8px] bg-[#D1D1D3] rounded-[4px] mb-2"
+            onClick={handleDeleteAll}
+          >
+            - 모든 멤버 삭제
           </NavLink>
+          </div>
         </div>
       </div>
 
@@ -187,6 +238,33 @@ export default function DeleteMember() {
           </div>
         </Modal>
       )}
+
+      <Modal isOpen={deleteAllModalIsOpen} onRequestClose={closeDeleteAllModal} contentLabel="Confirm Delete All" style={{
+        content: {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 0,
+          margin: 'auto',
+          border: 'none',
+          backgroundColor: 'transparent',
+          width: 'fit-content',
+        },
+      }}>
+        <div className='flex flex-col w-fit items-center font-PretendardVariable border-[1px] border-[#3F3F3F] rounded-[12px]'>
+          <div className='flex justify-end w-full p-2'>
+            <IoClose className='flex' onClick={closeDeleteAllModal} />
+          </div>
+          <div className='flex flex-col items-center w-full pb-5 px-14'>
+            <h2 className='flex justify-center w-full my-2'>모든 멤버를 삭제하시겠습니까?</h2>
+            <div className='flex justify-center w-full'>
+              <button className='flex px-2.5 py-0.5 text-[10px] rounded-[4px] mr-2 bg-[#D1D1D3]' onClick={confirmDeleteAll}>예</button>
+              <button className='flex px-2.5 py-0.5 text-[10px] rounded-[4px] bg-[#D1D1D380]' onClick={closeDeleteAllModal}>아니요</button>
+            </div>
+          </div>
+        </div>
+      </Modal>
+
     </div>
   );
 }
