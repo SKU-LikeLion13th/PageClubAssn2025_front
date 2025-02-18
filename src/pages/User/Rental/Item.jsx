@@ -1,11 +1,40 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { API_URL } from "../../../config";
 import { images } from "../../../utils/images";
 import RentalNote from "./RentalNote";
-import { RentalConfirm, RentalSuccess, RentalLimit, NoneReturn, ReturnOver } from "./RModal";
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Loading from "../../../components/Loading";
+import {
+  RentalConfirm,
+  RentalSuccess,
+  RentalLimit,
+  NoneReturn,
+  ReturnOver,
+} from "./RModal";
+
+// 한글 초성 리스트
+const HANGUL_INITIALS = [
+  "ㄱ",
+  "ㄲ",
+  "ㄴ",
+  "ㄷ",
+  "ㄸ",
+  "ㄹ",
+  "ㅁ",
+  "ㅂ",
+  "ㅃ",
+  "ㅅ",
+  "ㅆ",
+  "ㅇ",
+  "ㅈ",
+  "ㅉ",
+  "ㅊ",
+  "ㅋ",
+  "ㅌ",
+  "ㅍ",
+  "ㅎ",
+];
 
 const Item = () => {
   const navigate = useNavigate();
@@ -14,6 +43,7 @@ const Item = () => {
   const [showModal, setShowModal] = useState(false); // 모달 표시 상태
   const [modalStep, setModalStep] = useState(1); // 모달 단계
   const [isLoading, setIsLoading] = useState(true); //로딩
+  const itemRefs = useRef({});
 
   const fetchItems = async () => {
     const token = localStorage.getItem("Token");
@@ -47,6 +77,48 @@ const Item = () => {
     fetchItems(); // 처음 마운트될 때 데이터 가져오기
   }, []);
 
+  // 초성 추출 함수
+  const getInitial = (char) => {
+    const uni = char.charCodeAt(0);
+    if (uni >= 0xac00 && uni <= 0xd7a3) {
+      // 한글 유니코드 범위 (가 ~ 힣)
+      const index = Math.floor((uni - 0xac00) / 588);
+      return HANGUL_INITIALS[index];
+    }
+    return char; // 한글이 아니면 그대로 반환
+  };
+
+  // 초성 분류 함수
+  const getInitialCategory = (name) => {
+    const firstChar = name.charAt(0);
+    const initial = getInitial(firstChar);
+
+    if (HANGUL_INITIALS.includes(initial)) return initial;
+    if (/[A-Za-z]/.test(initial)) return "A-Z";
+    return "기타";
+  };
+
+  // 아이템을 초성별로 분류
+  const categorizedItems = items.reduce((acc, item) => {
+    const category = getInitialCategory(item.name);
+
+    if (!acc[category]) acc[category] = [];
+    acc[category].push(item);
+
+    return acc;
+  }, {});
+
+  const scrollToCategory = (category) => {
+    if (categorizedItems[category] && categorizedItems[category].length > 0) {
+      const firstItem = categorizedItems[category][0]; // 해당 카테고리의 첫 번째 아이템
+      const itemElement = itemRefs.current[firstItem.id]; // 해당 아이템의 ref
+
+      if (itemElement) {
+        itemElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  };
+
   // 예약 버튼 클릭 핸들러
   const handleReserve = (item) => {
     document.body.style.overflow = "hidden";
@@ -71,21 +143,32 @@ const Item = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
-        <DotLottieReact
-            src="https://lottie.host/5fffb6bd-540b-4b02-bd6e-e6f6ad2eb182/HJD7aY2gaz.lottie"
-            className="w-32"
-            loop
-            autoplay
-          />
+        <Loading />
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="relative w-full">
+      {/* 네비게이션 바 */}
+      <div className="fixed flex flex-col ml-[330px] leading-10">
+        {HANGUL_INITIALS.filter(
+          (category) =>
+            categorizedItems[category] && categorizedItems[category].length > 0
+        ).map((category) => (
+          <button
+            key={category}
+            className="px-3 py-1 rounded-md bg-[#d2b48c00] text-[#583D2C] text-[7px]"
+            onClick={() => scrollToCategory(category)}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
       {items.map((item) => (
         <div
           key={item.id}
+          ref={(el) => (itemRefs.current[item.id] = el)} // 여기에서 ref 저장
           className="bg-white w-full rounded-xl h-[150px] px-5 py-4 border-[2px] border-[#D2B48C] mb-4"
         >
           <div className="item flex justify-start text-xs h-full">

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { API_URL } from "../../../config";
 import { images } from "../../../utils/images";
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Loading from "../../../components/Loading";
 
 //이름 찾기 커스텀 훅
 export const useUserName = () => {
@@ -172,12 +172,7 @@ export const RentalLimit = ({ closeModal }) => {
       <div className="relative rounded-lg w-3/4 h-[40%] bg-white shadow-lg text-[#3F3F3F]">
         <div className="flex flex-col justify-center items-center h-full">
           {loading ? (
-            <DotLottieReact
-            src="https://lottie.host/5fffb6bd-540b-4b02-bd6e-e6f6ad2eb182/HJD7aY2gaz.lottie"
-            className="w-20"
-            loop
-            autoplay
-          />
+            <Loading/>
           ) : (
             <>
               <p className="mr-1 text-2xl mb-5">{userName}</p>
@@ -218,11 +213,22 @@ export const RentalLimit = ({ closeModal }) => {
 //미반납
 export const NoneReturn = ({ closeModal }) => {
   const userName = useUserName();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (userName) {
+      setLoading(false);
+    }
+  }, [userName]);
 
   return (
     <div className="w-full h-full flex items-center justify-center bg-opacity-30">
       <div className="relative rounded-lg w-3/4 h-[35%] bg-white shadow-lg text-[#3F3F3F]">
         <div className="flex flex-col justify-center items-center h-full">
+        {loading ? (
+            <Loading/>
+          ) : (
+            <>
           <p className="mr-1 text-2xl mb-5">{userName}</p>
           <img src={images.quantity} className="rounded-full mr-1" />
           <div className="mt-4 text-center leading-[22px]">
@@ -240,6 +246,8 @@ export const NoneReturn = ({ closeModal }) => {
               </button>
             </div>
           </div>
+          </>
+          )}
         </div>
       </div>
     </div>
@@ -249,11 +257,22 @@ export const NoneReturn = ({ closeModal }) => {
 //반납3회 지연
 export const ReturnOver = ({ closeModal }) => {
   const userName = useUserName();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (userName) {
+      setLoading(false);
+    }
+  }, [userName]);
 
   return (
     <div className="w-full h-full flex items-center justify-center bg-opacity-30">
       <div className="relative rounded-lg w-3/4 h-[35%] bg-white shadow-lg text-[#3F3F3F]">
         <div className="flex flex-col justify-center items-center h-full">
+        {loading ? (
+            <Loading/>
+          ) : (
+            <>
           <p className="mr-1 text-2xl mb-5">{userName}</p>
           <img src={images.quantity} className="rounded-full mr-1" />
           <div className="mt-4 text-center leading-[22px]">
@@ -272,6 +291,8 @@ export const ReturnOver = ({ closeModal }) => {
               </button>
             </div>
           </div>
+          </>
+          )}
         </div>
       </div>
     </div>
