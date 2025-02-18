@@ -74,27 +74,27 @@ const Item = () => {
   };
 
   useEffect(() => {
-    fetchItems(); // 처음 마운트될 때 데이터 가져오기
+    fetchItems();
   }, []);
 
   // 초성 추출 함수
   const getInitial = (char) => {
     const uni = char.charCodeAt(0);
     if (uni >= 0xac00 && uni <= 0xd7a3) {
-      // 한글 유니코드 범위 (가 ~ 힣)
       const index = Math.floor((uni - 0xac00) / 588);
       return HANGUL_INITIALS[index];
     }
-    return char; // 한글이 아니면 그대로 반환
+    return char;
   };
 
   // 초성 분류 함수
   const getInitialCategory = (name) => {
     const firstChar = name.charAt(0);
-    const initial = getInitial(firstChar);
+    if (/[0-9]/.test(firstChar)) return "1";
+    if (/[A-Za-z]/.test(firstChar)) return "A";
 
+    const initial = getInitial(firstChar);
     if (HANGUL_INITIALS.includes(initial)) return initial;
-    if (/[A-Za-z]/.test(initial)) return "A-Z";
     return "기타";
   };
 
@@ -118,6 +118,11 @@ const Item = () => {
       }
     }
   };
+  // 네비게이션 바에서 순서 조정
+  const navigationCategories = ["1", "A", ...HANGUL_INITIALS, "기타"].filter(
+    (category) =>
+      categorizedItems[category] && categorizedItems[category].length > 0
+  );
 
   // 예약 버튼 클릭 핸들러
   const handleReserve = (item) => {
@@ -151,19 +156,18 @@ const Item = () => {
   return (
     <div className="relative w-full">
       {/* 네비게이션 바 */}
-      <div className="fixed flex flex-col ml-[330px] leading-10">
-        {HANGUL_INITIALS.filter(
-          (category) =>
-            categorizedItems[category] && categorizedItems[category].length > 0
-        ).map((category) => (
-          <button
-            key={category}
-            className="px-3 py-1 rounded-md bg-[#d2b48c00] text-[#583D2C] text-[7px]"
-            onClick={() => scrollToCategory(category)}
-          >
-            {category}
-          </button>
-        ))}
+      <div className="fixed ml-[360px] max-[500px]:right-0">
+        <div className="absolute w-full flex flex-col items-end leading-10">
+          {navigationCategories.map((category) => (
+            <button
+              key={category}
+              className="px-2 py-1 rounded-md bg-[#d2b48c00] text-[#583D2C] text-[7px]"
+              onClick={() => scrollToCategory(category)}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
       </div>
       {items.map((item) => (
         <div
