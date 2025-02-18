@@ -46,7 +46,7 @@ const RentalStatus = () => {
   const handleReturn = async (itemRentId) => {
     const token = localStorage.getItem("Token");
     try {
-      const response = await axios.post(`${API_URL}/admin/item-rent`, { itemRentId }, {
+      const response = await axios.put(`${API_URL}/admin/item-rent`, { itemRentId }, {
         headers: { Authorization: token },
       });
       if (response.status === 200){

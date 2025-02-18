@@ -1,17 +1,18 @@
 import React from "react";
 import { images } from "../../../utils/images.jsx";
 import RentalNoteHeader from "./RentalNoteHeader.jsx";
+import Footer from "../../../components/Footer.jsx";
 
 const RentalNote = ({ itemId, closeModal, nextStep }) => {
   console.log(itemId);
   return (
     <div className="h-min-screen w-full top-0">
-      <div className="pt-8">
+      <div className="pt-4">
         <RentalNoteHeader closeModal={closeModal} />
       </div>
-      <div className="mt-[10%] flex items-center justify-center text-center">
+      <div className="mt-[7%] flex items-center justify-center text-center">
         <div>
-          <div className="title text-xl leading-none text-[#996515] bg-white mx-5 py-5 rounded-xl border-[1px] border-[#D2B48C]">
+          <div className="title text-[18px] leading-none text-[#996515] bg-white mx-5 py-4 rounded-xl border-[1px] border-[#D2B48C]">
             물품 대여 시,
             <br />
             유의사항 안내드립니다.
@@ -76,11 +77,12 @@ const RentalNote = ({ itemId, closeModal, nextStep }) => {
                 됩니다.
               </p>
               <button
-                className="mt-10 px-5 py-1 rounded-lg bg-white border-[1px] border-[#D2B48C] text-[#996515]"
+                className="mt-10 mb-4 px-5 py-1 rounded-lg bg-white border-[1px] border-[#D2B48C] text-[#996515]"
                 onClick={nextStep}
               >
                 위 내용을 확인했습니다.
               </button>
+              <Footer/>
             </div>
           </div>
         </div>
