@@ -2,10 +2,11 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { API_URL } from "../../../config";
 import { images } from "../../../utils/images";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 //이름 찾기 커스텀 훅
 export const useUserName = () => {
-  const [userName, setUserName] = useState("사용자");
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -65,7 +66,7 @@ export const RentalConfirm = ({
       nextStep(); // 성공하면 다음 단계로 이동
     } catch (error) {
       if (error.response && error.response.status === 403) {
-        if (error.response.data === "물품은 세 종류까지만 대여가 가능합니다.") {
+        if (error.response.data === "물품은 세 종류까지만 대여가 가능합니다." || error.response.data ==="물픔은 최대 5개까지만 대여가 가능합니다.") {
           setModalStep(4);
           return;
         }
@@ -155,45 +156,64 @@ export const RentalSuccess = ({ item, closeModal }) => {
   );
 };
 
-//수량 초과
+//수량 초과, 종류 초과
 export const RentalLimit = ({ closeModal }) => {
   const userName = useUserName();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (userName) {
+      setLoading(false);
+    }
+  }, [userName]);
 
   return (
     <div className="w-full h-full flex items-center justify-center bg-opacity-30">
       <div className="relative rounded-lg w-3/4 h-[40%] bg-white shadow-lg text-[#3F3F3F]">
         <div className="flex flex-col justify-center items-center h-full">
-          <p className="mr-1 text-2xl mb-5">{userName}</p>
-          <img src={images.quantity} className="rounded-full mr-1" />
-          <div className="mt-4 text-center leading-[22px]">
-            <p>
-              <span className="text-[#FF7009]">
-                최대 물품 대여 및 예약 수량 초과
-              </span>
-              로<br />
-              대여가 불가합니다.
-              <br />
-              <span className="text-[#FF7009]">
-                기존 대여 물품 반납 및 예약 취소
-              </span>{" "}
-              후,
-              <br />
-              이용해주세요.
-            </p>
-            <div className="flex justify-center items-center w-full mt-4 text-sm">
-              <button
-                onClick={closeModal}
-                className="bg-[#D2B48C] text-[#583D2C] py-[1px] px-6 rounded-xl mr-1"
-              >
-                확인
-              </button>
-            </div>
-          </div>
+          {loading ? (
+            <DotLottieReact
+            src="https://lottie.host/5fffb6bd-540b-4b02-bd6e-e6f6ad2eb182/HJD7aY2gaz.lottie"
+            className="w-20"
+            loop
+            autoplay
+          />
+          ) : (
+            <>
+              <p className="mr-1 text-2xl mb-5">{userName}</p>
+              <img src={images.quantity} className="rounded-full mr-1" />
+              <div className="mt-4 text-center leading-[22px]">
+                <p>
+                  <span className="text-[#FF7009]">
+                    최대 물품 대여 및 예약 수량 초과
+                  </span>
+                  로<br />
+                  대여가 불가합니다.
+                  <br />
+                  <span className="text-[#FF7009]">
+                    기존 대여 물품 반납 및 예약 취소
+                  </span>{" "}
+                  후,
+                  <br />
+                  이용해주세요.
+                </p>
+                <div className="flex justify-center items-center w-full mt-4 text-sm">
+                  <button
+                    onClick={closeModal}
+                    className="bg-[#D2B48C] text-[#583D2C] py-[1px] px-6 rounded-xl mr-1"
+                  >
+                    확인
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
   );
 };
+
 
 //미반납
 export const NoneReturn = ({ closeModal }) => {

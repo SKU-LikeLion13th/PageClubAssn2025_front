@@ -6,10 +6,9 @@ import Header from "../../../components/Header";
 const RentalItems = () => {
   return (
     <div className="relative min-h-screen w-full text-[#996515]">
-      <Header />
-
       <PageBack />
       <div className="flex flex-col items-center justify-center">
+        <Header />
         <div className="title mt-5 mb-9 px-12 py-1 bg-white rounded-3xl border-2 border-[#D2B48C] z-20">
           <p className="text-xl">대여 물품 LIST</p>
         </div>

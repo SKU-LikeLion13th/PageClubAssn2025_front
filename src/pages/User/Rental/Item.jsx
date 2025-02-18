@@ -5,6 +5,7 @@ import { API_URL } from "../../../config";
 import { images } from "../../../utils/images";
 import RentalNote from "./RentalNote";
 import { RentalConfirm, RentalSuccess, RentalLimit, NoneReturn, ReturnOver } from "./RModal";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const Item = () => {
   const navigate = useNavigate();
@@ -70,7 +71,12 @@ const Item = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
-        Loading...
+        <DotLottieReact
+            src="https://lottie.host/5fffb6bd-540b-4b02-bd6e-e6f6ad2eb182/HJD7aY2gaz.lottie"
+            className="w-32"
+            loop
+            autoplay
+          />
       </div>
     );
   }
