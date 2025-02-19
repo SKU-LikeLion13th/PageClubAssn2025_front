@@ -5,10 +5,13 @@ import MemberContainer from "./MemberContainer";
 import axios from "axios";
 import Header from "../../components/Header";
 import { API_URL } from "../../config";
+import Loading from "../../components/Loading";
 
 export default function Reservation() {
   const [reservations, setReservations] = useState([]);
   const [currentReservationIndex, setCurrentReservationIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  
 
   const decodeBase64Image = (base64String) => {
     try {
@@ -82,6 +85,13 @@ export default function Reservation() {
       });
   };
   
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <>
