@@ -3,7 +3,7 @@ const PATH = process.env.PUBLIC_URL;
 export const images = {
   //excellentClub
   ribbon: PATH + "/assets/images/ribbon.png",
-  win: PATH + "/assets/images/win.png",
+  win: PATH + "/assets/images/Win.png",
 
   //pageBackground
   pBack: PATH + "/assets/images/pagebackground/pBack.png",
