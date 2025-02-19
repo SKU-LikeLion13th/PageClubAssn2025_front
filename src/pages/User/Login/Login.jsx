@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Header from "../../../components/Header";
 import LoginFailureModal from "./LoginFailureModal";
 import axios from "axios";
@@ -70,7 +70,25 @@ export default function Login() {
 
   return (
     <>
-      <Header />
+      <div className="flex justify-between items-center w-full px-4 pt-8 z-10">
+        {/* 헤더 */}
+        <div className="flex justify-between items-center w-full max-w-4xl px-2">
+          <NavLink to="/">
+            <img
+              src={images.Home}
+              alt="홈 아이콘"
+              className="w-[19px] h-[22px]"
+            />
+          </NavLink>
+          <NavLink to="/">
+            <img
+              src={images.Back}
+              alt="뒤로 가기 아이콘"
+              className="w-[10px] h-[20px]"
+            />
+          </NavLink>
+        </div>
+      </div>
 
       <div className="relative w-full min-h-[calc(100vh-130px)] flex justify-center items-center">
         {/* 리본 배경 */}
@@ -124,8 +142,7 @@ export default function Login() {
                   ? "bg-[#D2B48C] text-[#583D2C]" // 활성화 버튼
                   : "bg-[#D2B48C80] text-[#583D2C80]" // 비활성화 버튼
               }`}
-              disabled={!isFormFilled}
-            >
+              disabled={!isFormFilled}>
               로그인
             </button>
           </form>
