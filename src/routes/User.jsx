@@ -36,7 +36,7 @@ const User = () => {
         <Route path="/sns" element={<SNS />} />
         <Route path="/aboutus" element={<AboutUs />} />
       </Routes>
-      <Footer className="text-[#d2b48c] pb-5" />
+      <Footer className="text-[#d2b48c] pb-5 pt-4" />
     </div>
   );
 };
