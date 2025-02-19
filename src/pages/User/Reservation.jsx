@@ -84,7 +84,7 @@ export default function Reservation() {
   
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full min-h-[calc(100vh-130px)]">
       <Header />
       <RibbonBackground />
       <div className="w-11/12 mx-auto">

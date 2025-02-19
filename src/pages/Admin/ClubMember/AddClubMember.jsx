@@ -317,7 +317,7 @@ export default function AddClubMember() {
       </div>
 
       <div
-        className="flex w-fit h-fit px-2 py-0.5 text-[8px] bg-[#D1D1D3] rounded-[4px] mt-5 cursor-pointer"
+        className="flex w-fit h-fit px-6 py-2 text-[15px] font-bold bg-[#D1D1D3] rounded-[4px] mt-5 cursor-pointer"
         onClick={handleAddMembers}
       >
         + 추가
