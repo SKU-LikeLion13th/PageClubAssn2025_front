@@ -36,7 +36,7 @@ export default function ExcellentClub() {
   }, []);
 
   return (
-    <div className="relative w-full min-h-screen">
+    <div className="relative w-full min-h-[calc(100vh-85px)]">
       <Header />
       {/* 리본 배경 */}
       <div className="absolute flex items-center justify-center w-full h-full">

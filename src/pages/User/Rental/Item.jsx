@@ -147,7 +147,7 @@ const Item = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
+      <div className="flex justify-center items-center mt-[50%] text-[40px] text-[#996515]">
         <Loading />
       </div>
     );
@@ -157,7 +157,7 @@ const Item = () => {
     <div className="relative w-full">
       {/* 네비게이션 바 */}
       <div className="fixed ml-[360px] max-[500px]:right-0">
-        <div className="absolute w-full flex flex-col items-end leading-10">
+        <div className="absolute flex flex-col items-end w-full leading-10">
           {navigationCategories.map((category) => (
             <button
               key={category}
@@ -175,7 +175,7 @@ const Item = () => {
           ref={(el) => (itemRefs.current[item.id] = el)} // 여기에서 ref 저장
           className="bg-white w-full rounded-xl h-[150px] px-5 py-4 border-[2px] border-[#D2B48C] mb-4"
         >
-          <div className="item flex justify-start text-xs h-full">
+          <div className="flex justify-start h-full text-xs item">
             <div className="img-status flex flex-col h-full justify-between items-center w-[37%]">
               <img
                 src={item.image}
@@ -192,8 +192,8 @@ const Item = () => {
                 {item.status}
               </p>
             </div>
-            <div className="itemcontent pl-4 w-full pt-1">
-              <div className="itemname flex justify-between items-center mb-1">
+            <div className="w-full pt-1 pl-4 itemcontent">
+              <div className="flex items-center justify-between mb-1 itemname">
                 <p
                   style={{
                     fontSize: `${Math.max(
@@ -217,8 +217,8 @@ const Item = () => {
                   예약하기
                 </button>
               </div>
-              <img src={images.line} className="pb-2 pt-1" alt="line" />
-              <div className="grid grid-cols-2 text-center gap-5 mt-2">
+              <img src={images.line} className="pt-1 pb-2" alt="line" />
+              <div className="grid grid-cols-2 gap-5 mt-2 text-center">
                 <p className="rounded-lg border-[1px] border-[#D2B48C]">
                   총 개수 : {item.count}개
                 </p>
@@ -240,7 +240,7 @@ const Item = () => {
 
       {/* 모달 */}
       {showModal && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 bg-black bg-opacity-30">
+        <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-30">
           {modalStep === 1 && selectedItem && (
             <div className="bg-[#FFF6EC] w-[375px] p-5">
               <RentalNote

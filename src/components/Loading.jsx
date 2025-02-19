@@ -5,11 +5,11 @@ const Loading = () => {
   return (
     <div>
       <DotLottieReact
-        src="https://lottie.host/5fffb6bd-540b-4b02-bd6e-e6f6ad2eb182/HJD7aY2gaz.lottie"
-        className="w-32"
-        loop
-        autoplay
-      />
+      className="w-48"
+      src="https://lottie.host/b89f063f-4d8e-4b97-8516-d7c2a9bdf2ea/atq45tJJyU.lottie"
+      loop
+      autoplay
+    />
     </div>
   );
 };

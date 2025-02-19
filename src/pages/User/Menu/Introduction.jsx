@@ -56,7 +56,7 @@ const members = [
     role: "동아리연합회 홍보국장",
     imgSrc: "../../assets/images/ClubUnion/김채현.png",
     department: "유아교육과 24",
-    name: "기하은",
+    name: "김채현",
   },
   {
     id: 9,
@@ -112,7 +112,7 @@ export default function Introduction() {
           <div className="flex items-center justify-center w-[211px] h-[40px] border-[0.8px] border-[#D2B48C] bg-white rounded-[20px] text-[20px] text-[#996515] z-10">
             집행부 소개
           </div>
-          <div className="grid justify-center grid-flow-row grid-cols-2 gap-5 mt-4">
+          <div className="grid justify-center grid-flow-row grid-cols-2 gap-5 mt-4 mb-8">
             {members.map((member) => (
               <div
                 key={member.id}
