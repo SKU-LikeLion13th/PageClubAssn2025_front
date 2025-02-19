@@ -6,40 +6,56 @@ import Header from "../../../components/Header";
 import axios from "axios";
 import { API_URL } from "../../../config";
 import RibbonBackground from "../../../components/RibbonBackground";
+import Loading from "../../../components/Loading"; // 로딩 컴포넌트 추가
 
 export default function ExcellentClub() {
   const [clubScore, setClubScore] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // ✅ 로딩 상태 추가
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
 
-    axios
-    .get(`${API_URL}/club-scores/all`, {
-      headers: {
-        "Authorization" : `${token}`,
-        "Accept" : "*/*",
-      },
-    })
-    .then((response) => {
-      // Base64 이미지 디코딩
-      const decodedData = response.data.map((item) => ({
-        ...item,
-        logo: item.logo.startsWith("data:image")
-          ? item.logo
-          : `data:image/png;base64,${item.logo}`, // Base64 이미지 변환
-      }));
+    setIsLoading(true); // ✅ 요청 시작 전에 로딩 상태 true
 
-      setClubScore(decodedData);
-    })
-    .catch((error) => {
-      console.error("Error fetching joined clubs:", error);
-    })
+    axios
+      .get(`${API_URL}/club-scores/all`, {
+        headers: {
+          Authorization: `${token}`,
+          Accept: "*/*",
+        },
+      })
+      .then((response) => {
+        // Base64 이미지 디코딩
+        const decodedData = response.data.map((item) => ({
+          ...item,
+          logo: item.logo.startsWith("data:image")
+            ? item.logo
+            : `data:image/png;base64,${item.logo}`,
+        }));
+
+        setClubScore(decodedData);
+      })
+      .catch((error) => {
+        console.error("Error fetching joined clubs:", error);
+      })
+      .finally(() => {
+        setIsLoading(false); // ✅ 요청 완료 후 로딩 상태 false
+      });
   }, []);
+
+  // ✅ 로딩 중이면 Loading 컴포넌트 표시
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <>
       <Header />
-      <div className="w-full min-h-[calc(100vh-130px)]">
+      <div className="relative w-full min-h-[calc(100vh-130px)]">
         <RibbonBackground />
 
         {/* 콘텐츠 */}

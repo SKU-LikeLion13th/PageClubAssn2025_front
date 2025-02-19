@@ -4,11 +4,13 @@ import RibbonBackground from "../../components/RibbonBackground";
 import { images } from "../../utils/images";
 import MemberContainer from "./MemberContainer";
 import Header from "../../components/Header";
+import Loading from "../../components/Loading";
 import { API_URL } from '../../config';
 
 export default function RentalClick() {
   const [rentItems, setRentItems] = useState([]);
   const [currentReservationIndex, setCurrentReservationIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   
   const decodeBase64Image = (base64String) => {
     if (!base64String?.startsWith('data:image')) {
@@ -77,6 +79,14 @@ export default function RentalClick() {
         : (prev > 0 ? prev - 1 : rentItems.length - 1)
     );
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <>

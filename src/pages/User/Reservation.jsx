@@ -5,10 +5,13 @@ import MemberContainer from "./MemberContainer";
 import axios from "axios";
 import Header from "../../components/Header";
 import { API_URL } from "../../config";
+import Loading from "../../components/Loading";
 
 export default function Reservation() {
   const [reservations, setReservations] = useState([]);
   const [currentReservationIndex, setCurrentReservationIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  
 
   const decodeBase64Image = (base64String) => {
     try {
@@ -24,7 +27,7 @@ export default function Reservation() {
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
-
+  
     axios
       .get(`${API_URL}/item-rent/book-list`, {
         headers: {
@@ -36,12 +39,13 @@ export default function Reservation() {
           ...item,
           image: item.image ? decodeBase64Image(item.image) : null
         }));
-
+  
         setReservations(processedItems);
       })
-      .catch((error) => console.log("사용자 데이터 가져오기 오류:", error));
+      .catch((error) => console.log("사용자 데이터 가져오기 오류:", error))
+      .finally(() => setIsLoading(false)); // 데이터 가져오기가 끝나면 로딩 상태 해제
   }, []);
-
+  
   // 슬라이드 버튼 핸들러
   const handleNext = () => {
     setCurrentReservationIndex((prev) =>
@@ -82,6 +86,13 @@ export default function Reservation() {
       });
   };
   
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <>
