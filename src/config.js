@@ -1,1 +1,1 @@
-export const API_URL = "http://pageback.sku-sku.com";
+export const API_URL = "https://pageback.sku-sku.com";
