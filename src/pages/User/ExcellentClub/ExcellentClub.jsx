@@ -5,6 +5,7 @@ import ScoreList from "./ScoreList";
 import Header from "../../../components/Header";
 import axios from "axios";
 import { API_URL } from "../../../config";
+import RibbonBackground from "../../../components/RibbonBackground";
 
 export default function ExcellentClub() {
   const [clubScore, setClubScore] = useState([]);
@@ -36,22 +37,20 @@ export default function ExcellentClub() {
   }, []);
 
   return (
-    <div className="relative w-full min-h-[calc(100vh-85px)]">
+    <>
       <Header />
-      {/* 리본 배경 */}
-      <div className="absolute flex items-center justify-center w-full h-full">
-        <img src={images.ribbon} className="w-full " alt="ribbon" />
-      </div>
-      
+      <div className="w-full min-h-[calc(100vh-130px)]">
+        <RibbonBackground />
 
-      {/* 콘텐츠 */}
-      <div className="z-10 flex flex-col items-center h-full">
-        {/* TOP3 점수 */}
-        <Score scores={clubScore} />
+        {/* 콘텐츠 */}
+        <div className="flex flex-col items-center h-full">
+          {/* TOP3 점수 */}
+          <Score scores={clubScore} />
 
-        {/* 순위 목록 */}
-        <ScoreList scores={clubScore} />
+          {/* 순위 목록 */}
+          <ScoreList scores={clubScore} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

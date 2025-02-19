@@ -84,72 +84,77 @@ export default function Reservation() {
   
 
   return (
-    <div className="relative w-full min-h-[calc(100vh-130px)]">
+    <>
       <Header />
-      <RibbonBackground />
-      <div className="w-11/12 mx-auto">
-        <div className="flex flex-col items-center text-[#996515]">
-          <div className="flex justify-center text-[50px] mt-7">MY PAGE</div>
-          <MemberContainer />
+      <div className="relative w-full">
+        {/* 리본 배경 */}
+        <div className="absolute flex items-center justify-center w-full h-full">
+          <img src={images.ribbon} className="w-full " alt="ribbon" />
+        </div>
+        <div className="w-11/12 min-h-[calc(100vh-100px)] mx-auto relative z-20">
+          <div className="flex flex-col items-center text-[#996515]">
+            <div className="flex justify-center text-[50px] mt-7">MY PAGE</div>
+            <MemberContainer />
 
-          {/* 예약 현황 컨테이너 */}
-          <div className="flex flex-col items-center w-full">
-            <div className="text-[35px] mt-7">예약 현황</div>
-            <div className="relative flex justify-center items-center w-[85%] h-[22rem] px-10 font-Moneygraphy text-[17px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] mt-7">
-              {reservations && reservations.length > 0 ? (
-                <div className="flex flex-col items-center">
-                  {/* 예약된 물품 정보 */}
-                  <div className="flex flex-col items-center text-center py-7">
-                    <img
-                      src={reservations[currentReservationIndex].image}
-                      alt={reservations[currentReservationIndex].itemName}
-                      className="w-[80px] h-[80px] object-cover mb-5"
-                    />
-                    <div className="mb-2">
-                      {reservations[currentReservationIndex].itemName}
+            {/* 예약 현황 컨테이너 */}
+            <div className="flex flex-col items-center w-full h-full">
+              <div className="text-[35px] mt-7">예약 현황</div>
+              <div className="relative flex justify-center items-center w-[85%] h-[22rem] px-10 font-Moneygraphy text-[17px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] mt-7">
+                {reservations && reservations.length > 0 ? (
+                  <div className="flex flex-col items-center">
+                    {/* 예약된 물품 정보 */}
+                    <div className="flex flex-col items-center text-center py-7">
+                      <img
+                        src={reservations[currentReservationIndex].image}
+                        alt={reservations[currentReservationIndex].itemName}
+                        className="w-[80px] h-[80px] object-cover mb-5"
+                      />
+                      <div className="mb-2">
+                        {reservations[currentReservationIndex].itemName}
+                      </div>
+                      <div>
+                        <span className="font-bold text-[#FF7009]">
+                          {new Date(reservations[currentReservationIndex].needReceiveTime).toLocaleDateString()}
+                        </span>
+                        {""}까지 <br /> 동아리연합회실로 방문해주세요.
+                      </div>
                     </div>
-                    <div>
-                      <span className="font-bold text-[#FF7009]">
-                        {new Date(reservations[currentReservationIndex].needReceiveTime).toLocaleDateString()}
+
+                    {/* 예약 취소 버튼 */}
+                    <div
+                      onClick={handleCancelReservation}
+                      className="flex justify-center w-fit px-5 py-1 rounded-[20px] text-[13px] text-[#583D2C] bg-[#D2B48C] cursor-pointer"
+                    >
+                      예약 취소
+                    </div>
+
+                    {/* 슬라이드 버튼 */}
+                    <div className="flex items-center mt-4 text-[#996515] text-[16px] space-x-4">
+                      <button
+                        onClick={handlePrev}
+                        className="hover:text-[#FF7009]"
+                      >
+                        <img src={images.left} alt="left" />
+                      </button>
+                      <span className="text-[11px]">
+                        {currentReservationIndex + 1}/{reservations.length}
                       </span>
-                      {""}까지 <br /> 동아리연합회실로 방문해주세요.
+                      <button
+                        onClick={handleNext}
+                        className="hover:text-[#FF7009]"
+                      >
+                        <img src={images.right} alt="right" />
+                      </button>
                     </div>
                   </div>
-
-                  {/* 예약 취소 버튼 */}
-                  <div
-                    onClick={handleCancelReservation}
-                    className="flex justify-center w-fit px-5 py-1 rounded-[20px] text-[13px] text-[#583D2C] bg-[#D2B48C] cursor-pointer"
-                  >
-                    예약 취소
-                  </div>
-
-                  {/* 슬라이드 버튼 */}
-                  <div className="flex items-center mt-4 text-[#996515] text-[16px] space-x-4">
-                    <button
-                      onClick={handlePrev}
-                      className="hover:text-[#FF7009]"
-                    >
-                      <img src={images.left} alt="left" />
-                    </button>
-                    <span className="text-[11px]">
-                      {currentReservationIndex + 1}/{reservations.length}
-                    </span>
-                    <button
-                      onClick={handleNext}
-                      className="hover:text-[#FF7009]"
-                    >
-                      <img src={images.right} alt="right" />
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div>예약 중인 물품이 없습니다.</div>
-              )}
+                ) : (
+                  <div>예약 중인 물품이 없습니다.</div>
+                )}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
