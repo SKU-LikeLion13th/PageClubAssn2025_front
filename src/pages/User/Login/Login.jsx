@@ -28,27 +28,26 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     // 기존 토큰 삭제
     localStorage.clear();
-  
+
     try {
       const response = await axios.post(`${API_URL}/login`, studentInfo, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-  
+
       // 로그인 성공 → 토큰 저장 후 홈으로 이동
       localStorage.setItem("Token", response.data.accessToken);
       localStorage.setItem("role", response.data.role);
       navigate("/", { replace: true });
-  
     } catch (error) {
       // error.response가 존재하는지 먼저 확인
       if (error.response) {
         const status = error.response.status;
-  
+
         if (status === 400) {
           setShowModal(true);
           setStudentInfo({ name: "", studentId: "" });
@@ -64,7 +63,6 @@ export default function Login() {
       }
     }
   };
-    
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -88,14 +86,14 @@ export default function Login() {
           <form onSubmit={handleLogin} className="font-Moneygraphy">
             <div className="my-24 space-y-8">
               {/* 이름 입력 */}
-              <div className="flex items-center bg-[#FFFFFF] border border-[#D2B48C] rounded-lg h-11">
-                <label className="ml-5 pr-4 mr-4 text-[#996515] border-r-[0.5px] border-[#CBB189]">
+              <div className="flex flex-wrap items-center bg-[#FFFFFF] border border-[#D2B48C] rounded-lg h-auto min-h-11 py-2">
+                <label className="w-14 ml-3 pr-3 mb-0 text-[#996515] border-r-[0.5px] border-[#CBB189] ">
                   이름
                 </label>
                 <input
                   type="text"
                   placeholder="홍길동"
-                  className="text-[14px] placeholder-[#9965154D] outline-none text-[#996515]"
+                  className="flex-1 min-w-0 ml-3 md:ml-4 text-[14px] placeholder-[#9965154D] outline-none text-[#996515]"
                   name="name"
                   value={studentInfo.name}
                   onChange={handleInputChange}
@@ -103,14 +101,14 @@ export default function Login() {
               </div>
 
               {/* 학번 입력 */}
-              <div className="flex items-center bg-[#FFFFFF] border border-[#D2B48C] rounded-lg h-11">
-                <label className="ml-5 pr-4 mr-4 text-[#996515] border-r-[0.5px] border-[#CBB189]">
+              <div className="flex flex-wrap items-center bg-[#FFFFFF] border border-[#D2B48C] rounded-lg h-auto min-h-11 py-2">
+                <label className="w-14 ml-3 pr-3 mb-0 text-[#996515] border-r-[0.5px] border-[#CBB189]">
                   학번
                 </label>
                 <input
                   type="text"
                   placeholder="20251234"
-                  className="text-[14px] placeholder-[#9965154D] outline-none text-[#996515]"
+                  className="flex-1 min-w-0 ml-3 md:ml-4 text-[14px] placeholder-[#9965154D] outline-none text-[#996515]"
                   name="studentId"
                   value={studentInfo.studentId}
                   onChange={handleInputChange}
@@ -126,7 +124,8 @@ export default function Login() {
                   ? "bg-[#D2B48C] text-[#583D2C]" // 활성화 버튼
                   : "bg-[#D2B48C80] text-[#583D2C80]" // 비활성화 버튼
               }`}
-              disabled={!isFormFilled}>
+              disabled={!isFormFilled}
+            >
               로그인
             </button>
           </form>
