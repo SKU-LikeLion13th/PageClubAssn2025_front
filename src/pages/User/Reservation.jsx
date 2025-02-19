@@ -27,7 +27,7 @@ export default function Reservation() {
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
-
+  
     axios
       .get(`${API_URL}/item-rent/book-list`, {
         headers: {
@@ -39,12 +39,13 @@ export default function Reservation() {
           ...item,
           image: item.image ? decodeBase64Image(item.image) : null
         }));
-
+  
         setReservations(processedItems);
       })
-      .catch((error) => console.log("사용자 데이터 가져오기 오류:", error));
+      .catch((error) => console.log("사용자 데이터 가져오기 오류:", error))
+      .finally(() => setIsLoading(false)); // 데이터 가져오기가 끝나면 로딩 상태 해제
   }, []);
-
+  
   // 슬라이드 버튼 핸들러
   const handleNext = () => {
     setCurrentReservationIndex((prev) =>
