@@ -3,6 +3,7 @@ import { IoCaretDownOutline } from "react-icons/io5";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
+import Loading from "../../components/Loading";
 
 export default function MemberContainer() {
   const navigate = useNavigate();
@@ -90,9 +91,7 @@ export default function MemberContainer() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
-        Loading...
-      </div>
+      <Loading />
     );
   }
 

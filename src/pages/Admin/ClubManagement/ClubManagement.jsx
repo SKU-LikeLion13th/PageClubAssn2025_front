@@ -5,13 +5,14 @@ import axios from "axios";
 import { API_URL } from "../../../config";
 import ClubDeleteModal from "./ClubDeleteModal";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../../components/Loading";
 
 // 개별 동아리
 function ClubItem({ club, onDeleteClick }) {
   const navigate = useNavigate();
 
   return (
-    <div className="flex items-center justify-between border-t-2 border-gray-300 py-2">
+    <div className="flex items-center justify-between py-2 border-t-2 border-gray-300">
       <p className="text-[15px]">{club.name}</p>
       <div className="flex">
         <button
@@ -106,7 +107,7 @@ export default function ClubManagement() {
   };
 
   return (
-    <div className="font-Y_spotlight mt-6 min-h-screen mx-6">
+    <div className="min-h-screen mx-6 mt-6 font-Y_spotlight">
       {/* 타이틀 */}
       <div>
         <p className="text-[30px] text-center">동아리 관리</p>
@@ -122,7 +123,7 @@ export default function ClubManagement() {
       </div>
 
       {loading ? (
-        <div className="text-center mt-14">Loading...</div>
+        <Loading />
       ) : (
         <div className="font-PretendardVariable">
           {clubs.map((club) => (

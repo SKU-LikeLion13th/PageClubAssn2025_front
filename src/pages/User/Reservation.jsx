@@ -11,11 +11,9 @@ export default function Reservation() {
   const [reservations, setReservations] = useState([]);
   const [currentReservationIndex, setCurrentReservationIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  
 
   const decodeBase64Image = (base64String) => {
     try {
-      // Base64 문자열이 데이터 URL 형식이 아니라면 추가
       if (!base64String.startsWith('data:image')) {
         base64String = `data:image/jpeg;base64,${base64String}`;
       }
@@ -43,10 +41,9 @@ export default function Reservation() {
         setReservations(processedItems);
       })
       .catch((error) => console.log("사용자 데이터 가져오기 오류:", error))
-      .finally(() => setIsLoading(false)); // 데이터 가져오기가 끝나면 로딩 상태 해제
+      .finally(() => setIsLoading(false));
   }, []);
-  
-  // 슬라이드 버튼 핸들러
+
   const handleNext = () => {
     setCurrentReservationIndex((prev) =>
       prev < reservations.length - 1 ? prev + 1 : 0
@@ -59,10 +56,9 @@ export default function Reservation() {
     );
   };
 
-  // 예약 취소 처리
   const handleCancelReservation = () => {
     const token = localStorage.getItem("Token");
-    const itemRentId = reservations[currentReservationIndex].itemRentId; // 현재 항목의 대여 번호
+    const itemRentId = reservations[currentReservationIndex].itemRentId;
   
     axios
       .delete(
@@ -72,12 +68,11 @@ export default function Reservation() {
             "Authorization": `${token}`,
             "Content-Type": "application/json",
           },
-          data: { itemRentId }, // 요청 본문에 itemRentId를 포함
+          data: { itemRentId },
         }
       )
       .then((response) => {
         console.log("예약 취소 성공:", response.data);
-        // 취소 후 렌탈 아이템 목록을 갱신 (혹은 화면에서 삭제)
         const updatedItems = reservations.filter((item, index) => index !== currentReservationIndex);
         setReservations(updatedItems);
       })
@@ -85,20 +80,11 @@ export default function Reservation() {
         console.error("예약 취소 실패:", error);
       });
   };
-  
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
-        <Loading />
-      </div>
-    );
-  }
 
   return (
     <>
       <Header />
       <div className="relative w-full">
-        {/* 리본 배경 */}
         <div className="absolute flex items-center justify-center w-full h-full">
           <img src={images.ribbon} className="w-full " alt="ribbon" />
         </div>
@@ -107,13 +93,13 @@ export default function Reservation() {
             <div className="flex justify-center text-[50px] mt-7">MY PAGE</div>
             <MemberContainer />
 
-            {/* 예약 현황 컨테이너 */}
             <div className="flex flex-col items-center w-full h-full">
               <div className="text-[35px] mt-7">예약 현황</div>
               <div className="relative flex justify-center items-center w-[85%] h-[22rem] px-10 font-Moneygraphy text-[17px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] mt-7">
-                {reservations && reservations.length > 0 ? (
+                {isLoading ? (
+                  <Loading />
+                ) : reservations && reservations.length > 0 ? (
                   <div className="flex flex-col items-center">
-                    {/* 예약된 물품 정보 */}
                     <div className="flex flex-col items-center text-center py-7">
                       <img
                         src={reservations[currentReservationIndex].image}
@@ -130,16 +116,12 @@ export default function Reservation() {
                         {""}까지 <br /> 동아리연합회실로 방문해주세요.
                       </div>
                     </div>
-
-                    {/* 예약 취소 버튼 */}
                     <div
                       onClick={handleCancelReservation}
                       className="flex justify-center w-fit px-5 py-1 rounded-[20px] text-[13px] text-[#583D2C] bg-[#D2B48C] cursor-pointer"
                     >
                       예약 취소
                     </div>
-
-                    {/* 슬라이드 버튼 */}
                     <div className="flex items-center mt-4 text-[#996515] text-[16px] space-x-4">
                       <button
                         onClick={handlePrev}
