@@ -27,45 +27,44 @@ export default function Login() {
     studentInfo.name.trim() !== "" && studentInfo.studentId.trim() !== "";
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // Prevent default form submission
-
-    // 토큰이 있을 수 있으니 삭제하기
+    e.preventDefault();
+  
+    // 기존 토큰 삭제
     localStorage.clear();
-
+  
     try {
       const response = await axios.post(`${API_URL}/login`, studentInfo, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-
-      // 토큰 저장
+  
+      // 로그인 성공 → 토큰 저장 후 홈으로 이동
       localStorage.setItem("Token", response.data.accessToken);
       localStorage.setItem("role", response.data.role);
-
       navigate("/", { replace: true });
+  
     } catch (error) {
-      const status = error.response.status;
-
-      //400에러 data : "학번이 올바른지 확인해주세요."
-      if (status === 400) {
-        //LoginFailureModal 띄우기
-        setShowModal(true);
-
-        setStudentInfo({
-          name: "",
-          studentId: "",
-        });
-      }
-      //401에러 Unauthorized - 개인정보 동의 안했을 경우
-      else if (status === 401) {
-        navigate("/user-agreement", { state: { studentInfo } });
+      // error.response가 존재하는지 먼저 확인
+      if (error.response) {
+        const status = error.response.status;
+  
+        if (status === 400) {
+          setShowModal(true);
+          setStudentInfo({ name: "", studentId: "" });
+        } else if (status === 401) {
+          navigate("/user-agreement", { state: { studentInfo } });
+        } else {
+          console.error("서버 오류:", error);
+          alert("예기치 않은 오류가 발생했습니다.");
+        }
       } else {
-        console.error("Unexpected error:", error);
-        alert("예기치 않은 오류가 발생했습니다.");
+        console.error("네트워크 오류 또는 서버 응답 없음:", error);
+        alert("서버에 연결할 수 없습니다. 인터넷 상태를 확인하세요.");
       }
     }
   };
+    
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -78,7 +77,7 @@ export default function Login() {
       <div className="relative w-full min-h-[calc(100vh-130px)] flex justify-center items-center">
         {/* 리본 배경 */}
         <div className="absolute flex items-center justify-center w-full h-full">
-          <img src={images.ribbon} className=" w-full" alt="ribbon" />
+          <img src={images.ribbon} className="w-full " alt="ribbon" />
         </div>
 
         <div className="z-[50] w-[75%] text-center">
