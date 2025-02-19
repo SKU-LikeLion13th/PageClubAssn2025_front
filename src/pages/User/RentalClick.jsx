@@ -4,11 +4,13 @@ import RibbonBackground from "../../components/RibbonBackground";
 import { images } from "../../utils/images";
 import MemberContainer from "./MemberContainer";
 import Header from "../../components/Header";
+import Loading from "../../components/Loading";
 import { API_URL } from '../../config';
 
 export default function RentalClick() {
   const [rentItems, setRentItems] = useState([]);
   const [currentReservationIndex, setCurrentReservationIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   
   const decodeBase64Image = (base64String) => {
     if (!base64String?.startsWith('data:image')) {
@@ -78,47 +80,57 @@ export default function RentalClick() {
     );
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
+        <Loading />
+      </div>
+    );
+  }
+
   return (
-    <div className="relative w-full min-h-[calc(100vh-100px)]">
+    <>
       <Header />
-      <RibbonBackground />
-      <div className="w-11/12 mx-auto text-[#996515] flex flex-col items-center">
-        <h1 className="text-[50px] mt-7">MY PAGE</h1>
-        <MemberContainer />
-        <div className="flex flex-col items-center w-full">
-          <h2 className="text-[35px] mt-7">대여 현황</h2>
-          <div className="relative font-Moneygraphy flex justify-center items-center w-[85%] h-[22rem] px-10 text-[16px] bg-white border border-[#D2B48C] rounded-[13px] mt-7">
-            {rentItems.length > 0 ? (
-              <div className='flex flex-col items-center'>
-                <div className="flex flex-col items-center py-5 text-center">
-                  {rentItems[currentReservationIndex] && (
-                    <>
-                      <img
-                        src={rentItems[currentReservationIndex].image}
-                        alt={rentItems[currentReservationIndex].itemName}
-                        className="w-[90px] h-[90px] object-cover mb-4"
-                      />
-                      <div className='w-full mb-5'>{rentItems[currentReservationIndex].itemName}</div>
-                      <DateInfo rentItem={rentItems[currentReservationIndex]} />
-                    </>
-                  )}
+      <div className="relative w-full min-h-[calc(100vh-100px)]">
+        <RibbonBackground />
+        <div className="w-11/12 mx-auto text-[#996515] flex flex-col items-center">
+          <h1 className="text-[50px] mt-7">MY PAGE</h1>
+          <MemberContainer />
+          <div className="flex flex-col items-center w-full">
+            <h2 className="text-[35px] mt-7">대여 현황</h2>
+            <div className="relative font-Moneygraphy flex justify-center items-center w-[85%] h-[22rem] px-10 text-[16px] bg-white border border-[#D2B48C] rounded-[13px] mt-7">
+              {rentItems.length > 0 ? (
+                <div className='flex flex-col items-center'>
+                  <div className="flex flex-col items-center py-5 text-center">
+                    {rentItems[currentReservationIndex] && (
+                      <>
+                        <img
+                          src={rentItems[currentReservationIndex].image}
+                          alt={rentItems[currentReservationIndex].itemName}
+                          className="w-[90px] h-[90px] object-cover mb-4"
+                        />
+                        <div className='w-full mb-5'>{rentItems[currentReservationIndex].itemName}</div>
+                        <DateInfo rentItem={rentItems[currentReservationIndex]} />
+                      </>
+                    )}
+                  </div>
+                  <div className="flex items-center mt-5 mb-3 text-[#996515] text-[16px] space-x-4">
+                    <button onClick={() => handleNavigation("prev")} className="hover:text-[#FF7009]">
+                      <img src={images.left} alt="left" />
+                    </button>
+                    <span className='text-[11px]'>{currentReservationIndex + 1}/{rentItems.length}</span>
+                    <button onClick={() => handleNavigation("next")} className="hover:text-[#FF7009]">
+                      <img src={images.right} alt="right" />
+                    </button>
+                  </div>
                 </div>
-                <div className="flex items-center mt-5 mb-3 text-[#996515] text-[16px] space-x-4">
-                  <button onClick={() => handleNavigation("prev")} className="hover:text-[#FF7009]">
-                    <img src={images.left} alt="left" />
-                  </button>
-                  <span className='text-[11px]'>{currentReservationIndex + 1}/{rentItems.length}</span>
-                  <button onClick={() => handleNavigation("next")} className="hover:text-[#FF7009]">
-                    <img src={images.right} alt="right" />
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div>대여 중인 물품이 없습니다.</div>
-            )}
+              ) : (
+                <div>대여 중인 물품이 없습니다.</div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

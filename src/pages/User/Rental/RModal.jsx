@@ -89,16 +89,16 @@ export const RentalConfirm = ({
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="flex items-center justify-center w-full h-full">
       <div className="relative rounded-lg w-3/4 h-1/3 bg-white shadow-lg text-[#3F3F3F]">
-        <div className="flex flex-col justify-center items-center h-full">
-          <div className="title text-xl mb-2">{item.name}</div>
+        <div className="flex flex-col items-center justify-center h-full">
+          <div className="mb-2 text-xl title">{item.name}</div>
           <img src={item.image} className="rounded-full h-28" />
           <div className="mt-4 text-center">
             <p>
               <span className="text-[#FF7009]">예약</span>하시겠습니까?
             </p>
-            <div className="flex justify-center items-center w-full text-sm mt-2">
+            <div className="flex items-center justify-center w-full mt-2 text-sm">
               <button
                 onClick={handleConfirm}
                 className="bg-[#D2B48C] text-[#583D2C] py-[1px] px-6 rounded-xl mr-1"
@@ -128,10 +128,10 @@ export const RentalConfirm = ({
 export const RentalSuccess = ({ item, closeModal }) => {
   console.log(item);
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="flex items-center justify-center w-full h-full">
       <div className="relative rounded-lg w-3/4 h-[40%] bg-white shadow-lg text-[#3F3F3F]">
-        <div className="flex flex-col justify-center items-center h-full">
-          <div className="title text-xl mb-2">{item.name}</div>
+        <div className="flex flex-col items-center justify-center h-full">
+          <div className="mb-2 text-xl title">{item.name}</div>
           <img src={item.image} className="rounded-full h-28" />
           <div className="mt-4 text-center leading-[22px]">
             <p>
@@ -141,7 +141,7 @@ export const RentalSuccess = ({ item, closeModal }) => {
               <br />
               동아리연합회의실로 방문해주세요.
             </p>
-            <div className="flex justify-center items-center w-full mt-4 text-sm">
+            <div className="flex items-center justify-center w-full mt-4 text-sm">
               <button
                 onClick={closeModal}
                 className="bg-[#D2B48C] text-[#583D2C] py-[1px] px-6 rounded-xl mr-1"
@@ -168,15 +168,15 @@ export const RentalLimit = ({ closeModal }) => {
   }, [userName]);
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-opacity-30">
+    <div className="flex items-center justify-center w-full h-full bg-opacity-30">
       <div className="relative rounded-lg w-3/4 h-[40%] bg-white shadow-lg text-[#3F3F3F]">
-        <div className="flex flex-col justify-center items-center h-full">
+        <div className="flex flex-col items-center justify-center h-full">
           {loading ? (
             <Loading/>
           ) : (
             <>
-              <p className="mr-1 text-2xl mb-5">{userName}</p>
-              <img src={images.quantity} className="rounded-full mr-1" />
+              <p className="mb-5 mr-1 text-2xl">{userName} 학우님</p>
+              <img src={images.quantity} className="mr-1 rounded-full" />
               <div className="mt-4 text-center leading-[22px]">
                 <p>
                   <span className="text-[#FF7009]">
@@ -192,7 +192,7 @@ export const RentalLimit = ({ closeModal }) => {
                   <br />
                   이용해주세요.
                 </p>
-                <div className="flex justify-center items-center w-full mt-4 text-sm">
+                <div className="flex items-center justify-center w-full mt-4 text-sm">
                   <button
                     onClick={closeModal}
                     className="bg-[#D2B48C] text-[#583D2C] py-[1px] px-6 rounded-xl mr-1"
@@ -222,22 +222,22 @@ export const NoneReturn = ({ closeModal }) => {
   }, [userName]);
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-opacity-30">
+    <div className="flex items-center justify-center w-full h-full bg-opacity-30">
       <div className="relative rounded-lg w-3/4 h-[35%] bg-white shadow-lg text-[#3F3F3F]">
-        <div className="flex flex-col justify-center items-center h-full">
+        <div className="flex flex-col items-center justify-center h-full">
         {loading ? (
             <Loading/>
           ) : (
             <>
-          <p className="mr-1 text-2xl mb-5">{userName}</p>
-          <img src={images.quantity} className="rounded-full mr-1" />
+          <p className="mb-5 mr-1 text-2xl">{userName} 학우님</p>
+          <img src={images.quantity} className="mr-1 rounded-full" />
           <div className="mt-4 text-center leading-[22px]">
             <p>
               <span className="text-[#FF7009]">미반납 1회</span>
               로<br />
               대여 서비스가 제한되었습니다.
             </p>
-            <div className="flex justify-center items-center w-full mt-4 text-sm">
+            <div className="flex items-center justify-center w-full mt-4 text-sm">
               <button
                 onClick={closeModal}
                 className="bg-[#D2B48C] text-[#583D2C] py-[1px] px-6 rounded-xl mr-1"
@@ -266,15 +266,15 @@ export const ReturnOver = ({ closeModal }) => {
   }, [userName]);
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-opacity-30">
+    <div className="flex items-center justify-center w-full h-full bg-opacity-30">
       <div className="relative rounded-lg w-3/4 h-[35%] bg-white shadow-lg text-[#3F3F3F]">
-        <div className="flex flex-col justify-center items-center h-full">
+        <div className="flex flex-col items-center justify-center h-full">
         {loading ? (
             <Loading/>
           ) : (
             <>
-          <p className="mr-1 text-2xl mb-5">{userName}</p>
-          <img src={images.quantity} className="rounded-full mr-1" />
+          <p className="mb-5 mr-1 text-2xl">{userName} 학우님</p>
+          <img src={images.quantity} className="mr-1 rounded-full" />
           <div className="mt-4 text-center leading-[22px]">
             <p>
               <span className="text-[#FF7009]">반납 3회 지연</span>
@@ -282,7 +282,7 @@ export const ReturnOver = ({ closeModal }) => {
               <br />
               대여 서비스가 제한되었습니다.
             </p>
-            <div className="flex justify-center items-center w-full mt-4 text-sm">
+            <div className="flex items-center justify-center w-full mt-4 text-sm">
               <button
                 onClick={closeModal}
                 className="bg-[#D2B48C] text-[#583D2C] py-[1px] px-6 rounded-xl mr-1"

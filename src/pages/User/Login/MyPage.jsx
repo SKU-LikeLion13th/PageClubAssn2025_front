@@ -5,6 +5,7 @@ import Header from "../../../components/Header";
 import { API_URL } from "../../../config";
 import axios from "axios";
 import { images } from "../../../utils/images";
+import Loading from "../../../components/Loading";
 
 export default function MyPage() {
   const navigate = useNavigate();
@@ -102,7 +103,7 @@ export default function MyPage() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
-        Loading...
+        <Loading />
       </div>
     );
   }

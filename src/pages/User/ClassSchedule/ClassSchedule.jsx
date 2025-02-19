@@ -9,7 +9,7 @@ export default function ClassSchedule() {
       <Header/>
       <PageBack />
 
-      <div className="relative z-20">
+      <div className="relative z-20 min-h-[51rem]">
         <ClassList />
       </div>
     </div>
