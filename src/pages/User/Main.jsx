@@ -12,7 +12,7 @@ export default function Main() {
         {" "}
         {/* 페이지로고 */}
         <div className="flex justify-center">
-          <img src="/assets/images/PAGE.png" alt="" className="w-[260px]" />
+          <img src={images.page} alt="" className="w-[260px]" />
         </div>
         <div className="max-w-[500px]:w-full relative">
           {/* 책 배경 이미지 */}

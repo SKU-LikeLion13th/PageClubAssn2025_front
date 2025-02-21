@@ -4,13 +4,12 @@ import RentalNoteHeader from "./RentalNoteHeader.jsx";
 import Footer from "../../../components/Footer.jsx";
 
 const RentalNote = ({ itemId, closeModal, nextStep }) => {
-  console.log(itemId);
   return (
     <div className="top-0 w-full min-h-screen">
-      <div className="pt-4">
+      <div className="pt-10">
         <RentalNoteHeader closeModal={closeModal} />
       </div>
-      <div className="flex min-h-[calc(100vh-150px)]">
+      <div className="flex min-h-[calc(100vh-150px) w-full justify-center">
         <div className="mt-[7%] flex items-center justify-center text-center">
           <div>
             <div className="title text-[18px] leading-none text-[#996515] bg-white mx-5 py-4 rounded-xl border-[1px] border-[#D2B48C]">
@@ -78,7 +77,7 @@ const RentalNote = ({ itemId, closeModal, nextStep }) => {
                   됩니다.
                 </p>
                 <button
-                  className="mt-10 mb-4 px-7 py-2 text-[13px] rounded-xl bg-[#996515] border-[1px] border-[#D2B48C] text-white"
+                  className="mt-6 mb-4 px-7 py-2 text-[13px] rounded-xl bg-[#996515] border-[1px] border-[#D2B48C] text-white"
                   onClick={nextStep}
                 >
                   위 내용을 확인했습니다.

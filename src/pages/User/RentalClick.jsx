@@ -19,28 +19,29 @@ export default function RentalClick() {
     return base64String;
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("Token");
+useEffect(() => {
+  const token = localStorage.getItem("Token");
 
-    if (!token) {
-      console.error("토큰이 없습니다.");
-      return;
-    }
+  if (!token) {
+    console.error("토큰이 없습니다.");
+    return;
+  }
 
-    axios
-      .get(`${API_URL}/item-rent/rent-list`, {
-        headers: { "Authorization": token },
-      })
-      .then((response) => {
-        const processedItems = response.data.map(item => ({
-          ...item,
-          image: item.image ? decodeBase64Image(item.image) : null
-        }));
+  axios
+    .get(`${API_URL}/item-rent/rent-list`, {
+      headers: { "Authorization": token },
+    })
+    .then((response) => {
+      const processedItems = response.data.map(item => ({
+        ...item,
+        image: item.image ? decodeBase64Image(item.image) : null
+      }));
 
-        setRentItems(processedItems);
-      })
-      .catch((error) => console.error("사용자 데이터 가져오기 오류:", error));
-  }, []);
+      setRentItems(processedItems);
+    })
+    .catch((error) => console.error("사용자 데이터 가져오기 오류:", error))
+    .finally(() => setIsLoading(false));
+}, []);
 
   const isOverdue = (item) => {
     if (!item?.needReturnTime) return false;
@@ -59,8 +60,8 @@ export default function RentalClick() {
   const DateInfo = ({ rentItem }) => (
     rentItem ? (
       isOverdue(rentItem) ? (
-        <div className="text-center text-[#FF7009] font-bold">
-          연체되었습니다.<br/>
+        <div className="font-bold text-center">
+          <div><span className="text-[#FF7009]">연체</span>되었습니다.</div>
           빠른 시일 내에 동아리연합회실로 반납해주세요.
         </div>
       ) : (
@@ -70,7 +71,7 @@ export default function RentalClick() {
         </div>
       )
     ) : null
-  );  
+  );
 
   const handleNavigation = (direction) => {
     setCurrentReservationIndex((prev) => 
@@ -80,13 +81,13 @@ export default function RentalClick() {
     );
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
-        <Loading />
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
+  //       <Loading />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -99,7 +100,9 @@ export default function RentalClick() {
           <div className="flex flex-col items-center w-full">
             <h2 className="text-[35px] mt-7">대여 현황</h2>
             <div className="relative font-Moneygraphy flex justify-center items-center w-[85%] h-[22rem] px-10 text-[16px] bg-white border border-[#D2B48C] rounded-[13px] mt-7">
-              {rentItems.length > 0 ? (
+              {isLoading ? (
+                <Loading />
+              ) : rentItems.length > 0 ? (
                 <div className='flex flex-col items-center'>
                   <div className="flex flex-col items-center py-5 text-center">
                     {rentItems[currentReservationIndex] && (

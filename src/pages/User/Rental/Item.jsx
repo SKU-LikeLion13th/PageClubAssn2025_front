@@ -242,7 +242,7 @@ const Item = () => {
       {showModal && (
         <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-30">
           {modalStep === 1 && selectedItem && (
-            <div className="bg-[#FFF6EC] w-[375px] p-5">
+            <div className="bg-[#FFF6EC] w-[375px] max-[500px]:w-full max-[500px]:flex max-[500px]:items-center p-5">
               <RentalNote
                 item={selectedItem}
                 closeModal={closeModal}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../../config";
+import Loading from "../../../components/Loading";
 
 export default function RentalItems() {
   const [items, setItems] = useState([]);
@@ -55,9 +56,7 @@ export default function RentalItems() {
 
       {/* 로딩 상태 표시 */}
       {loading ? (
-        <div className="flex items-center justify-center mt-6">
-          <p className="text-sm">로딩 중...</p>
-        </div>
+        <Loading />
       ) : (
         // 물품 리스트
         <div className="mt-6 space-y-4 font-PretendardVariable">

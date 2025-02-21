@@ -55,9 +55,12 @@ export default function ExcellentClub() {
   return (
     <>
       <Header />
-      <div className="relative w-full min-h-[calc(100vh-130px)]">
-        <RibbonBackground />
-
+      <div className="relative w-full min-h-[calc(100vh-130px)] mb-4">
+        {/* 리본 배경 */}
+        <div className="absolute z-0 flex items-center justify-center w-full h-full">
+            <img src={images.ribbon} className="w-full opacity-50" alt="ribbon" />
+        </div>
+              
         {/* 콘텐츠 */}
         <div className="flex flex-col items-center h-full">
           {/* TOP3 점수 */}

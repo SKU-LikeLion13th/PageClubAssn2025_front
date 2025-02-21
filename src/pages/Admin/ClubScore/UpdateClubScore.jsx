@@ -119,7 +119,7 @@ const UpdateClubScore = () => {
   };
 
   return (
-    <div className="font-Y_spotlight mt-6 min-h-screen mx-6">
+    <div className="min-h-screen mx-6 mt-6 font-Y_spotlight">
       {/* 타이틀 */}
       <div>
         <p className="text-[30px] text-center">활동 점수 수정</p>
@@ -161,7 +161,7 @@ const UpdateClubScore = () => {
               <div className="flex-1">
                 <div className="flex items-center mb-2">
                   <p>동아리명</p>
-                  <div className="ml-2 flex-1">
+                  <div className="flex-1 ml-2">
                     <select
                       value={item.clubName}
                       onChange={(e) =>
@@ -179,7 +179,7 @@ const UpdateClubScore = () => {
                 </div>
                 <div className="flex items-center">
                   <p>점수</p>
-                  <div className="ml-2 flex-1 relative">
+                  <div className="relative flex-1 ml-2">
                     <input
                       type="text"
                       value={item.score}
