@@ -8,6 +8,8 @@ const members = [
     imgSrc: "../../assets/images/ClubUnion/기하은.png",
     department: "경영학과 22",
     name: "기하은",
+    width: "68px",
+    height: "68px",
   },
   {
     id: 2,
@@ -15,6 +17,8 @@ const members = [
     imgSrc: "../../assets/images/ClubUnion/임수현.png",
     department: "사회복지학과 23",
     name: "임수현",
+    width: "68px",
+    height: "68px",
   },
   {
     id: 3,
@@ -22,6 +26,10 @@ const members = [
     imgSrc: "../../assets/images/ClubUnion/한수진.png",
     department: "체육교육과 22",
     name: "한수진",
+    width: "55px",
+    height: "55px",
+    marginBottom: "12px",
+    marginTop: "13px",
   },
   {
     id: 4,
@@ -29,6 +37,8 @@ const members = [
     imgSrc: "../../assets/images/ClubUnion/김정호.png",
     department: "미디어소프트웨어학과 24",
     name: "김정호",
+    width: "79px",
+    height: "79px",
   },
   {
     id: 5,
@@ -36,6 +46,8 @@ const members = [
     imgSrc: "../../assets/images/ClubUnion/강신욱.png",
     department: "관광학과 19",
     name: "강신욱",
+    width: "68px",
+    height: "68px",
   },
   {
     id: 6,
@@ -43,6 +55,8 @@ const members = [
     imgSrc: "../../assets/images/ClubUnion/이다혜.png",
     department: "뷰티디자인학과 24",
     name: "이다혜",
+    width: "68px",
+    height: "68px",
   },
   {
     id: 7,
@@ -50,6 +64,10 @@ const members = [
     imgSrc: "../../assets/images/ClubUnion/이예원.png",
     department: "기독교교육상담학과 23",
     name: "이예원",
+    width: "43px",
+    height: "59px",
+    marginBottom: "4px",
+    marginTop: "4px",
   },
   {
     id: 8,
@@ -57,6 +75,8 @@ const members = [
     imgSrc: "../../assets/images/ClubUnion/김채현.png",
     department: "유아교육과 24",
     name: "김채현",
+    width: "68px",
+    height: "68px",
   },
   {
     id: 9,
@@ -64,6 +84,8 @@ const members = [
     imgSrc: "../../assets/images/ClubUnion/오도현.png",
     department: "산업경영공학과 20",
     name: "오도현",
+    width: "68px",
+    height: "68px",
   },
   {
     id: 10,
@@ -71,6 +93,8 @@ const members = [
     imgSrc: "../../assets/images/ClubUnion/최효빈.png",
     department: "사회복지학과 20",
     name: "최효빈",
+    width: "68px",
+    height: "68px",
   },
 ];
 
@@ -121,7 +145,13 @@ export default function Introduction() {
                 <img
                   src={member.imgSrc}
                   alt={member.name}
-                  className="w-[68px] h-[68px] object-contain"
+                  className="object-contain"
+                  style={{
+                    width: member.width,
+                    height: member.height,
+                    marginBottom: member.marginBottom,
+                    marginTop: member.marginTop,
+                  }}
                 />
                 <p className="text-[14px] text-center mt-2 font-Moneygraphy text-[#3F3F3F]">
                   {member.role}
