@@ -136,7 +136,7 @@ export default function ClubMemberCard() {
             <div className="text-[#996515] flex-1 flex flex-col justify-center items-center relative">
               {/* 동아리선택 드롭다운 토글 */}
               <div
-                className="w-full flex items-center cursor-pointer px-4 relative"
+                className="relative flex items-center w-full px-4 cursor-pointer"
                 onClick={() => {
                   if (userData.clubs.length > 1) {
                     setIsDropdownOpen(!isDropdownOpen);
@@ -150,7 +150,9 @@ export default function ClubMemberCard() {
                 >
                   {userData.clubName}
                 </p>
-                <IoCaretDownOutline className="text-[#D2B48C] absolute right-0" />
+                {userData.clubs.length > 1 && (
+                  <IoCaretDownOutline className="text-[#D2B48C] absolute right-0" />
+                )}
               </div>
 
               {/* 드롭다운 */}
@@ -180,7 +182,7 @@ export default function ClubMemberCard() {
                 </div>
               )}
 
-              <div className="w-full flex justify-end">
+              <div className="flex justify-end w-full">
                 <p className="w-[95%] my-3 border-t-[0.1px] border-[#D2B48C]"></p>
               </div>
               <p className="text-[25px]">{userData.name}</p>

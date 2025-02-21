@@ -144,7 +144,9 @@ export default function MyPage() {
                 <div className="flex items-center justify-between w-full">
                   <p className="flex-1 text-center">{userData?.clubName}</p>
                   <p className="ml-2">
-                    <IoCaretDownOutline className="text-[#D2B48C]" />
+                    {userData.clubs.length > 1 && (
+                      <IoCaretDownOutline className="text-[#D2B48C]" />
+                    )}
                   </p>
                 </div>
                 <div className="mt-1 pr-5 text-[#996515] text-[15px]">
