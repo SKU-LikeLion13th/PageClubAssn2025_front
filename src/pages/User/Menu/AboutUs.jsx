@@ -50,8 +50,8 @@ const likeLionMembers = [
     role: "대표",
     task: "Back-end",
     width: "78px",
-    marginTop: "8px",
-    marginBottom: "-5px",
+    marginTop: "-8px",
+    marginBottom: "8px",
   },
   {
     id: 2,
@@ -72,7 +72,7 @@ const likeLionMembers = [
     department: "컴퓨터공학과 20학번",
     role: "운영진",
     task: "Back-end",
-    width: "60px",
+    width: "55px",
     marginTop: "5px",
   },
   {
@@ -84,6 +84,8 @@ const likeLionMembers = [
     role: "운영진",
     task: "Front-end",
     width: "68px",
+    marginTop: "-8px",
+    marginBottom: "5px",
   },
   {
     id: 5,
@@ -93,9 +95,9 @@ const likeLionMembers = [
     department: "컴퓨터공학과 23학번",
     role: "운영진",
     task: "Back-end",
-    width: "60px",
-    marginBottom: "5px",
-    marginTop: "5px",
+    width: "58px",
+    marginBottom: "1px",
+    marginTop: "7px",
   },
   {
     id: 6,
