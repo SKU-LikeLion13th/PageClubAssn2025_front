@@ -156,11 +156,11 @@ export default function Introduction() {
                 <p className="text-[14px] text-center mt-2 font-Moneygraphy text-[#3F3F3F]">
                   {member.role}
                   <br />
-                  <div className="font-Moneygraphy mt-2 text-[12px] leading-[13.2px] text-[#3F3F3F]">
+                  <span className="font-Moneygraphy mt-2 text-[12px] leading-[13.2px] text-[#3F3F3F]">
                     {member.department}
                     <br />
                     {member.name}
-                  </div>
+                  </span>
                 </p>
               </div>
             ))}

@@ -13,7 +13,7 @@ const members = [
   },
   {
     id: 2,
-    imgSrc: "../../assets/images/ClubUnion/김정호.png", // 교체할 이미지 경로
+    imgSrc: "../../assets/images/ClubUnion/김정호.png",
     logoSrc: "../../assets/images/PageLogo.png",
     name: "김정호",
     department: "미디어소프트웨어학과 24학번",
@@ -22,7 +22,7 @@ const members = [
   },
   {
     id: 3,
-    imgSrc: "../../assets/images/ClubUnion/임수현.png", // 교체할 이미지 경로
+    imgSrc: "../../assets/images/ClubUnion/임수현.png",
     logoSrc: "../../assets/images/PageLogo.png",
     name: "임수현",
     department: "사회복지학과 23학번",
@@ -31,7 +31,7 @@ const members = [
   },
   {
     id: 4,
-    imgSrc: "../../assets/images/ClubUnion/최효빈.png", // 교체할 이미지 경로
+    imgSrc: "../../assets/images/ClubUnion/최효빈.png",
     logoSrc: "../../assets/images/PageLogo.png",
     name: "최효빈",
     department: "사회복지학과 23학번",
@@ -43,28 +43,30 @@ const members = [
 const likeLionMembers = [
   {
     id: 1,
-    imgSrc: "../../assets/images/likeLion/mingyu.png", // 이 부분에 실제 이미지 경로를 넣어주세요
+    imgSrc: "../../assets/images/likeLion/mingyu.png",
     logoSrc: "../../assets/images/LikeLionLogo.png",
     name: "한민규",
     department: "컴퓨터공학과 21학번",
     role: "대표",
     task: "Back-end",
-    width: "76px",
+    width: "78px",
+    marginTop: "8px",
+    marginBottom: "-5px",
   },
   {
     id: 2,
-    imgSrc: "../../assets/images/likeLion/minseo.png", // 이 부분에 실제 이미지 경로를 넣어주세요
+    imgSrc: "../../assets/images/likeLion/minseo.png",
     logoSrc: "../../assets/images/LikeLionLogo.png",
     name: "신민서",
     department: "미디어소프트웨어학과 22학번",
     role: "부대표",
     task: "Front-end",
-    width: "76px",
-    marginTop: "-10px",
+    width: "85px",
+    marginTop: "-5px",
   },
   {
     id: 3,
-    imgSrc: "../../assets/images/likeLion/junbeom.png", // 이 부분에 실제 이미지 경로를 넣어주세요
+    imgSrc: "../../assets/images/likeLion/junbeom.png",
     logoSrc: "../../assets/images/LikeLionLogo.png",
     name: "박준범",
     department: "컴퓨터공학과 20학번",
@@ -75,7 +77,7 @@ const likeLionMembers = [
   },
   {
     id: 4,
-    imgSrc: "../../assets/images/likeLion/yujeong.png", // 이 부분에 실제 이미지 경로를 넣어주세요
+    imgSrc: "../../assets/images/likeLion/yujeong.png",
     logoSrc: "../../assets/images/LikeLionLogo.png",
     name: "최유정",
     department: "미디어소프트웨어학과 21학번",
@@ -85,7 +87,7 @@ const likeLionMembers = [
   },
   {
     id: 5,
-    imgSrc: "../../assets/images/likeLion/ohyun.png", // 이 부분에 실제 이미지 경로를 넣어주세요
+    imgSrc: "../../assets/images/likeLion/ohyun.png",
     logoSrc: "../../assets/images/LikeLionLogo.png",
     name: "권오현",
     department: "컴퓨터공학과 23학번",
@@ -97,7 +99,7 @@ const likeLionMembers = [
   },
   {
     id: 6,
-    imgSrc: "../../assets/images/likeLion/hoyeon.png", // 이 부분에 실제 이미지 경로를 넣어주세요
+    imgSrc: "../../assets/images/likeLion/hoyeon.png",
     logoSrc: "../../assets/images/LikeLionLogo.png",
     name: "이호연",
     department: "미디어소프트웨어학과 21학번",
@@ -107,27 +109,28 @@ const likeLionMembers = [
   },
   {
     id: 7,
-    imgSrc: "../../assets/images/likeLion/juhee.png", // 이 부분에 실제 이미지 경로를 넣어주세요
+    imgSrc: "../../assets/images/likeLion/juhee.png",
     logoSrc: "../../assets/images/LikeLionLogo.png",
     name: "노주희",
     department: "미디어소프트웨어학과 22학번",
     role: "운영진",
     task: "Back-end",
-    width: "68px",
+    width: "78px",
   },
   {
     id: 8,
-    imgSrc: "../../assets/images/likeLion/hyewon.png", // 이 부분에 실제 이미지 경로를 넣어주세요
+    imgSrc: "../../assets/images/likeLion/hyewon.png",
     logoSrc: "../../assets/images/LikeLionLogo.png",
     name: "구혜원",
     department: "미디어소프트웨어학과 22학번",
     role: "운영진",
     task: "Front-end",
     width: "68px",
+    marginBottom: "10px",
   },
   {
     id: 9,
-    imgSrc: "../../assets/images/likeLion/hansol.png", // 이 부분에 실제 이미지 경로를 넣어주세요
+    imgSrc: "../../assets/images/likeLion/hansol.png",
     logoSrc: "../../assets/images/LikeLionLogo.png",
     name: "오한솔",
     department: "관광학과 22학번",
@@ -285,8 +288,8 @@ export default function AboutUs() {
                   <p className="text-[8px] leading-[10px] text-center mt-2">
                     {member.department}
                     <br />
-                    <div className="text-[8px] mt-1">{member.role}</div>
                   </p>
+                  <p className="text-[8px] mt-1">{member.role}</p>
                   <div className="flex items-center justify-center mt-2">
                     <hr className="w-[58px] border-[#D2B48C] border-[0.5px]" />
                   </div>
