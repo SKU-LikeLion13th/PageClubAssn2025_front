@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { IoCaretDownOutline } from "react-icons/io5";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "../../config";
-import Loading from "../../components/Loading";
+import Loading from "../../../components/Loading";
+import { API_URL } from '../../../config';
 
 export default function MemberContainer() {
   const navigate = useNavigate();
@@ -100,7 +100,7 @@ export default function MemberContainer() {
       {/* 드롭다운 컨테이너 */}
       <div className="relative flex flex-col items-center w-full mt-5 text-[14px] font-Moneygraphy">
         <div
-          className="flex items-center bg-[#ffffff] w-[80%] px-4 py-2 border-[#D2B48C] rounded-[10px] cursor-pointer relative z-10"
+          className="flex items-center bg-[#ffffff] w-[80%] px-4 py-2 border-[1px] border-[#D2B48C] rounded-[10px] cursor-pointer relative z-10"
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
           <div>
             {/* selectedClub이 있을 경우 로고를 표시 */}
@@ -115,7 +115,7 @@ export default function MemberContainer() {
           <div className="flex flex-col items-center justify-center w-full">
             <div className="flex items-center">
               {userData?.clubName}
-              <IoCaretDownOutline className="ml-2" />
+              {userData.clubs.length > 1 && <IoCaretDownOutline className="ml-2" />}
             </div>
             <div>{userData.name}</div>
           </div>
