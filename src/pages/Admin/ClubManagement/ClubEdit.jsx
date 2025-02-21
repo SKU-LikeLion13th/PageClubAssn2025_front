@@ -60,7 +60,7 @@ export default function ClubEdit() {
   };
 
   return (
-    <div className="font-Y_spotlight mt-6 min-h-screen mx-5">
+    <div className="min-h-screen mx-5 mt-6 font-Y_spotlight">
       <p className="text-[30px] text-center mb-6">동아리 수정</p>
       <p className="border border-[#D1D1D3] mb-6"></p>
 
@@ -84,7 +84,7 @@ export default function ClubEdit() {
         </div>
 
         {/* 동아리 로고 */}
-        <div className="mt-1 flex items-center space-x-2">
+        <div className="flex items-center mt-1 space-x-2">
           <label>동아리 로고</label>
           <div className="relative font-Y_spotlight w-[30.67px] h-[12px] bg-[#D1D1D3] rounded text-[#3F3F3F] text-[5.17px] flex justify-center items-center cursor-pointer">
             파일 선택
