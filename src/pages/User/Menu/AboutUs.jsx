@@ -49,6 +49,7 @@ const likeLionMembers = [
     department: "컴퓨터공학과 21학번",
     role: "대표",
     task: "Back-end",
+    width: "76px",
   },
   {
     id: 2,
@@ -58,6 +59,8 @@ const likeLionMembers = [
     department: "미디어소프트웨어학과 22학번",
     role: "부대표",
     task: "Front-end",
+    width: "76px",
+    marginTop: "-10px",
   },
   {
     id: 3,
@@ -67,6 +70,8 @@ const likeLionMembers = [
     department: "컴퓨터공학과 20학번",
     role: "운영진",
     task: "Back-end",
+    width: "60px",
+    marginTop: "5px",
   },
   {
     id: 4,
@@ -76,6 +81,7 @@ const likeLionMembers = [
     department: "미디어소프트웨어학과 21학번",
     role: "운영진",
     task: "Front-end",
+    width: "68px",
   },
   {
     id: 5,
@@ -85,6 +91,9 @@ const likeLionMembers = [
     department: "컴퓨터공학과 23학번",
     role: "운영진",
     task: "Back-end",
+    width: "60px",
+    marginBottom: "5px",
+    marginTop: "5px",
   },
   {
     id: 6,
@@ -94,6 +103,7 @@ const likeLionMembers = [
     department: "미디어소프트웨어학과 21학번",
     role: "운영진",
     task: "Front-end",
+    width: "68px",
   },
   {
     id: 7,
@@ -103,6 +113,7 @@ const likeLionMembers = [
     department: "미디어소프트웨어학과 22학번",
     role: "운영진",
     task: "Back-end",
+    width: "68px",
   },
   {
     id: 8,
@@ -112,6 +123,7 @@ const likeLionMembers = [
     department: "미디어소프트웨어학과 22학번",
     role: "운영진",
     task: "Front-end",
+    width: "68px",
   },
   {
     id: 9,
@@ -121,6 +133,7 @@ const likeLionMembers = [
     department: "관광학과 22학번",
     role: "운영진",
     task: "UXUI",
+    width: "68px",
   },
 ];
 
@@ -254,7 +267,12 @@ export default function AboutUs() {
                   <img
                     src={member.imgSrc}
                     alt={member.name}
-                    className="w-[70px]"
+                    className="object-contain"
+                    style={{
+                      width: member.width,
+                      marginBottom: member.marginBottom,
+                      marginTop: member.marginTop,
+                    }}
                   />
                   <div className="flex items-center justify-center mt-2">
                     <img
