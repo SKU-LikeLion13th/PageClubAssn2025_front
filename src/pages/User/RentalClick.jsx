@@ -60,8 +60,8 @@ useEffect(() => {
   const DateInfo = ({ rentItem }) => (
     rentItem ? (
       isOverdue(rentItem) ? (
-        <div className="text-center text-[#FF7009] font-bold">
-          연체되었습니다.<br/>
+        <div className="font-bold text-center">
+          <div><span className="text-[#FF7009]">연체</span>되었습니다.</div>
           빠른 시일 내에 동아리연합회실로 반납해주세요.
         </div>
       ) : (
@@ -71,7 +71,7 @@ useEffect(() => {
         </div>
       )
     ) : null
-  );  
+  );
 
   const handleNavigation = (direction) => {
     setCurrentReservationIndex((prev) => 

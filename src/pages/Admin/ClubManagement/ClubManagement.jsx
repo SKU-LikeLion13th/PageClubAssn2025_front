@@ -5,7 +5,6 @@ import axios from "axios";
 import { API_URL } from "../../../config";
 import ClubDeleteModal from "./ClubDeleteModal";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../../components/Loading";
 
 // 개별 동아리
 function ClubItem({ club, onDeleteClick }) {
@@ -123,7 +122,7 @@ export default function ClubManagement() {
       </div>
 
       {loading ? (
-        <Loading />
+        <div className="text-center mt-14">Loading...</div>
       ) : (
         <div className="font-PretendardVariable">
           {clubs.map((club) => (

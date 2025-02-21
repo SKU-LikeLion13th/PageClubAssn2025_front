@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../../config";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../../components/Loading";
 
 const UpdateClubScore = () => {
   const navigate = useNavigate();
@@ -148,7 +147,7 @@ const UpdateClubScore = () => {
 
       {/* 로딩상태 */}
       {loading ? (
-          <Loading />
+        <div className="text-center">Loading...</div>
       ) : (
         // 동아리 리스트
         <div className="mx-5">
