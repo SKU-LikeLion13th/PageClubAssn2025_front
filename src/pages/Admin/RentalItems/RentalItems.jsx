@@ -12,7 +12,7 @@ export default function RentalItems() {
     const token = localStorage.getItem("Token");
 
     if (!token) {
-      console.log("Token is missing");
+      //console.log("Token is missing");
       return;
     }
 
@@ -31,7 +31,7 @@ export default function RentalItems() {
           );
           setItems(sortedItems); // 상태 업데이트
         } else {
-          console.log("No items found");
+          //console.log("No items found");
         }
       } catch (error) {
         console.error("Error fetching rental items:", error);

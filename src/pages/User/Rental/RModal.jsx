@@ -54,7 +54,6 @@ export const RentalConfirm = ({
         { headers: { Authorization: token } }
       );
 
-      console.log("예약 성공:", response.data);
       let needReceiveTime = new Date(response.data.needReceiveTime);
       const formattedNeedReceiveTime =
         needReceiveTime.toLocaleDateString("ko-KR");
@@ -126,7 +125,6 @@ export const RentalConfirm = ({
 };
 
 export const RentalSuccess = ({ item, closeModal }) => {
-  console.log(item);
   return (
     <div className="flex items-center justify-center w-full h-full">
       <div className="relative rounded-lg w-3/4 h-[40%] bg-white shadow-lg text-[#3F3F3F]">

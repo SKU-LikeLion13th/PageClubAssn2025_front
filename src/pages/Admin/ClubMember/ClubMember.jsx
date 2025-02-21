@@ -39,7 +39,6 @@ export default function ClubMember() {
       );
       setSearchResults(response.data);
       setIsSearched(true);
-      console.log(response.data);
     } catch (err) {
       if (err.response?.status === 401) {
         localStorage.clear();

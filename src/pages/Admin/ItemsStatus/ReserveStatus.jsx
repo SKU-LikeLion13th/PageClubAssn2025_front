@@ -67,7 +67,7 @@ const ReserveStatus = () => {
 
       if (error.response) {
         const statusCode = error.response.status;
-        console.log(statusCode)
+        //console.log(statusCode)
       }
     }
   };
@@ -91,7 +91,7 @@ const ReserveStatus = () => {
 
       if (error.response) {
         const statusCode = error.response.status;
-        console.log(statusCode)
+        //console.log(statusCode)
       }
     }
   };

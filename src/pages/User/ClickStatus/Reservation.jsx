@@ -39,7 +39,9 @@ export default function Reservation() {
   
         setReservations(processedItems);
       })
-      .catch((error) => console.log("사용자 데이터 가져오기 오류:", error))
+      .catch(
+        //(error) => console.log("사용자 데이터 가져오기 오류:", error)
+    )
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -71,7 +73,7 @@ export default function Reservation() {
         }
       )
       .then((response) => {
-        console.log("예약 취소 성공:", response.data);
+        //console.log("예약 취소 성공:", response.data);
         const updatedItems = reservations.filter((item, index) => index !== currentReservationIndex);
         setReservations(updatedItems);
       })
