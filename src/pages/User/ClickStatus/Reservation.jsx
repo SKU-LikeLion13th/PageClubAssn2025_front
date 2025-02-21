@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import RibbonBackground from "../../components/RibbonBackground";
-import { images } from "../../utils/images";
 import MemberContainer from "./MemberContainer";
 import axios from "axios";
-import Header from "../../components/Header";
-import { API_URL } from "../../config";
-import Loading from "../../components/Loading";
+import Header from "../../../components/Header";
+import Loading from "../../../components/Loading";
+import { images } from '../../../utils/images';
+import { API_URL } from "../../../config";
 
 export default function Reservation() {
   const [reservations, setReservations] = useState([]);

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import RibbonBackground from "../../components/RibbonBackground";
-import { images } from "../../utils/images";
+import RibbonBackground from "../../../components/RibbonBackground";
 import MemberContainer from "./MemberContainer";
-import Header from "../../components/Header";
-import Loading from "../../components/Loading";
-import { API_URL } from '../../config';
+import Header from "../../../components/Header";
+import Loading from "../../../components/Loading";
+import { images } from '../../../utils/images';
+import { API_URL } from '../../../config';
 
 export default function RentalClick() {
   const [rentItems, setRentItems] = useState([]);
