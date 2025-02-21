@@ -124,8 +124,6 @@ const likeLionMembers = [
   },
 ];
 
-
-
 export default function AboutUs() {
   return (
     <div className="">
@@ -204,7 +202,9 @@ export default function AboutUs() {
                 <img
                   src={member.imgSrc}
                   alt={member.name}
-                  className={`w-[70px] ${member.name === "김정호" ? "w-[80px]" :""}`}
+                  className={`w-[70px] ${
+                    member.name === "김정호" ? "w-[80px] mb-[-10px]" : ""
+                  }`}
                 />
                 <div className="flex items-center justify-center mt-2">
                   <img
