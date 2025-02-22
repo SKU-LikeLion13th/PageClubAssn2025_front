@@ -52,4 +52,7 @@ export const images = {
 
   // AdminMain
   PageLogo: PATH + "/assets/images/PageLogo.png",
+
+  //404page
+  img404 : PATH +"/assets/images/img404.png",
 };

@@ -16,6 +16,7 @@ import SNS from '../pages/User/Menu/SNS';
 import AboutUs from '../pages/User/Menu/AboutUs';
 import Main from '../pages/User/Main';
 import Footer from '../components/Footer';
+import Page404 from '../pages/User/Page404';
 
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useLogin();
@@ -30,7 +31,6 @@ const ProtectedRoute = ({ children }) => {
 
   return children;
 };
-
 
 const User = () => {
   return (
@@ -53,6 +53,9 @@ const User = () => {
         <Route path="/rentalitems" element={ <ProtectedRoute><RentalItems /></ProtectedRoute> } />
         <Route path="/reservation" element={ <ProtectedRoute><Reservation /></ProtectedRoute> } />
         <Route path="/rentalclick" element={ <ProtectedRoute><RentalClick /></ProtectedRoute> } />
+
+        {/* 404 페이지 */}
+        <Route path="*" element={<Page404 />} />
       </Routes>
       <Footer className="text-[#d2b48c] pb-5 pt-8" />
     </AuthProvider>
