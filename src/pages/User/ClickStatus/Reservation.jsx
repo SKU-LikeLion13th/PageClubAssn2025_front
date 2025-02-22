@@ -94,7 +94,7 @@ export default function Reservation() {
 
             <div className="flex flex-col items-center w-full h-full">
               <div className="text-[35px] mt-7">예약 현황</div>
-              <div className="relative flex justify-center items-center w-[85%] h-[22rem] px-10 font-Moneygraphy text-[17px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] mt-7">
+              <div className="relative flex justify-center items-center w-[85%] h-[22rem] px-10 font-Moneygraphy text-[15px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] mt-7">
                 {isLoading ? (
                   <Loading />
                 ) : reservations && reservations.length > 0 ? (
@@ -121,7 +121,7 @@ export default function Reservation() {
                     >
                       예약 취소
                     </div>
-                    <div className="flex items-center mt-4 text-[#996515] text-[16px] space-x-4">
+                    <div className="flex items-center mt-4 text-[#996515] text-[15px] space-x-4">
                       <button
                         onClick={handlePrev}
                         className="hover:text-[#FF7009]"

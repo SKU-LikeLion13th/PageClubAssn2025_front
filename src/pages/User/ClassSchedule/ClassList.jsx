@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import classroomData from '../../../utils/classroom.json';
 import { IoCaretDownOutline } from "react-icons/io5";
 
@@ -7,18 +7,37 @@ export default function ClassList() {
   const [selectedRoom, setSelectedRoom] = useState("");
   const [rooms, setRooms] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
+  const [isBuildingOpen, setIsBuildingOpen] = useState(false);
+  const [isRoomOpen, setIsRoomOpen] = useState(false);
+  
+  const buildingDropdownRef = useRef(null);
+  const roomDropdownRef = useRef(null);
 
-  const handleBuildingChange = (e) => {
-    const building = e.target.value;
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (buildingDropdownRef.current && !buildingDropdownRef.current.contains(event.target)) {
+        setIsBuildingOpen(false);
+      }
+      if (roomDropdownRef.current && !roomDropdownRef.current.contains(event.target)) {
+        setIsRoomOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleBuildingSelect = (building) => {
     setSelectedBuilding(building);
     setRooms(classroomData[building]?.rooms || []);
     setSelectedRoom("");
     setSelectedImage("");
+    setIsBuildingOpen(false);
   };
 
-  const handleRoomChange = (e) => {
-    const room = e.target.value;
+  const handleRoomSelect = (room) => {
     setSelectedRoom(room);
+    setIsRoomOpen(false);
   };
 
   const handleSearch = () => {
@@ -30,61 +49,69 @@ export default function ClassList() {
 
   return (
     <div className="flex flex-col items-center text-[#996515]">
-      {/* 제목 */}
       <div className="flex justify-center pt-6 text-[45px]">강의실 시간표</div>
 
-      <div className="flex w-fit px-11 py-0.5 mt-11 font-Moneygraphy text-[10px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[15px] text-[#996515]">
+      <div className="flex w-9/12 px-12 py-1 mt-8 font-Moneygraphy text-[10px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[15px] text-[#996515]">
         {/* 건물 선택 */}
-        <div className="flex items-center">
-          <select
-            name="building"
-            id="building"
-            className="appearance-none"
-            value={selectedBuilding}
-            onChange={handleBuildingChange}
+        <div className="relative w-full" ref={buildingDropdownRef}>
+          <div 
+            className="flex items-center justify-between w-full cursor-pointer"
+            onClick={() => setIsBuildingOpen(!isBuildingOpen)}
           >
-            <option value="">건물</option>
-            {Object.keys(classroomData).map((building) => (
-              <option key={building} value={building}>
-                {building}
-              </option>
-            ))}
-          </select>
-          <IoCaretDownOutline />
+            <span>{selectedBuilding || "건물"}</span>
+            <IoCaretDownOutline />
+          </div>
+          
+          {isBuildingOpen && (
+            <div className="absolute top-full left-0 w-full mt-1 bg-white border border-[#D2B48C] rounded-md shadow-lg z-10">
+              {Object.keys(classroomData).map((building) => (
+                <div
+                  key={building}
+                  className="px-2 py-1 hover:bg-[#F5DEB3] cursor-pointer"
+                  onClick={() => handleBuildingSelect(building)}
+                >
+                  {building}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="border-[#D2B48C] mx-7 border-r-[1px]"></div>
 
         {/* 강의실 선택 */}
-        <div className="flex items-center">
-          <select
-            name="classroom"
-            id="classroom"
-            className="appearance-none"
-            value={selectedRoom}
-            onChange={handleRoomChange}
-            disabled={!rooms.length} // 건물이 선택되지 않으면 비활성화
+        <div className="relative w-full" ref={roomDropdownRef}>
+          <div 
+            className="flex items-center justify-between w-full cursor-pointer"
+            onClick={() => rooms.length > 0 && setIsRoomOpen(!isRoomOpen)}
           >
-            <option value="">강의실</option>
-            {rooms.map((room) => (
-              <option key={room} value={room}>
-                {room}
-              </option>
-            ))}
-          </select>
-          <IoCaretDownOutline className="ml-2" />
+            <span>{selectedRoom || "강의실"}</span>
+            <IoCaretDownOutline />
+          </div>
+          
+          {isRoomOpen && (
+            <div className="absolute top-full left-0 w-full mt-1 bg-white border border-[#D2B48C] rounded-md shadow-lg z-10">
+              {rooms.map((room) => (
+                <div
+                  key={room}
+                  className="px-2 py-1 hover:bg-[#F5DEB3] cursor-pointer"
+                  onClick={() => handleRoomSelect(room)}
+                >
+                  {room}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
-      {/* 조회 버튼 */}
       <button
-        className="flex w-fit px-4 mt-2 ml-[48%] justify-end text-[12px] bg-[#D2B48C] rounded-[11px]"
+        className="flex w-fit px-4 mt-2 ml-[62%] justify-end text-[12px] bg-[#D2B48C] rounded-[11px]"
         onClick={handleSearch}
       >
         조회
       </button>
 
-      {/* 선택된 건물 및 강의실 사진 */}
       {selectedImage && (
         <div className="flex flex-col items-center m-8">
           <img

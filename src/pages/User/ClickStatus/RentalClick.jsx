@@ -99,7 +99,7 @@ useEffect(() => {
           <MemberContainer />
           <div className="flex flex-col items-center w-full">
             <h2 className="text-[35px] mt-7">대여 현황</h2>
-            <div className="relative font-Moneygraphy flex justify-center items-center w-[85%] h-[22rem] px-10 text-[16px] bg-white border border-[#D2B48C] rounded-[13px] mt-7">
+            <div className="relative font-Moneygraphy flex justify-center items-center w-[85%] h-[22rem] px-10 text-[15px] bg-white border border-[#D2B48C] rounded-[13px] mt-7">
               {isLoading ? (
                 <Loading />
               ) : rentItems.length > 0 ? (
@@ -117,11 +117,11 @@ useEffect(() => {
                       </>
                     )}
                   </div>
-                  <div className="flex items-center mt-5 mb-3 text-[#996515] text-[16px] space-x-4">
+                  <div className="flex items-center mt-5 mb-3 text-[#996515] text-[15px] space-x-4">
                     <button onClick={() => handleNavigation("prev")} className="hover:text-[#FF7009]">
                       <img src={images.left} alt="left" />
                     </button>
-                    <span className='text-[11px]'>{currentReservationIndex + 1}/{rentItems.length}</span>
+                    <span className='text-[10px]'>{currentReservationIndex + 1}/{rentItems.length}</span>
                     <button onClick={() => handleNavigation("next")} className="hover:text-[#FF7009]">
                       <img src={images.right} alt="right" />
                     </button>
