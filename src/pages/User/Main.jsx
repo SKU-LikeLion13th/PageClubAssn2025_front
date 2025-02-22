@@ -5,15 +5,15 @@ import MainHeader from "../../components/MainHeader";
 
 export default function Main() {
   return (
-    <div className="flex flex-col items-center text-center min-h-screen py-8">
+    <div className="flex flex-col items-center min-h-screen py-8 text-center">
       <MainHeader />
       {/* 메인 콘텐츠 */}
       <div className="flex flex-col w-full mt-5">
         {" "}
         {/* 페이지로고 */}
-        <div className="flex justify-center">
+        <NavLink to='/' className="flex justify-center">
           <img src={images.page} alt="" className="w-[260px]" />
-        </div>
+        </NavLink>
         <div className="max-w-[500px]:w-full relative">
           {/* 책 배경 이미지 */}
           <img
