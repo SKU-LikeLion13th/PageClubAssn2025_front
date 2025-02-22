@@ -17,7 +17,6 @@ export default function AddMember() {
     const token = localStorage.getItem('Token');
 
     try {
-      // 먼저 이미 존재하는 멤버인지 확인
       const checkResponse = await axios.get(
         `${API_URL}/admin/member/find?keyword=${encodeURIComponent(studentId)}`,
         {
@@ -28,7 +27,6 @@ export default function AddMember() {
       );
 
       if (checkResponse.status === 200 && checkResponse.data.length > 0) {
-        // 이미 존재하는 멤버
         setMessage("이미 등록된 멤버입니다.");
         return;
       }

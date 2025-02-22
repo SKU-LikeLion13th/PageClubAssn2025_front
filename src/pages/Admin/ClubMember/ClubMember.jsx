@@ -116,10 +116,10 @@ export default function ClubMember() {
         />
       </div>
 
-      <div className="flex justify-between w-10/12 my-2 text-[11px] text-[#FF4242] font-PretendardVariable">
-        <div className="flex">선택할 동아리원이 없다면 멤버로 먼저 관리하세요.</div>
-        <NavLink to="/admin/memberManage" className="flex">
-          멤버관리
+      <div className="flex justify-between w-fit my-2 text-[11px] text-[#FF4242] font-PretendardVariable">
+        <div className="flex">선택할 동아리원이 없다면 동아리원을 추가해주세요.</div>
+        <NavLink to="/admin/addClubMember" className="flex ml-2">
+          동아리원 추가
           <img src={images.click} alt="click" className="ml-1 w-[15px] h-[15px]" />
         </NavLink>
       </div>
