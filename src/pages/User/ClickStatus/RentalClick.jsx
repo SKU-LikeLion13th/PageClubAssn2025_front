@@ -81,14 +81,6 @@ useEffect(() => {
     );
   };
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
-  //       <Loading />
-  //     </div>
-  //   );
-  // }
-
   return (
     <>
       <Header />

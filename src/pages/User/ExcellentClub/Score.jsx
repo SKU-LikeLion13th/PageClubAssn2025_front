@@ -43,7 +43,7 @@ export default function Score({ scores = [] }) {
                   ? "h-[7.5rem]"
                   : item.ranking === 2
                   ? "h-[5.5rem]"
-                  : "h-[4rem]"  // 높이 조정
+                  : "h-[4rem]" 
               } bg-[#EFDABD] rounded-t-[10px]`}
             >
               {item.ranking}

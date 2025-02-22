@@ -10,7 +10,7 @@ export default function MemberContainer() {
 
   const dropdownRef = useRef(null);
   const [userData, setUserData] = useState({
-    logo: "", // 기본값을 빈 문자열로 설정
+    logo: "",
     clubName: "",
     name: "",
     clubs: [],
@@ -106,7 +106,7 @@ export default function MemberContainer() {
             {/* selectedClub이 있을 경우 로고를 표시 */}
             {userData && (
               <img
-                src={userData.logo} // 선택된 동아리 로고
+                src={userData.logo}
                 alt="clubLogo"
                 className="w-[60px] object-cover rounded-full"
               />
@@ -123,7 +123,7 @@ export default function MemberContainer() {
 
         {isDropdownOpen && (
           <div
-            ref={dropdownRef} // 드롭다운 영역 참조
+            ref={dropdownRef}
             className="flex flex-col bg-[#ffffff] w-10/12 rounded-[10px] shadow-lg absolute mt-0 z-50">
             {/* userData.clubs이 있을 경우 목록을 표시 */}
             {userData.clubs.map((club) => (
@@ -132,7 +132,7 @@ export default function MemberContainer() {
                 className="flex items-center px-4 py-2 cursor-pointer hover:bg-[#f8f8f8] first:rounded-t-[10px] last:rounded-b-[10px]"
                 onClick={() => handleClubSelect(club)}>
                 <img
-                  src={club.logo} // 동아리 로고
+                  src={club.logo}
                   alt={`${club.name} logo`}
                   className="w-[40px] h-[40px] object-cover rounded-full mr-3"
                 />
