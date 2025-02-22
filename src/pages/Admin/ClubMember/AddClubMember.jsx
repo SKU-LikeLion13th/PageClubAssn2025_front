@@ -62,29 +62,28 @@ export default function AddClubMember() {
   const handleSearch = async () => {
     const token = localStorage.getItem('Token');
     const userRole = localStorage.getItem('role');
-
+  
     if (!token) {
       setError('인증 토큰이 없습니다. 로그인 후 다시 시도해주세요.');
       return;
     }
-
+  
     if (userRole !== 'ROLE_ADMIN') {
       setError('관리자 권한이 없습니다.');
       return;
     }
-
+  
     try {
       const response = await axios.get(
         `${API_URL}/admin/member/find?keyword=${encodeURIComponent(searchKeyword)}`, {
           headers: {
             Authorization: `${token}`,
-            Accept: '*/*',
           },
         });
-
+  
       if (response.status === 200) {
         setSearchResults(response.data);
-
+  
         // 검색 결과가 없으면 에러 메시지 설정
         if (response.data.length === 0) {
           setError('존재하지 않는 멤버입니다. \n멤버 추가에서 먼저 추가해주세요.');
@@ -92,13 +91,15 @@ export default function AddClubMember() {
           setError(''); // 검색 결과가 있으면 에러 메시지 초기화
         }
       } else {
-        throw new Error('Network response was not ok');
+        // API에서 에러 메시지를 가져와서 표시
+        setError(response.data.message || '알 수 없는 오류가 발생했습니다.');
       }
-
     } catch (error) {
       console.error('Error fetching search results:', error);
+      setError(error.response?.data?.message || '서버와 연결할 수 없습니다.');
     }
   };
+  
 
   const handleCheckboxChange = (member) => {
     setSelectedMembers((prevSelected) => {
@@ -114,12 +115,12 @@ export default function AddClubMember() {
 
   const handleAddMembers = async () => {
     const token = localStorage.getItem('Token');
-
+  
     if (!token) {
       setError('인증 토큰이 없습니다. 로그인 후 다시 시도해주세요.');
       return;
     }
-
+  
     try {
       const promises = selectedMembers.map((member) =>
         axios.post(
@@ -138,7 +139,7 @@ export default function AddClubMember() {
           }
         )
       );
-
+  
       await Promise.all(promises);
       alert('선택한 멤버가 성공적으로 추가되었습니다.');
       setSelectedMembers([]);
@@ -147,9 +148,19 @@ export default function AddClubMember() {
       }, 1000);
     } catch (error) {
       console.error('Error adding members:', error);
-      setError('멤버 추가 중 오류가 발생했습니다.');
+  
+      // error.response가 존재하면 메시지를 출력
+      if (error.response) {
+        const errorMessage = error.response.data || '알 수 없는 서버 오류가 발생했습니다.';
+        setError(errorMessage);
+      } else {
+        // error.response가 없으면 일반적인 오류 메시지 출력
+        setError('서버에 요청을 보낼 수 없습니다.');
+      }
     }
   };
+  
+  
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
