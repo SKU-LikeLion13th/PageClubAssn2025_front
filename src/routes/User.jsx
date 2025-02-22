@@ -19,14 +19,18 @@ import Footer from '../components/Footer';
 
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useLogin();
-  
+
   if (!isLoggedIn) {
-    alert("로그인 후 이용 가능합니다.");
+    setTimeout(() => {
+      alert("로그인 후 이용 가능합니다.");
+    }, 0);
+
     return <Navigate to="/login" />;
   }
 
   return children;
 };
+
 
 const User = () => {
   return (
