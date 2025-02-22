@@ -1,11 +1,10 @@
 import React from "react";
 
-// 순위에 맞는 접미사를 계산하는 함수
 const getRankingSuffix = (rank) => {
   if (rank === 1) return "st";
   if (rank === 2) return "nd";
   if (rank === 3) return "rd";
-  return "th"; // 4위 이상은 모두 "th"
+  return "th";
 };
 
 export default function ScoreList({ scores = [] }) {
@@ -21,7 +20,7 @@ export default function ScoreList({ scores = [] }) {
           }`}
         >
           <div className="flex justify-start text-[14px] w-[50px]">
-            {`${item.ranking}${getRankingSuffix(item.ranking)}`} {/* 순위와 접미사 표시 */}
+            {`${item.ranking}${getRankingSuffix(item.ranking)}`}
           </div>
           <div className="flex justify-center text-[15px] flex-grow">
             {item.clubName}

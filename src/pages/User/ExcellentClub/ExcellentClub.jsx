@@ -5,17 +5,17 @@ import ScoreList from "./ScoreList";
 import Header from "../../../components/Header";
 import axios from "axios";
 import { API_URL } from "../../../config";
-import Loading from "../../../components/Loading"; // 로딩 컴포넌트 추가
-import './ExcellentClub.css';  // CSS 파일 import
+import Loading from "../../../components/Loading";
+import '../../../css/ExcellentClub.css'; 
 
 export default function ExcellentClub() {
   const [clubScore, setClubScore] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // ✅ 로딩 상태 추가
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
 
-    setIsLoading(true); // ✅ 요청 시작 전에 로딩 상태 true
+    setIsLoading(true);
 
     axios
       .get(`${API_URL}/club-scores/all`, {
@@ -25,7 +25,6 @@ export default function ExcellentClub() {
         },
       })
       .then((response) => {
-        // Base64 이미지 디코딩
         const decodedData = response.data.map((item) => ({
           ...item,
           logo: item.logo.startsWith("data:image")
@@ -39,11 +38,10 @@ export default function ExcellentClub() {
         console.error("Error fetching joined clubs:", error);
       })
       .finally(() => {
-        setIsLoading(false); // ✅ 요청 완료 후 로딩 상태 false
+        setIsLoading(false);
       });
   }, []);
 
-  // ✅ 로딩 중이면 Loading 컴포넌트 표시
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen text-[40px] text-[#996515]">
