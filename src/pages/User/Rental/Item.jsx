@@ -257,7 +257,7 @@ const Item = () => {
                 closeModal={closeModal}
                 nextStep={nextStep}
                 setModalStep={setModalStep}
-                setSelectedItem={setSelectedItem} // ✅ 추가
+                setSelectedItem={setSelectedItem}
               />
             </div>
           )}

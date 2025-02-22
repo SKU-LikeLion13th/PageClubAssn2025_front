@@ -78,7 +78,7 @@ export default function Reservation() {
         setReservations(updatedItems);
       })
       .catch((error) => {
-        console.error("예약 취소 실패:", error);
+        //console.error("예약 취소 실패:", error);
       });
   };
 

@@ -17,13 +17,13 @@ export default function Menu() {
             alt="책 배경 이미지"
           />
           <NavLink to="/Introduction">
-            <button className="absolute w-[200px] h-12 border-2 top-[25%] max-w-[500px]:left-[45%] transform -translate-x-[34%] z-10"></button>
+            <button className="absolute w-[200px] h-12 top-[25%] max-w-[500px]:left-[45%] transform -translate-x-[34%] z-10"></button>
           </NavLink>
           <NavLink to="/SNS">
-            <button className="absolute w-36 h-[47px] border-2 top-[38%] max-w-[500px]:left-[50%] transform -translate-x-[40%] z-10"></button>
+            <button className="absolute w-36 h-[47px] top-[38%] max-w-[500px]:left-[50%] transform -translate-x-[40%] z-10"></button>
           </NavLink>
           <NavLink to="/AboutUs">
-            <button className="absolute w-[140px] h-[47px] border-2 top-[50%] max-w-[500px]:left-[30%] transform -translate-x-[30%] z-10"></button>
+            <button className="absolute w-[140px] h-[47px] top-[50%] max-w-[500px]:left-[30%] transform -translate-x-[30%] z-10"></button>
           </NavLink>
         </div>
       </div>
