@@ -5,8 +5,8 @@ import ScoreList from "./ScoreList";
 import Header from "../../../components/Header";
 import axios from "axios";
 import { API_URL } from "../../../config";
-import RibbonBackground from "../../../components/RibbonBackground";
 import Loading from "../../../components/Loading"; // 로딩 컴포넌트 추가
+import './ExcellentClub.css';  // CSS 파일 import
 
 export default function ExcellentClub() {
   const [clubScore, setClubScore] = useState([]);
@@ -57,10 +57,10 @@ export default function ExcellentClub() {
       <Header />
       <div className="relative w-full min-h-[calc(100vh-130px)] mb-4">
         {/* 리본 배경 */}
-        <div className="absolute z-0 flex items-center justify-center w-full h-full">
-            <img src={images.ribbon} className="w-full opacity-50" alt="ribbon" />
+        <div className="ribbon-background">
+          <img src={images.ribbon} className="w-full opacity-50" alt="ribbon" />
         </div>
-              
+
         {/* 콘텐츠 */}
         <div className="flex flex-col items-center h-full">
           {/* TOP3 점수 */}

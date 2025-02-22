@@ -1,0 +1,39 @@
+/* ExcellentClub.css */
+
+/* 기본 스타일 */
+.ribbon-background {
+  position: absolute;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: calc(100vh - 130px);
+  margin-top: 1.5rem;
+}
+
+.ribbon-background img {
+  width: 100%;
+  opacity: 0.5;
+}
+
+/* 모바일 화면에서 */
+@media (max-width: 500px) {
+  .ribbon-background {
+    margin-top: 10rem;
+  }
+}
+
+/* 모바일 화면에서 */
+@media (max-width: 640px) {
+  .ribbon-background {
+    margin-top: 8rem;
+  }
+}
+
+/* 중간 크기 화면에서 */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .ribbon-background {
+    margin-top: 2rem;
+  }
+}
