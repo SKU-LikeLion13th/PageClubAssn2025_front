@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import Header from "../../../components/Header";
 import LoginFailureModal from "./LoginFailureModal";
 import axios from "axios";
 import { API_URL } from "../../../config";
@@ -70,9 +69,9 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex justify-between items-center w-full px-4 pt-8 z-10">
+      <div className="z-10 flex items-center justify-between w-full px-4 pt-8">
         {/* 헤더 */}
-        <div className="flex justify-between items-center w-full max-w-4xl px-2">
+        <div className="flex items-center justify-between w-full max-w-4xl px-2">
           <NavLink to="/">
             <img
               src={images.Home}

@@ -1,5 +1,3 @@
-// AuthProvider.jsx
-
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -21,6 +19,7 @@ export const AuthProvider = ({ children }) => {
       setIsLoggedIn(true);
     }
 
+    // 요청 인터셉터 설정
     axiosInstance.interceptors.request.use(
       (config) => {
         const token = localStorage.getItem('Token');
@@ -37,9 +36,14 @@ export const AuthProvider = ({ children }) => {
       (error) => {
         if (error.response && error.response.status === 401) {
           localStorage.removeItem('Token');
-          setIsLoggedIn(false);  // 로그아웃 처리
-          alert("로그인 후 이용 가능합니다.");
-          navigate("/login");
+          setIsLoggedIn(false);
+
+          setTimeout(() => {
+            alert("로그인 후 이용 가능합니다.");
+            navigate("/login");
+          }, 0);
+
+          return Promise.reject(error);
         }
         return Promise.reject(error);
       }
