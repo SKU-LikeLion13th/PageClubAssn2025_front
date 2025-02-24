@@ -78,26 +78,8 @@ export default function AdminLogin() {
             입력해주세요
           </span>
           <form className="inputbox mt-7">
-            {/* 학번 입력 */}
-            <div className="flex flex-col idbox">
-              <span className="ml-1 text-base id">학번</span>
-              <input
-                type="text"
-                name="studentId"
-                value={studentInfo.studentId}
-                onChange={handleInputChange}
-                className="p-3 mt-1 border rounded-lg idinput"
-                placeholder="20190826"
-              />
-              {!idValid && studentInfo.studentId.length > 0 && (
-                <div className="mt-2 ml-2 text-xs text-red-500">
-                  숫자 8자를 입력해주세요
-                </div>
-              )}
-            </div>
-
             {/* 이름 입력 */}
-            <div className="flex flex-col mt-5 namebox">
+            <div className="flex flex-col namebox">
               <span className="ml-1 text-base name">이름</span>
               <input
                 type="text"
@@ -110,6 +92,24 @@ export default function AdminLogin() {
               {!nameValid && studentInfo.name.length > 0 && (
                 <div className="mt-2 ml-2 text-xs text-red-500">
                   한글 이름을 입력해주세요 (최소 2글자)
+                </div>
+              )}
+            </div>
+
+            {/* 학번 입력 */}
+            <div className="flex flex-col mt-5 idbox">
+              <span className="ml-1 text-base id">학번</span>
+              <input
+                type="text"
+                name="studentId"
+                value={studentInfo.studentId}
+                onChange={handleInputChange}
+                className="p-3 mt-1 border rounded-lg idinput"
+                placeholder="20251234"
+              />
+              {!idValid && studentInfo.studentId.length > 0 && (
+                <div className="mt-2 ml-2 text-xs text-red-500">
+                  숫자 8자를 입력해주세요
                 </div>
               )}
             </div>
