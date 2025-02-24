@@ -21,7 +21,7 @@ const UpdateClubScore = () => {
         const token = localStorage.getItem("Token");
 
         // 동아리 목록 가져오기
-        const clubsResponse = await axios.get(`${API_URL}/admin/club/all`, {
+        const clubsResponse = await axios.get(`${API_URL}/admin/club/summary`, {
           headers: {
             Authorization: `${token}`,
           },
@@ -183,7 +183,7 @@ const UpdateClubScore = () => {
                       className="w-full text-[12px] font-semibold text-center border-b border-[#3F3F3F]/[.5] bg-transparent focus:outline-none">
                       <option value="">동아리 선택</option>
                       {clubs.map((club) => (
-                        <option key={club.id} value={club.name}>
+                        <option key={club.clubId} value={club.name}>
                           {club.name}
                         </option>
                       ))}
