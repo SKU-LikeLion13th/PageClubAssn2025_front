@@ -20,6 +20,7 @@ const UpdateClubScore = () => {
       try {
         const token = localStorage.getItem("Token");
 
+        // 동아리 목록 가져오기
         const clubsResponse = await axios.get(`${API_URL}/admin/club/all`, {
           headers: {
             Authorization: `${token}`,
@@ -27,33 +28,46 @@ const UpdateClubScore = () => {
         });
         setClubs(clubsResponse.data);
 
-        const scoresResponse = await axios.get(`${API_URL}/club-scores/all`, {
-          headers: {
-            Authorization: `${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        try {
+          // 점수 데이터 가져오기 - 404 오류를 별도로 처리하기 위해 별도의 try/catch 블록 사용
+          const scoresResponse = await axios.get(`${API_URL}/club-scores/all`, {
+            headers: {
+              Authorization: `${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          });
 
-        if (scoresResponse.data && scoresResponse.data.length > 0) {
-          const top3Scores = scoresResponse.data
-            .filter((score) => score.ranking <= 3)
-            .sort((a, b) => a.ranking - b.ranking);
+          if (scoresResponse.data && scoresResponse.data.length > 0) {
+            const top3Scores = scoresResponse.data
+              .filter((score) => score.ranking <= 3)
+              .sort((a, b) => a.ranking - b.ranking);
 
-          if (top3Scores.length > 0 && top3Scores[0].quarter) {
-            setSelectedQuarter(top3Scores[0].quarter);
+            if (top3Scores.length > 0 && top3Scores[0].quarter) {
+              setSelectedQuarter(top3Scores[0].quarter);
+            }
+
+            setScores(
+              scores.map((score, index) => ({
+                ...score,
+                clubName: top3Scores[index]?.clubName || "",
+                score: top3Scores[index]?.score.toString() || "",
+              }))
+            );
           }
+        } catch (scoresError) {
+          // 점수 데이터 가져오기 오류 처리
+          console.error("Error fetching scores:", scoresError);
 
-          setScores(
-            scores.map((score, index) => ({
-              ...score,
-              clubName: top3Scores[index]?.clubName || "",
-              score: top3Scores[index]?.score.toString() || "",
-            }))
-          );
+          // 404 에러일 경우 아무 처리 없이 기본값 유지
+          if (scoresError.response && scoresError.response.status !== 404) {
+            // 404가 아닌 다른 에러는 알림 표시
+            console.error("Error fetching scores:", scoresError);
+            alert("점수 데이터를 불러오는 중 오류가 발생했습니다.");
+          }
         }
       } catch (error) {
-        const errorStatus = error.status;
-        if (errorStatus === 401) {
+        // 동아리 목록 가져오기 또는 전체적인 오류 처리
+        if (error.response && error.response.status === 401) {
           navigate("/admin/adminlogin");
         } else {
           console.error("Error fetching data:", error);
@@ -91,7 +105,7 @@ const UpdateClubScore = () => {
         quarter: selectedQuarter,
         ranking: item.ranking,
         clubName: item.clubName,
-        score: parseInt(item.score, 10),
+        score: parseInt(item.score, 10) || 0, // 점수가 비어있으면 0으로 처리
       }));
 
       await axios.post(
@@ -108,8 +122,7 @@ const UpdateClubScore = () => {
       alert("점수가 성공적으로 저장되었습니다.");
       navigate("/admin/club-score-management");
     } catch (error) {
-      const errorStatus = error.status;
-      if (errorStatus === 401) {
+      if (error.response && error.response.status === 401) {
         navigate("/admin/adminlogin");
       } else {
         console.error("Error submitting scores:", error);
