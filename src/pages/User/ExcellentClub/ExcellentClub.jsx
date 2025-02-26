@@ -58,7 +58,7 @@ export default function ExcellentClub() {
 
       <div className="flex items-center justify-center w-full">
         {isLoading ? (
-          <div className="absolute">
+          <div className="absolute flex flex-col items-center top-1/2">
             <Loading />
           </div>
         ) : clubScore.length > 0 ? (
@@ -68,7 +68,7 @@ export default function ExcellentClub() {
           </div>
         ) : (
           <div className="absolute flex items-center justify-center w-9/12 ready">
-            <div className="w-full h-[22rem] flex items-center justify-center font-Moneygraphy text-[15px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] text-[#996515]">데이터를 준비 중입니다.</div>
+            <div className="w-full h-[22rem] flex items-center justify-center font-Moneygraphy text-[15px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] text-[#996515]">Comming Soon!</div>
           </div>
         )}
       </div>

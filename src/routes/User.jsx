@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { AuthProvider, useLogin } from '../components/AuthProvider';
 import ExcellentClub from '../pages/User/ExcellentClub/ExcellentClub';
 import RentalItems from '../pages/User/Rental/RentalItems';
 import Login from '../pages/User/Login/Login';
@@ -18,25 +17,46 @@ import Main from '../pages/User/Main';
 import Footer from '../components/Footer';
 import Page404 from '../pages/User/Page404';
 
-const ProtectedRoute = ({ children }) => {
-  const { isLoggedIn } = useLogin();
+const isTokenValid = () => {
+  const token = localStorage.getItem('Token');
+  if (!token) return false;
 
-  if (!isLoggedIn) {
-    setTimeout(() => {
-      alert("로그인 후 이용 가능합니다.");
-    }, 0);
+  try {
+    const tokenParts = token.replace('Bearer ', '').split('.');
+    if (tokenParts.length !== 3) {
+      console.error('Invalid token format');
+      return false;
+    }
 
-    return <Navigate to="/login" />;
+    const decodedPayload = JSON.parse(atob(tokenParts[1]));
+    const currentTime = Math.floor(Date.now() / 1000);
+
+    if (decodedPayload.exp < currentTime) {
+      console.warn('Token expired');
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    return false;
   }
+};
 
+const ProtectedRoute = ({ children }) => {
+  if (!isTokenValid()) {
+    alert('로그인이 필요합니다.');
+    return <Navigate to="/login" replace />;
+  }
   return children;
 };
 
 const User = () => {
   return (
-    <AuthProvider>
+    <div>
       <Routes>
-        {/* 로그인하지 않아도 되는 페이지들 */}
+        {/* 로그인 없이 접근 가능한 페이지 */}
         <Route path="/" element={<Main />} />
         <Route path="/excellentclub" element={<ExcellentClub />} />
         <Route path="/classSchedule" element={<ClassSchedule />} />
@@ -45,20 +65,20 @@ const User = () => {
         <Route path="/sns" element={<SNS />} />
         <Route path="/aboutus" element={<AboutUs />} />
 
-        {/* 로그인 후 접근해야 하는 페이지들 */}
+        {/* 로그인 후 접근해야 하는 페이지 */}
         <Route path="/login" element={<Login />} />
         <Route path="/user-agreement" element={<UserAgreement />} />
-        <Route path="/mypage" element={ <ProtectedRoute><MyPage /></ProtectedRoute> } />
-        <Route path="/member-card" element={ <ProtectedRoute><ClubMemberCard /></ProtectedRoute>} />
-        <Route path="/rentalitems" element={ <ProtectedRoute><RentalItems /></ProtectedRoute> } />
-        <Route path="/reservation" element={ <ProtectedRoute><Reservation /></ProtectedRoute> } />
-        <Route path="/rentalclick" element={ <ProtectedRoute><RentalClick /></ProtectedRoute> } />
+        <Route path="/mypage" element={<ProtectedRoute><MyPage /></ProtectedRoute>} />
+        <Route path="/member-card" element={<ProtectedRoute><ClubMemberCard /></ProtectedRoute>} />
+        <Route path="/rentalitems" element={<ProtectedRoute><RentalItems /></ProtectedRoute>} />
+        <Route path="/reservation" element={<ProtectedRoute><Reservation /></ProtectedRoute>} />
+        <Route path="/rentalclick" element={<ProtectedRoute><RentalClick /></ProtectedRoute>} />
 
         {/* 404 페이지 */}
         <Route path="*" element={<Page404 />} />
       </Routes>
       <Footer className="text-[#d2b48c] pb-5 pt-8" />
-    </AuthProvider>
+    </div>
   );
 };
 

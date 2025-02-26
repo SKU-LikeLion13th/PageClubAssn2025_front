@@ -34,7 +34,7 @@ const members = [
     imgSrc: "../../assets/images/ClubUnion/최효빈.png",
     logoSrc: "../../assets/images/PageLogo.png",
     name: "최효빈",
-    department: "사회복지학과 23학번",
+    department: "사회복지학과 20학번",
     role: "동아리연합회 기획국장",
     task: "기획",
   },
