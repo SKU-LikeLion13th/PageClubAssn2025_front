@@ -69,87 +69,89 @@ export default function Login() {
 
   return (
     <>
-      <div className="z-10 flex items-center justify-between w-full px-4 pt-8">
+      <div className="relative w-full min-h-[calc(100vh-75px)] flex flex-col">
         {/* 헤더 */}
-        <div className="flex items-center justify-between w-full max-w-4xl px-2">
-          <NavLink to="/">
-            <img
-              src={images.Home}
-              alt="홈 아이콘"
-              className="w-[19px] h-[22px]"
-            />
-          </NavLink>
-          <NavLink to="/">
-            <img
-              src={images.Back}
-              alt="뒤로 가기 아이콘"
-              className="w-[10px] h-[20px]"
-            />
-          </NavLink>
-        </div>
-      </div>
-
-      <div className="relative w-full min-h-[calc(100vh-130px)] flex justify-center items-center">
-        {/* 리본 배경 */}
-        <div className="absolute flex items-center justify-center w-full h-full">
-          <img src={images.ribbon} className="w-full " alt="ribbon" />
+        <div className="z-50 flex items-center justify-between w-full px-4 pt-8">
+          <div className="flex items-center justify-between w-full max-w-4xl px-2">
+            <NavLink to="/">
+              <img
+                src={images.Home}
+                alt="홈 아이콘"
+                className="w-[19px] h-[22px]"
+              />
+            </NavLink>
+            <NavLink to="/">
+              <img
+                src={images.Back}
+                alt="뒤로 가기 아이콘"
+                className="w-[10px] h-[20px]"
+              />
+            </NavLink>
+          </div>
         </div>
 
-        <div className="z-[50] w-[75%] text-center">
-          <div className="font-Ownglyph_PDH text-[#996515] text-[65px]">
-            LOGIN
+        <div className="flex-1 flex justify-center items-center">
+          {/* 리본 배경 */}
+          <div className="absolute flex items-center justify-center w-full h-full">
+            <img src={images.ribbon} className="w-full " alt="ribbon" />
           </div>
 
-          <form onSubmit={handleLogin} className="font-Moneygraphy">
-            <div className="my-24 space-y-8">
-              {/* 이름 입력 */}
-              <div className="flex flex-wrap items-center bg-[#FFFFFF] border border-[#D2B48C] rounded-lg h-auto min-h-11 py-2">
-                <label className="w-14 ml-3 pr-3 mb-0 text-[#996515] border-r-[0.5px] border-[#CBB189] ">
-                  이름
-                </label>
-                <input
-                  type="text"
-                  placeholder="홍길동"
-                  className="flex-1 min-w-0 ml-3 md:ml-4 text-[14px] placeholder-[#9965154D] outline-none text-[#996515]"
-                  name="name"
-                  value={studentInfo.name}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              {/* 학번 입력 */}
-              <div className="flex flex-wrap items-center bg-[#FFFFFF] border border-[#D2B48C] rounded-lg h-auto min-h-11 py-2">
-                <label className="w-14 ml-3 pr-3 mb-0 text-[#996515] border-r-[0.5px] border-[#CBB189]">
-                  학번
-                </label>
-                <input
-                  type="text"
-                  placeholder="20251234"
-                  className="flex-1 min-w-0 ml-3 md:ml-4 text-[14px] placeholder-[#9965154D] outline-none text-[#996515]"
-                  name="studentId"
-                  value={studentInfo.studentId}
-                  onChange={handleInputChange}
-                />
-              </div>
+          <div className="z-[50] w-[75%] text-center">
+            <div className="font-Ownglyph_PDH text-[#996515] text-[65px]">
+              LOGIN
             </div>
 
-            {/* 로그인 버튼 */}
-            <button
-              type="submit"
-              className={`w-24 h-9 rounded-lg text-lg ${
-                isFormFilled
-                  ? "bg-[#D2B48C] text-[#583D2C]" // 활성화 버튼
-                  : "bg-[#D2B48C80] text-[#583D2C80]" // 비활성화 버튼
-              }`}
-              disabled={!isFormFilled}>
-              로그인
-            </button>
-          </form>
-        </div>
-      </div>
+            <form onSubmit={handleLogin} className="font-Moneygraphy">
+              <div className="my-24 space-y-8">
+                {/* 이름 입력 */}
+                <div className="flex flex-wrap items-center bg-[#FFFFFF] border border-[#D2B48C] rounded-lg h-auto min-h-11 py-2">
+                  <label className="w-14 ml-3 pr-3 mb-0 text-[#996515] border-r-[0.5px] border-[#CBB189] ">
+                    이름
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="홍길동"
+                    className="flex-1 min-w-0 ml-3 md:ml-4 text-[14px] placeholder-[#9965154D] outline-none text-[#996515]"
+                    name="name"
+                    value={studentInfo.name}
+                    onChange={handleInputChange}
+                  />
+                </div>
 
-      {/* 모달 */}
-      {showModal && <LoginFailureModal onClose={handleCloseModal} />}
+                {/* 학번 입력 */}
+                <div className="flex flex-wrap items-center bg-[#FFFFFF] border border-[#D2B48C] rounded-lg h-auto min-h-11 py-2">
+                  <label className="w-14 ml-3 pr-3 mb-0 text-[#996515] border-r-[0.5px] border-[#CBB189]">
+                    학번
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="20251234"
+                    className="flex-1 min-w-0 ml-3 md:ml-4 text-[14px] placeholder-[#9965154D] outline-none text-[#996515]"
+                    name="studentId"
+                    value={studentInfo.studentId}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+
+              {/* 로그인 버튼 */}
+              <button
+                type="submit"
+                className={`w-24 h-9 rounded-lg text-lg ${
+                  isFormFilled
+                    ? "bg-[#D2B48C] text-[#583D2C]" // 활성화 버튼
+                    : "bg-[#D2B48C80] text-[#583D2C80]" // 비활성화 버튼
+                }`}
+                disabled={!isFormFilled}>
+                로그인
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {/* 모달 */}
+        {showModal && <LoginFailureModal onClose={handleCloseModal} />}
+      </div>
     </>
   );
 }
