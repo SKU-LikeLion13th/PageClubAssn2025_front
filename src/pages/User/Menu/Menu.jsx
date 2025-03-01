@@ -17,21 +17,21 @@ export default function Menu() {
             alt="책 배경 이미지"
           />
           <NavLink to="/Introduction">
-            <button className="absolute w-[47%] h-[8.5%] top-[25.5%] max-w-[500px]:left-[45%] transform -translate-x-[40%] z-10 border">
+            <button className="absolute w-[47%] h-[8.5%] top-[25.5%] max-w-[500px]:left-[45%] transform -translate-x-[40%] z-10">
               <div className="text-[150%] pr-9 text-[#3f3f3f] flex justify-center items-center">
                 동아리연합회 소개
               </div>
             </button>
           </NavLink>
           <NavLink to="/SNS">
-            <button className="absolute w-[33%] h-[8.5%] top-[38.5%] max-w-[500px]:left-[50%] transform -translate-x-[48%] z-10 border">
+            <button className="absolute w-[33%] h-[8.5%] top-[38.5%] max-w-[500px]:left-[50%] transform -translate-x-[48%] z-10">
               <div className="text-[150%] pr-8 text-[#3f3f3f] flex justify-center items-center">
                 SNS
               </div>
             </button>
           </NavLink>
           <NavLink to="/AboutUs">
-            <button className="absolute w-[33%] h-[8.5%] top-[51%] max-w-[500px]:left-[30%] transform -translate-x-[40%] z-10 border">
+            <button className="absolute w-[33%] h-[8.5%] top-[51%] max-w-[500px]:left-[30%] transform -translate-x-[40%] z-10">
               <div className="text-[150%] pr-8 text-[#3f3f3f] flex justify-center items-center">
                 만든이들
               </div>
