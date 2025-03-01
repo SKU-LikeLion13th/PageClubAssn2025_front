@@ -56,7 +56,7 @@ export default function ClassList() {
         <div className="relative w-full" ref={buildingDropdownRef}>
           <div 
             className="flex items-center justify-between w-full cursor-pointer"
-            onClick={() => setIsBuildingOpen(!isBuildingOpen)}
+            // onClick={() => setIsBuildingOpen(!isBuildingOpen)}
           >
             <span>{selectedBuilding || "건물"}</span>
             <IoCaretDownOutline />
@@ -112,15 +112,19 @@ export default function ClassList() {
         조회
       </button>
 
-      {selectedImage && (
-        <div className="flex flex-col items-center m-8">
+      <div className="flex flex-col items-center m-8">
+        {selectedImage ? (
           <img
             src={selectedImage}
             alt={`${selectedBuilding} ${selectedRoom}`}
             className="w-fit object-cover border border-[#D2B48C] rounded-[20px]"
           />
-        </div>
-      )}
+        ) : (
+          <div className="w-[265%] h-[25rem] flex items-center justify-center font-Moneygraphy text-[15px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] text-[#996515]">
+            Comming Soon!
+          </div>
+        )}
+      </div>
     </div>
   );
 }
