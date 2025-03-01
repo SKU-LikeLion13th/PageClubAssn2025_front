@@ -1,7 +1,47 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { images } from "../../../utils/images";
 
-export default function Score({ scores = [], currentIndexes = {} }) {
+export default function Score({ scores = [] }) {
+  
+  // 같은 등수를 가진 팀들을 관리할 상태
+  const [currentIndexes, setCurrentIndexes] = useState({});
+  const intervalIds = useRef({}); // useRef로 intervalIds를 관리합니다.
+
+  useEffect(() => {
+    // clean up the intervals on component unmount
+    return () => {
+      Object.values(intervalIds.current).forEach(clearInterval);
+    };
+  }, []);
+
+  useEffect(() => {
+    scores.forEach((item) => {
+      const sameRankTeams = scores.filter((team) => team.ranking === item.ranking);
+      
+      if (sameRankTeams.length > 1 && !intervalIds.current[item.ranking]) {
+        intervalIds.current[item.ranking] = setInterval(() => {
+          setCurrentIndexes((prevIndexes) => {
+            const currentIndex = prevIndexes[item.ranking] || 0;
+            return {
+              ...prevIndexes,
+              [item.ranking]: (currentIndex + 1) % sameRankTeams.length,
+            };
+          });
+        }, 2500);
+      }
+    });
+
+    // 클린업 - 등수가 하나라도 바뀌면, 기존 setInterval을 지운 후 새로 시작합니다.
+    scores.forEach((item) => {
+      const sameRankTeams = scores.filter((team) => team.ranking === item.ranking);
+      if (sameRankTeams.length <= 1 && intervalIds.current[item.ranking]) {
+        clearInterval(intervalIds.current[item.ranking]);
+        intervalIds.current[item.ranking] = null;
+      }
+    });
+
+  }, [scores]); // scores가 바뀔 때마다 실행됩니다.
+
   if (scores.length === 0) {
     return <div>데이터를 불러오는 중...</div>;
   }

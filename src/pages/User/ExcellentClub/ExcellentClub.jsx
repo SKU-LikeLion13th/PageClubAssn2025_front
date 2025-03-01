@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { images } from "../../../utils/images";
 import Score from "./Score";
 import ScoreList from "./ScoreList";
@@ -11,8 +11,6 @@ import "../../../css/ExcellentClub.css";
 export default function ExcellentClub() {
   const [clubScore, setClubScore] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentIndexes, setCurrentIndexes] = useState({});
-  const intervalIds = useRef({});
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
@@ -43,45 +41,16 @@ export default function ExcellentClub() {
         setIsLoading(false);
       });
   }, []);
-
-  useEffect(() => {
-    clubScore.forEach((item) => {
-      const sameRankTeams = clubScore.filter(
-        (team) => team.ranking === item.ranking
-      );
-
-      if (sameRankTeams.length > 1 && !intervalIds.current[item.ranking]) {
-        intervalIds.current[item.ranking] = setInterval(() => {
-          setCurrentIndexes((prevIndexes) => {
-            const currentIndex = prevIndexes[item.ranking] || 0;
-            return {
-              ...prevIndexes,
-              [item.ranking]: (currentIndex + 1) % sameRankTeams.length,
-            };
-          });
-        }, 2500);
-      }
-    });
-
-    clubScore.forEach((item) => {
-      const sameRankTeams = clubScore.filter(
-        (team) => team.ranking === item.ranking
-      );
-      if (sameRankTeams.length <= 1 && intervalIds.current[item.ranking]) {
-        clearInterval(intervalIds.current[item.ranking]);
-        intervalIds.current[item.ranking] = null;
-      }
-    });
-  }, [clubScore]);
-
+  
   return (
-    <div className="relative min-h-[calc(100vh-200px)]">
+    <div className="relative min-h-screen">
       <Header />
 
       {/* 활동점수 Top 3 제목 */}
       <div className="z-10">
         <div className="flex justify-center w-fit mx-auto text-[25.5px] text-[#996515] border-[0.5px] border-[#996515] bg-[#ffffff] rounded-[62px] mt-8 px-11 py-1">
-          {clubScore.length > 0 ? clubScore[0].quarter : ""} 활동 점수 TOP3
+          {/* {clubScore.length > 0 ? clubScore[0].quarter : ""}  */}
+          활동 점수 TOP3
         </div>
 
         <div className="flex items-center justify-center w-full">
@@ -109,5 +78,5 @@ export default function ExcellentClub() {
         <img src={images.ribbon} className="w-full opacity-50" alt="ribbon" />
       </div>
     </div>
-  );
+  );  
 }
