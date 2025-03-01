@@ -58,4 +58,5 @@ export const images = {
 
   //ScoreList
   toggle : PATH + "/assets/images/toggle.png",
+  clubToggle : PATH + "/assets/images/clubToggle.png",
 };
