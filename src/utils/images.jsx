@@ -55,4 +55,7 @@ export const images = {
 
   //404page
   img404 : PATH +"/assets/images/img404.png",
+
+  //ScoreList
+  toggle : PATH + "/assets/images/toggle.png",
 };
