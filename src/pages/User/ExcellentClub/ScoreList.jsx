@@ -47,27 +47,28 @@ export default function ScoreList({ scores = [] }) {
         return (
           <div key={rank}>
             <div
-              className={`flex px-3 py-4 items-center ${group.length > 1 ? "cursor-pointer" : ""} 
+              className={`flex pl-4 pr-1.5 py-4 items-center ${group.length > 1 ? "cursor-pointer" : ""} 
                 ${!isLastRank && !isExpanded ? "border-b-[1px] border-[#d2b48c]" : ""}`}
               onClick={() => group.length > 1 && toggleGroupVisibility(rank)}
             >
-              <div className="flex justify-start text-[14px] w-[50px]">
+              <div className="flex justify-start text-[14px] w-fit">
                 {`${rank}${getRankingSuffix(parseInt(rank))}`}
               </div>
               <div className="flex justify-center text-[15px] flex-grow">
                 {group[0].clubName}
               </div>
-              <div className="flex justify-end text-[10px]">
+              <div className={`flex justify-end h-fit text-[10px] ${!isExpanded && group.length <= 1 ? 'mr-3' : ''}`}>
                 <div className="flex px-2 items-center border-[1px] border-[#d2b48c] rounded-[20px]">
                   {group[0].score}
                 </div>
               </div>
+
               {group.length > 1 && (
                 <img
-                  src={images.toggle}
+                  src={images.clubToggle}
                   alt="Toggle"
-                  className="ml-2"
-                  style={{ width: "10px", height: "8px" }}
+                  className="ml-1.5"
+                  style={{ width: "7px" }}
                 />
               )}
             </div>
@@ -79,16 +80,16 @@ export default function ScoreList({ scores = [] }) {
               return (
                 <div 
                   key={item.id || itemIndex} 
-                  className={`flex px-3 py-4 ${itemIndex === 0 ? "border-t-[1px]" : ""} 
+                  className={`flex pl-4 pr-2.5 py-4 items-center ${itemIndex === 0 ? "border-t-[1px]" : ""} 
                     ${shouldShowBorderBottom ? "border-b-[1px]" : ""} border-[#d2b48c]`}
                 >
-                  <div className="flex justify-start text-[14px] w-[50px]">
+                  <div className="flex justify-start text-[14px]">
                     {`${item.ranking}${getRankingSuffix(item.ranking)}`}
                   </div>
                   <div className="flex justify-center text-[15px] flex-grow">
                     {item.clubName}
                   </div>
-                  <div className="flex justify-end text-[10px]">
+                  <div className="flex justify-end h-fit text-[10px] mr-2">
                     <div className="flex px-2 items-center border-[1px] border-[#d2b48c] rounded-[20px]">
                       {item.score}
                     </div>

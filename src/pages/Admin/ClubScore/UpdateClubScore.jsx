@@ -30,7 +30,7 @@ const UpdateClubScore = () => {
 
         try {
           // 점수 데이터 가져오기 - 404 오류를 별도로 처리하기 위해 별도의 try/catch 블록 사용
-          const scoresResponse = await axios.get(`${API_URL}/club-scores/all`, {
+          const scoresResponse = await axios.get(`${API_URL}/club-scores/ranked`, {
             headers: {
               Authorization: `${token}`,
               "Content-Type": "multipart/form-data",

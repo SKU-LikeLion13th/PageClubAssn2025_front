@@ -12,7 +12,7 @@ export default function ClubScoreManagement() {
     const fetchClubScores = async () => {
       try {
         const token = localStorage.getItem("Token");
-        const response = await axios.get(`${API_URL}/club-scores/all`, {
+        const response = await axios.get(`${API_URL}/club-scores/ranked`, {
           headers: {
             Authorization: `${token}`,
             "Content-Type": "multipart/form-data",
@@ -44,7 +44,7 @@ export default function ClubScoreManagement() {
   };
 
   return (
-    <div className="font-Y_spotlight mt-6 min-h-screen mx-6">
+    <div className="min-h-screen mx-6 mt-6 font-Y_spotlight">
       {/* 타이틀 */}
       <div>
         <p className="text-[30px] text-center">활동 점수 관리</p>
@@ -60,7 +60,7 @@ export default function ClubScoreManagement() {
 
       {/* 데이터 없음 메시지 */}
       {noData && (
-        <div className="text-center py-10">
+        <div className="py-10 text-center">
           <p>데이터가 없습니다.</p>
         </div>
       )}
@@ -79,7 +79,7 @@ export default function ClubScoreManagement() {
               <div className="flex-1">
                 <div className="flex items-center mb-2">
                   <p>동아리명 </p>
-                  <div className="ml-2 flex-1">
+                  <div className="flex-1 ml-2">
                     <p className="font-semibold text-[12px] text-center border-b border-[#3F3F3F]/[.5]">
                       {item.clubName}
                     </p>
@@ -88,7 +88,7 @@ export default function ClubScoreManagement() {
 
                 <div className="flex items-center">
                   <p>점수</p>
-                  <div className="ml-2 flex-1">
+                  <div className="flex-1 ml-2">
                     <p className="font-semibold text-[12px] text-center border-b-[0.35px] border-[#3F3F3F]/[.5]">
                       {item.score}점
                     </p>
