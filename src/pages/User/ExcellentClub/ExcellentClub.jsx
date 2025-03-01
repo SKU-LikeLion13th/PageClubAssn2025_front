@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { images } from "../../../utils/images";
 import Score from "./Score";
 import ScoreList from "./ScoreList";
@@ -11,6 +11,8 @@ import '../../../css/ExcellentClub.css';
 export default function ExcellentClub() {
   const [clubScore, setClubScore] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentIndexes, setCurrentIndexes] = useState({});
+  const intervalIds = useRef({});
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
@@ -41,7 +43,34 @@ export default function ExcellentClub() {
         setIsLoading(false);
       });
   }, []);
-  
+
+  useEffect(() => {
+    clubScore.forEach((item) => {
+      const sameRankTeams = clubScore.filter((team) => team.ranking === item.ranking);
+
+      if (sameRankTeams.length > 1 && !intervalIds.current[item.ranking]) {
+        intervalIds.current[item.ranking] = setInterval(() => {
+          setCurrentIndexes((prevIndexes) => {
+            const currentIndex = prevIndexes[item.ranking] || 0;
+            return {
+              ...prevIndexes,
+              [item.ranking]: (currentIndex + 1) % sameRankTeams.length,
+            };
+          });
+        }, 2500);
+      }
+    });
+
+    clubScore.forEach((item) => {
+      const sameRankTeams = clubScore.filter((team) => team.ranking === item.ranking);
+      if (sameRankTeams.length <= 1 && intervalIds.current[item.ranking]) {
+        clearInterval(intervalIds.current[item.ranking]);
+        intervalIds.current[item.ranking] = null;
+      }
+    });
+
+  }, [clubScore]);
+
   return (
     <div className="relative min-h-[calc(100vh-200px)]">
       <Header />
@@ -63,8 +92,8 @@ export default function ExcellentClub() {
           </div>
         ) : clubScore.length > 0 ? (
           <div className="absolute top-[14%] flex flex-col items-center">
-            <Score scores={clubScore} />
-            <ScoreList scores={clubScore} />
+            <Score scores={clubScore} currentIndexes={currentIndexes} />
+            <ScoreList scores={clubScore} currentIndexes={currentIndexes} />
           </div>
         ) : (
           <div className="absolute flex items-center justify-center w-9/12 ready">
@@ -74,5 +103,5 @@ export default function ExcellentClub() {
       </div>
 
     </div>
-  );  
+  );
 }
