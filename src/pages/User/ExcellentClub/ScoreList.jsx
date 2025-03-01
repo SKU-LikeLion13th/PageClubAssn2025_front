@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const getRankingSuffix = (rank) => {
   if (rank === 1) return "st";
@@ -7,34 +7,7 @@ const getRankingSuffix = (rank) => {
   return "th";
 };
 
-export default function ScoreList({ scores = [] }) {
-  const [currentIndexes, setCurrentIndexes] = useState({});
-
-  useEffect(() => {
-    const intervalIds = {};
-    
-    // 각 랭킹에 대해 동작을 설정
-    [...new Set(scores.map((item) => item.ranking))].forEach((ranking) => {
-      const sameRankTeams = scores.filter((team) => team.ranking === ranking);
-
-      if (sameRankTeams.length > 1 && !intervalIds[ranking]) {
-        intervalIds[ranking] = setInterval(() => {
-          setCurrentIndexes((prevIndexes) => {
-            const currentIndex = prevIndexes[ranking] || 0;
-            return {
-              ...prevIndexes,
-              [ranking]: (currentIndex + 1) % sameRankTeams.length,
-            };
-          });
-        }, 2500); // 2.5초 간격
-      }
-    });
-
-    return () => {
-      Object.values(intervalIds).forEach(clearInterval);
-    };
-  }, [scores]);
-
+export default function ScoreList({ scores = [], currentIndexes = {} }) {
   return (
     <div className="flex flex-col font-Moneygraphy w-10/12 bg-[#ffffff] border-[1px] border-[#d2b48c] text-[#996515] rounded-[10px] mt-12 z-10">
       {scores
