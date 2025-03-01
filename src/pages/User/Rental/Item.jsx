@@ -156,8 +156,8 @@ const Item = () => {
   return (
     <div className="relative w-full">
       {/* 네비게이션 바 */}
-      <div className="fixed ml-[360px] max-[500px]:right-0">
-        <div className="absolute flex flex-col items-end w-full leading-10">
+      <div className="fixed ml-[360px] top-14 max-[500px]:right-0">
+        <div className="absolute flex flex-col items-end w-full leading-8">
           {navigationCategories.map((category) => (
             <button
               key={category}
