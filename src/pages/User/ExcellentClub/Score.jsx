@@ -7,7 +7,7 @@ export default function Score({ scores = [], currentIndexes = {} }) {
   }
 
   return (
-    <div className="relative flex flex-col items-center w-9/12 z-0 text-[#996515]">
+    <div className="relative flex flex-col items-center w-9/12 z-10 text-[#996515]">
       <div className="flex items-end justify-center w-full pt-10 gap-x-2">
         {[...new Set(scores.map((item) => item.ranking))].map((ranking) => {
           const sameRankTeams = scores.filter((team) => team.ranking === ranking);
