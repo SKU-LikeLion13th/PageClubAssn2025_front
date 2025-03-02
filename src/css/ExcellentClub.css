@@ -25,19 +25,19 @@
 }
 
 @media (max-height: 670px) {
-  .ready {
-    top: 26%;
+  .loading {
+    margin-top: 9rem;
   }
 }
 
 @media (min-height: 671px) and (max-height: 1024px) {
-  .ready {
-    top: 25%;
+  .loading {
+    margin-top: 15rem;
   }
 }
 
 @media (min-height: 1025px) {
-  .ready {
-    top: 23%;
+  .loading {
+    margin-top: 18rem;
   }
 }

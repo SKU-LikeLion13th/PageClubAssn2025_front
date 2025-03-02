@@ -20,7 +20,7 @@ export default function ExcellentClub() {
     setIsLoading(true);
 
     axios
-      .get(`${API_URL}/club-scores/all`, {
+      .get(`${API_URL}/club-scores/ranked`, {
         headers: {
           Authorization: `${token}`,
           Accept: "*/*",
@@ -75,33 +75,35 @@ export default function ExcellentClub() {
     <div className="relative min-h-[calc(100vh-200px)]">
       <Header />
 
-      {/* 활동점수 Top 3 제목 */}
-      <div className="flex justify-center w-fit mx-auto text-[25.5px] text-[#996515] border-[0.5px] border-[#996515] bg-[#ffffff] rounded-[62px] mt-8 px-11 py-1">
-        {clubScore.length > 0 ? clubScore[0].quarter : ""} 활동 점수 TOP3
+      <div className="z-20">
+        <div className="flex justify-center w-fit mx-auto text-[25.5px] text-[#996515] border-[0.5px] border-[#996515] bg-[#ffffff] rounded-[62px] mt-8 px-11 py-1">
+          {clubScore.length > 0 ? clubScore[0].quarter : ""} 활동 점수 TOP3
+        </div>
+
+        <div className="flex items-center justify-center w-full">
+          {isLoading ? (
+            <div className="flex flex-col items-center w-full loading">
+              <Loading />
+            </div>
+          ) : clubScore.length > 0 ? (
+            <div className="top-[14%] flex flex-col items-center">
+              <Score scores={clubScore} currentIndexes={currentIndexes} />
+              <ScoreList scores={clubScore} currentIndexes={currentIndexes} />
+            </div>
+          ) : (
+            <div className="z-10 flex items-center justify-center w-9/12 mt-[4rem]">
+              <div className="w-full h-[22rem] flex items-center justify-center font-Moneygraphy text-[15px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] text-[#996515]">
+                Comming Soon!
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* 리본 배경 */}
-      <div className="ribbon-background">
+      <div className="absolute top-24 z-0 max-[500px]:w-full">
         <img src={images.ribbon} className="w-full opacity-50" alt="ribbon" />
       </div>
-
-      <div className="flex items-center justify-center w-full">
-        {isLoading ? (
-          <div className="absolute flex flex-col items-center top-1/2">
-            <Loading />
-          </div>
-        ) : clubScore.length > 0 ? (
-          <div className="absolute top-[14%] flex flex-col items-center">
-            <Score scores={clubScore} currentIndexes={currentIndexes} />
-            <ScoreList scores={clubScore} currentIndexes={currentIndexes} />
-          </div>
-        ) : (
-          <div className="absolute flex items-center justify-center w-9/12 ready">
-            <div className="w-full h-[22rem] flex items-center justify-center font-Moneygraphy text-[15px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] text-[#996515]">Comming Soon!</div>
-          </div>
-        )}
-      </div>
-
     </div>
   );
 }
