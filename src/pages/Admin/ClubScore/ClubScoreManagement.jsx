@@ -12,26 +12,49 @@ export default function ClubScoreManagement() {
     const fetchClubScores = async () => {
       try {
         const token = localStorage.getItem("Token");
-        const response = await axios.get(`${API_URL}/club-scores/all`, {
+        const response = await axios.get(`${API_URL}/admin/club-scores/all`, {
           headers: {
             Authorization: `${token}`,
             "Content-Type": "multipart/form-data",
           },
         });
 
-        // top 3
-        const top3Scores = response.data
-          .filter((score) => score.ranking <= 3)
-          .sort((a, b) => a.ranking - b.ranking);
+        const Scores = response.data;
 
-        setScores(top3Scores);
+        const rankedScores = [];
+        let rank = 1;
+
+        // 첫 번째 클럽 처리
+        rankedScores.push({
+          ...Scores[0],
+          ranking: rank,
+        });
+
+        // 두 번째 클럽부터 처리
+        for (let i = 1; i < Scores.length; i++) {
+          // 이전 클럽과 점수가 같은 경우
+          if (Scores[i].score === Scores[i - 1].score) {
+            rankedScores.push({
+              ...Scores[i],
+              ranking: rankedScores[i - 1].ranking, // 같은 순위 부여
+            });
+          } else {
+            rank = rank + 1;
+            rankedScores.push({
+              ...Scores[i],
+              ranking: rank,
+            });
+          }
+        }
+
+        setScores(rankedScores);
         setNoData(false);
       } catch (error) {
-        console.error("예기치 못한 에러가 발생했습니다.", error);
-
         // 404 에러 처리
         if (error.response && error.response.status === 404) {
           setNoData(true);
+        } else {
+          console.error("예기치 못한 에러가 발생했습니다.", error);
         }
       }
     };
@@ -68,9 +91,9 @@ export default function ClubScoreManagement() {
       {/* 동아리 리스트 */}
       {!noData && (
         <div className="mx-7">
-          {scores.map((item) => (
+          {scores.map((item, index) => (
             <div
-              key={`${item.ranking}`}
+              key={`${item.ranking}-${item.clubName}-${index}`}
               className="font-PretendardVariable text-[14px] flex mb-4 pb-5">
               <div className="mr-5">
                 <p>{item.ranking}등</p>
