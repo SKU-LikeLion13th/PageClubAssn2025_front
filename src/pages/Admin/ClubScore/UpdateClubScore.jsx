@@ -212,7 +212,7 @@ const UpdateClubScore = () => {
           <button
             onClick={handleSubmit}
             className="h-[16px] w-[42px] text-[7.08px] bg-[#D1D1D3] rounded-[4.72px]">
-            수정
+            저장
           </button>
         </div>
         <p className="border border-[#D1D1D3]"></p>
@@ -232,7 +232,7 @@ const UpdateClubScore = () => {
 
       {/* 로딩상태 */}
       {loading ? (
-        <div className="text-center mt-10">Loading...</div>
+        <div className="mt-10 text-center">Loading...</div>
       ) : (
         // 동아리 리스트
         <div className="mx-5 mt-5">
@@ -240,7 +240,7 @@ const UpdateClubScore = () => {
             <div
               key={`club-score-${index}`}
               className="font-PretendardVariable text-[14px] flex mb-4 pb-5 relative">
-              <div className="flex flex-1 items-center">
+              <div className="flex items-center flex-1">
                 <div className="flex-1 mr-2">
                   <div className="flex items-center mb-2">
                     <p>동아리명</p>
