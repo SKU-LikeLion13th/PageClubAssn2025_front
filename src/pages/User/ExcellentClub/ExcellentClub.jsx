@@ -93,7 +93,7 @@ export default function ExcellentClub() {
           ) : (
             <div className="z-10 flex items-center justify-center w-9/12 mt-[4rem]">
               <div className="w-full h-[22rem] flex items-center justify-center font-Moneygraphy text-[15px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] text-[#996515]">
-                Comming Soon!
+                Coming Soon!
               </div>
             </div>
           )}

@@ -1,18 +1,22 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { images } from "../utils/images";
 
 export default function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // 이전 페이지로 이동
   const goBack = () => {
-    navigate(-1);
+    if (location.key !== "default") {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
   };
 
   return (
-    <div className="flex justify-between items-center w-full px-4 pt-8 z-10">
+    <div className="z-10 flex items-center justify-between w-full px-4 pt-8">
       {/* 헤더 */}
-      <div className="flex justify-between items-center w-full max-w-4xl px-2">
+      <div className="flex items-center justify-between w-full max-w-4xl px-2">
         <NavLink to="/">
           <img
             src={images.Home}

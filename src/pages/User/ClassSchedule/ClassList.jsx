@@ -121,7 +121,7 @@ export default function ClassList() {
           />
         ) : (
           <div className="w-[265%] h-[25rem] flex items-center justify-center font-Moneygraphy text-[15px] bg-[#ffffff] border-[1px] border-[#D2B48C] rounded-[13px] text-[#996515]">
-            Comming Soon!
+            Coming Soon!
           </div>
         )}
       </div>

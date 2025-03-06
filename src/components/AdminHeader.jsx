@@ -1,12 +1,16 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { images } from "../utils/images";
 
 export default function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // 이전 페이지로 이동
   const goBack = () => {
-    navigate(-1);
+    if (location.key !== "default") {
+      navigate(-1);
+    } else {
+      navigate("/admin/");
+    }
   };
 
   return (
