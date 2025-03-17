@@ -2,22 +2,22 @@
   "중생관": {
     "rooms": ["107호", "206호", "207호", "208호", "209호", "301호", "302호", "303호", "304호", "305호", "306호", "307호", "308호", "309호", "310호", "406호"],
     "images": {
-      "107호": "/assets/images/classroom/중107.png",
-      "206호": "/assets/images/classroom/중206.png",
-      "207호": "/assets/images/classroom/중207.png",
-      "208호": "/assets/images/classroom/중208.png",
-      "209호": "/assets/images/classroom/중209.png",
-      "301호": "/assets/images/classroom/중301.png",
-      "302호": "/assets/images/classroom/중302.png",
-      "303호": "/assets/images/classroom/중303.png",
-      "304호": "/assets/images/classroom/중304.png",
-      "305호": "/assets/images/classroom/중305.png",
-      "306호": "/assets/images/classroom/중306.png",
-      "307호": "/assets/images/classroom/중307.png",
-      "308호": "/assets/images/classroom/중308.png",
-      "309호": "/assets/images/classroom/중309.png",
-      "310호": "/assets/images/classroom/중310.png",
-      "406호": "/assets/images/classroom/중406.png"
+      "107호": "/assets/images/classroom/중생관107.png",
+      "206호": "/assets/images/classroom/중생관206.png",
+      "207호": "/assets/images/classroom/중생관207.png",
+      "208호": "/assets/images/classroom/중생관208.png",
+      "209호": "/assets/images/classroom/중생관209.png",
+      "301호": "/assets/images/classroom/중생관301.png",
+      "302호": "/assets/images/classroom/중생관302.png",
+      "303호": "/assets/images/classroom/중생관303.png",
+      "304호": "/assets/images/classroom/중생관304.png",
+      "305호": "/assets/images/classroom/중생관305.png",
+      "306호": "/assets/images/classroom/중생관306.png",
+      "307호": "/assets/images/classroom/중생관307.png",
+      "308호": "/assets/images/classroom/중생관308.png",
+      "309호": "/assets/images/classroom/중생관309.png",
+      "310호": "/assets/images/classroom/중생관310.png",
+      "406호": "/assets/images/classroom/중생관406.png"
     }
   },
   "영암관": {
