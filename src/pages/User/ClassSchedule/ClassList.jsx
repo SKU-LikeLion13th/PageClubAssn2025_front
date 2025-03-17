@@ -43,9 +43,9 @@ export default function ClassList() {
   const handleSearch = () => {
     if (selectedBuilding && selectedRoom) {
       const image = classroomData[selectedBuilding]?.images[selectedRoom];
-      setSelectedImage(image || "");
+      setSelectedImage(image ? `${process.env.PUBLIC_URL}${image}` : "");
     }
-  };
+  };  
 
   return (
     <div className="flex flex-col items-center text-[#996515]">
