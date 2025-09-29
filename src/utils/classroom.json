@@ -23,29 +23,29 @@
   "영암관": {
     "rooms": ["111호", "204호", "205호", "206호", "303호", "304호", "305호", "306호", "307호", "309호", "310호", "401호", "403호", "404호"],
     "images": {
-      "111호": "/assets/images/classroom/영111.png",
-      "204호": "/assets/images/classroom/영204.png",
-      "205호": "/assets/images/classroom/영205.png",
-      "206호": "/assets/images/classroom/영206.png",
-      "303호": "/assets/images/classroom/영303.png",
-      "304호": "/assets/images/classroom/영304.png",
-      "305호": "/assets/images/classroom/영305.png",
-      "306호": "/assets/images/classroom/영306.png",
-      "307호": "/assets/images/classroom/영307.png",
-      "309호": "/assets/images/classroom/영309.png",
-      "310호": "/assets/images/classroom/영310.png",
-      "401호": "/assets/images/classroom/영401.png",
-      "403호": "/assets/images/classroom/영403.png",
-      "404호": "/assets/images/classroom/영404.png"
+      "111호": "/assets/images/classroom/영암관111.png",
+      "204호": "/assets/images/classroom/영암관204.png",
+      "205호": "/assets/images/classroom/영암관205.png",
+      "206호": "/assets/images/classroom/영암관206.png",
+      "303호": "/assets/images/classroom/영암관303.png",
+      "304호": "/assets/images/classroom/영암관304.png",
+      "305호": "/assets/images/classroom/영암관305.png",
+      "306호": "/assets/images/classroom/영암관306.png",
+      "307호": "/assets/images/classroom/영암관307.png",
+      "309호": "/assets/images/classroom/영암관309.png",
+      "310호": "/assets/images/classroom/영암관310.png",
+      "401호": "/assets/images/classroom/영암관401.png",
+      "403호": "/assets/images/classroom/영암관403.png",
+      "404호": "/assets/images/classroom/영암관404.png"
     }
   },
   "기념관": {
     "rooms": ["316호", "318호", "320호", "502호"],
     "images": {
-      "316호": "/assets/images/classroom/기316.png",
-      "318호": "/assets/images/classroom/기318.png",
-      "320호": "/assets/images/classroom/기320.png",
-      "502호": "/assets/images/classroom/기502.png"
+      "316호": "/assets/images/classroom/기념관316.png",
+      "318호": "/assets/images/classroom/기념관318.png",
+      "320호": "/assets/images/classroom/기념관320.png",
+      "502호": "/assets/images/classroom/기념관502.png"
     }
   }
 }
